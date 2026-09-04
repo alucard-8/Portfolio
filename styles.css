@@ -1308,54 +1308,53 @@ html.has-custom-cursor * {
   .page-counter { bottom: 12px; padding: 6px 14px; gap: 10px; }
   .pc-dot { width: 20px; height: 20px; }
 
-/* backdrop panel fills the whole phone screen (cover) so every
-     card position falls inside the painted panel */
+/* backdrop panel fills the whole phone screen (cover) */
   .page-2, .page-3, .page-4, .page-5 {
     background-size: cover;
     background-position: center;
   }
 
-  /* ---------- Page 2: gamedev ---------- */
-  .gamedev-title { left: 50%; top: 4vh; width: min(84vw, 360px); transform: translateX(-50%); }
-  .gamedev-sticker { width: clamp(64px, 17vw, 110px); }
-  .gs-1 { left: auto; right: 4vw; top: 82vh; }
-  .gs-2 { left: 4vw; top: 78vh; }
+  /* ---------- Page 2: gamedev — centered 3-col grid like page 1 ---------- */
+  .gamedev { display: grid; grid-template-columns: repeat(3, 1fr); justify-items: center; align-content: center; gap: 3.2vh 3vw; }
+  .gamedev-title { position: static; width: min(70vw, 300px); grid-column: 1 / -1; }
+  .gamedev-sticker { width: clamp(56px, 15vw, 96px); }
+  .gs-1 { position: absolute; left: auto; right: 3vw; top: 78vh; }
+  .gs-2 { position: absolute; left: 3vw; top: 74vh; }
 
-  /* post-its: responsive stack — 2 columns that fit the screen width */
-  .postit { width: min(44vw, 170px); padding: 5px; }
-  .postit .cov { height: 88px; }
+  /* post-its: three in one centered row (grid items, never overflow) */
+  .postit { position: static; width: 100%; max-width: 190px; min-width: 0; padding: 5px; transform: none !important; }
+  .postit:nth-child(4) { transform: rotate(-4deg) !important; }
+  .postit:nth-child(5) { transform: rotate(2deg) !important; }
+  .postit:nth-child(6) { transform: rotate(4deg) !important; }
+  .postit .cov { height: 96px; }
   .postit .pname { font-size: 15px; margin-top: 4px; }
-  .postit:nth-child(4) { left: 7vw; top: 30vh; transform: rotate(-5deg); }
-  .postit:nth-child(5) { left: 51vw; top: 26vh; transform: rotate(3deg); }
-  .postit:nth-child(6) { left: 26vw; top: 66vh; transform: rotate(5deg); }
-  /* shrink tape so it stays on a small post-it */
-  .postit::before { width: min(60px, 70%); height: 18px; top: -9px; }
-  .postit:nth-child(5)::before { width: 66px; }
-  .postit:nth-child(6)::before { width: 54px; }
+  .postit::before { width: min(56px, 70%); height: 17px; top: -9px; transform: translateX(-50%) rotate(-3deg); }
 
-  /* ---------- Page 3: 2d art ---------- */
-  .art-title { left: 50%; top: 4vh; width: min(78vw, 340px); transform: translateX(-50%); }
+  /* ---------- Page 3: 2d art — centered 2-col grid like page 1 ---------- */
+  .art { display: grid; grid-template-columns: repeat(2, 1fr); justify-items: center; align-content: center; gap: 3vh 4vw; }
+  .art-title { position: static; width: min(64vw, 280px); grid-column: 1 / -1; }
 
-  /* polaroid pieces: 2-col responsive grid inside the panel */
-  .art-piece { width: min(43vw, 165px); padding: 4px; }
-  .art-piece img { height: 110px; }
-  .art-piece:nth-child(2) { left: 6vw;  top: 26vh; transform: rotate(-3deg); }
-  .art-piece:nth-child(3) { left: 52vw; top: 24vh; transform: rotate(2.5deg); }
-  .art-piece:nth-child(4) { left: 6vw;  top: 62vh; transform: rotate(-2deg); }
-  .art-piece:nth-child(5) { left: 52vw; top: 60vh; transform: rotate(4deg); }
-  .art-piece::before { width: min(52px, 70%); height: 16px; top: -8px; }
+  /* polaroid pieces: flow into a neat 2x2 grid */
+  .art-piece { position: static; width: 100%; max-width: 168px; padding: 4px; transform: none !important; }
+  .art-piece:nth-child(2) { transform: rotate(-3deg) !important; }
+  .art-piece:nth-child(3) { transform: rotate(2.5deg) !important; }
+  .art-piece:nth-child(4) { transform: rotate(-2deg) !important; }
+  .art-piece:nth-child(5) { transform: rotate(4deg) !important; }
+  .art-piece img { height: 118px; }
+  .art-piece::before { width: min(50px, 70%); height: 15px; top: -8px; }
 
-  /* smileys: smaller, tucked between the polaroids so none overlap */
-  .smile { width: clamp(52px, 12vw, 84px); }
-  .smile:nth-child(6) { left: 34vw; top: 47vh; width: 74px; }
-  .smile:nth-child(7) { left: 76vw; top: 40vh; width: 62px; }
-  .smile:nth-child(8) { left: 34vw; top: 82vh; width: 64px; }
-  .smile:nth-child(9) { left: 78vw; top: 76vh; width: 70px; }
+  /* smileys: a tidy row pair under the pieces, centered */
+  .smile { position: static; width: clamp(52px, 13vw, 80px); }
+  .smile:nth-child(6) { width: 74px; --sd: 0.0s; }
+  .smile:nth-child(7) { width: 64px; --sd: 0.5s; }
+  .smile:nth-child(8) { width: 66px; --sd: 0.8s; }
+  .smile:nth-child(9) { width: 70px; --sd: 0.3s; }
 
-  /* "find me on" post-it: full-width across the bottom edge */
-  .art-link { left: 50% !important; width: min(74vw, 300px); top: auto !important; bottom: 84px; transform: translateX(-50%) rotate(-1.5deg); }
-  .art-link .al-label { font-size: 22px; }
+  /* "find me on" post-it: fits under the smileys, centered */
+  .art-link { position: static; width: min(66vw, 280px); grid-column: 1 / -1; transform: rotate(-1.5deg); touch-action: auto; }
+  .art-link .al-label { font-size: 20px; }
   .art-link .al-site { font-size: 16px; }
+  .art-link .al-handle { font-size: 13px; }
 
   /* ---------- doodle toolbar: keep it usable on a phone ---------- */
   .pencil-btn { left: 14px; bottom: 14px; width: 62px; height: 62px; }
@@ -1365,24 +1364,14 @@ html.has-custom-cursor * {
   .draw-layer.active { cursor: default; }
 }
 
-/* extra-small phones: drop to a single column so nothing overlaps */
+/* extra-small phones: nudge gaps so the row still breathes */
 @media (max-width: 520px) {
-  .postit { width: min(60vw, 170px); }
-  .postit:nth-child(4) { left: 6vw;  top: 28vh; }
-  .postit:nth-child(5) { left: 43vw; top: 26vh; }
-  .postit:nth-child(6) { left: 20vw;  top: 66vh; }
-
-  .art-piece { width: min(54vw, 165px); }
-  .art-piece:nth-child(2) { left: 5vw;  top: 25vh; }
-  .art-piece:nth-child(3) { left: 48vw; top: 23vh; }
-  .art-piece:nth-child(4) { left: 5vw;  top: 60vh; }
-  .art-piece:nth-child(5) { left: 48vw; top: 58vh; }
-
-  .smile:nth-child(6)  { left: 31vw; top: 46vh; width: 66px; }
-  .smile:nth-child(7)  { left: 78vw; top: 42vh; width: 54px; }
-  .smile:nth-child(8)  { left: 32vw; top: 82vh; width: 56px; }
-  .smile:nth-child(9)  { left: 80vw; top: 78vh; width: 62px; }
-
-  .art-link { width: min(84vw, 280px); bottom: 82px; }
+  .gamedev { gap: 2.6vh 2.4vw; }
+  .art { gap: 2.4vh 3vw; }
+  .postit .cov { height: 78px; }
+  .postit .pname { font-size: 14px; }
+  .art-piece { max-width: 148px; }
+  .art-piece img { height: 96px; }
+  .art-link { width: min(74vw, 260px); }
   .draw-tools { width: 86vw; }
 }
