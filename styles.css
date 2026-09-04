@@ -99,6 +99,18 @@ body {
   height: 100%;
   perspective: 1200px;
 }
+/* fixed-size design stage: every item is locked inside it and the
+   whole stage is scaled as one unit (like the page-1 sticker fit) */
+.gamedev .stage,
+.art .stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1280px;
+  height: 800px;
+  transform: translate(-50%, -50%) scale(var(--gs, 1));
+  transform-origin: center center;
+}
 /* staggered fade-reveal when the page becomes active (opacity only, so the
    per-item rotations stay intact) */
 .gamedev .fade-item { opacity: 0; }
@@ -113,9 +125,9 @@ body {
 /* title sits on the panel, upper area */
 .gamedev-title {
   position: absolute;
-  left: 22vw;
-  top: 9vh;
-  width: min(58vw, 700px);
+  left: 22%;
+  top: 9%;
+  width: 700px;
   height: auto;
   display: block;
   pointer-events: none;
@@ -123,7 +135,7 @@ body {
 /* the gamedev sticker appears twice at random spots; click = special effect */
 .gamedev-sticker {
   position: absolute;
-  width: clamp(90px, 15vw, 170px);
+  width: 170px;
   height: auto;
   display: block;
   cursor: pointer;
@@ -131,8 +143,8 @@ body {
   filter: drop-shadow(0 8px 12px rgba(24, 31, 66, 0.35));
   transition: transform 0.4s cubic-bezier(0.34, 1.45, 0.64, 1);
 }
-.gs-1 { left: 73.9vw; top: 76.3vh; transform: rotate(-12deg); }
-.gs-2 { left: 40.4vw; top: 32.8vh; transform: rotate(9deg)  scale(0.8); }
+.gs-1 { left: 73.9%; top: 76.3%; transform: rotate(-12deg); }
+.gs-2 { left: 40.4%; top: 32.8%; transform: rotate(9deg)  scale(0.8); }
 .gamedev-sticker:hover { transform: scale(1.12); }
 .gamedev-sticker.burst { animation: gsJump 0.45s cubic-bezier(0.34, 1.45, 0.64, 1); }
 
@@ -162,9 +174,9 @@ body {
   box-shadow: 0 18px 34px rgba(24, 31, 66, 0.35);
 }
 /* where each post-it sits (set via placement tool) */
-.postit:nth-child(4) { left: 20.3vw; top: 37.7vh; transform: rotate(-5deg); }
-.postit:nth-child(5) { left: 41.9vw; top: 60.2vh; transform: rotate(3deg); }
-.postit:nth-child(6) { left: 57.4vw; top: 29.2vh; transform: rotate(5deg); }
+.postit:nth-child(4) { left: 20.3%; top: 37.7%; transform: rotate(-5deg); }
+.postit:nth-child(5) { left: 41.9%; top: 60.2%; transform: rotate(3deg); }
+.postit:nth-child(6) { left: 57.4%; top: 29.2%; transform: rotate(5deg); }
 .postit .cov {
   width: 100%;
   height: 150px;
@@ -775,9 +787,9 @@ html.has-custom-cursor * {
 /* art title (2dart.png) sits at the top of the panel */
 .art-title {
   position: absolute;
-  left: 22vw;
-  top: 5vh;
-  width: min(50vw, 600px);
+  left: 22%;
+  top: 5%;
+  width: 600px;
   height: auto;
   display: block;
   pointer-events: none;
@@ -811,10 +823,10 @@ html.has-custom-cursor * {
   background: #eef0f6;
   border: 2px solid rgba(0, 0, 0, 0.08);
 }
-.art-piece:nth-child(2) { left: 20.7vw; top: 34.6vh; transform: rotate(-3deg); }
-.art-piece:nth-child(3) { left: 45.2vw; top: 33.8vh; transform: rotate(2.5deg); }
-.art-piece:nth-child(4) { left: 65.6vw; top: 19.4vh; transform: rotate(-2deg); }
-.art-piece:nth-child(5) { left: 35.6vw; top: 63.2vh; transform: rotate(4deg); }
+.art-piece:nth-child(2) { left: 20.7%; top: 34.6%; transform: rotate(-3deg); }
+.art-piece:nth-child(3) { left: 45.2%; top: 33.8%; transform: rotate(2.5deg); }
+.art-piece:nth-child(4) { left: 65.6%; top: 19.4%; transform: rotate(-2deg); }
+.art-piece:nth-child(5) { left: 35.6%; top: 63.2%; transform: rotate(4deg); }
 /* tape strip pinning each polaroid to the panel */
 .art-piece::before {
   content: '';
@@ -835,7 +847,7 @@ html.has-custom-cursor * {
    and pops + bursts a rainbow ring when clicked */
 .smile {
   position: absolute;
-  width: clamp(90px, 14vw, 150px);
+  width: 150px;
   height: auto;
   display: block;
   cursor: pointer;
@@ -846,10 +858,10 @@ html.has-custom-cursor * {
   transition: transform 0.3s cubic-bezier(0.34, 1.45, 0.64, 1), filter 0.3s ease;
   will-change: transform;
 }
-.smile:nth-child(6)  { left: 37.2vw; top: 36.3vh; width: 130px; --sd: 0.0s; }
-.smile:nth-child(7)  { left: 65.9vw; top: 48.9vh; width: 100px; --sd: 0.5s; }
-.smile:nth-child(8)  { left: 22.7vw; top: 66.1vh; width: 110px; --sd: 0.8s; }
-.smile:nth-child(9)  { left: 57.4vw; top: 11.2vh; width: 120px; --sd: 0.3s; }
+.smile:nth-child(6)  { left: 37.2%; top: 36.3%; width: 130px; --sd: 0.0s; }
+.smile:nth-child(7)  { left: 65.9%; top: 48.9%; width: 100px; --sd: 0.5s; }
+.smile:nth-child(8)  { left: 22.7%; top: 66.1%; width: 110px; --sd: 0.8s; }
+.smile:nth-child(9)  { left: 57.4%; top: 11.2%; width: 120px; --sd: 0.3s; }
 .smile:hover {
   transform: scale(1.18) rotate(-6deg);
   filter: drop-shadow(0 14px 22px rgba(24, 31, 66, 0.5)) hue-rotate(40deg) saturate(1.3);
@@ -967,8 +979,8 @@ html.has-custom-cursor * {
 /* freely draggable links post-it on the art page — hand-written note */
 .art-link {
   position: absolute;
-  left: 70vw;
-  top: 58vh;
+  left: 70%;
+  top: 58%;
   width: 258px;
   background: #fffdf2;
   border: 2px solid #2b3991;
@@ -1308,45 +1320,14 @@ html.has-custom-cursor * {
   .page-counter { bottom: 12px; padding: 6px 14px; gap: 10px; }
   .pc-dot { width: 20px; height: 20px; }
 
-/* backdrop panel fills the whole phone screen (cover) so the scaled
-     composition stays inside it */
+  /* backdrop panel fills the whole phone screen (cover) */
   .page-2, .page-3, .page-4, .page-5 {
     background-size: cover;
     background-position: center;
   }
 
-  /* ---------- Page 2: gamedev — same layout, whole group scaled ---------- */
-  /* keep every vw/vh position; turn fixed px sizes into proportional vw */
-  .gamedev-title { left: 22vw; top: 9vh; width: min(58vw, 700px); }
-  .gamedev-sticker { width: min(15vw, 90px); }
-  .gs-1 { left: 73.9vw; top: 76.3vh; }
-  .gs-2 { left: 40.4vw; top: 32.8vh; transform: rotate(9deg) scale(0.8); }
-
-  .postit { width: 23.4vw; max-width: 300px; padding: 0.6vw; border-width: 0.23vw; border-radius: 0.47vw; }
-  .postit .cov { height: 11.7vw; border-radius: 0.31vw; }
-  .postit .pname { font-size: 1.48vw; margin-top: 0.62vw; }
-  .postit::before { width: 7.6vw; height: 1.87vw; top: -0.86vw; transform: translateX(-50%) rotate(-4deg); border-width: 0.16vw; }
-  .postit:nth-child(5)::before { width: 8.6vw; transform: translateX(-50%) rotate(3deg); }
-  .postit:nth-child(6)::before { width: 7vw; transform: translateX(-50%) rotate(-7deg); }
-
-  /* ---------- Page 3: 2d art — same layout, whole group scaled ---------- */
-  .art-title { left: 22vw; top: 5vh; width: min(50vw, 600px); }
-
-  .art-piece { width: 21.9vw; max-width: 280px; padding: 0.47vw; border-width: 0.23vw; }
-  .art-piece img { height: 16.4vw; }
-  .art-piece::before { width: 7vw; height: 1.72vw; top: -0.86vw; transform: translateX(-50%) rotate(-3deg); }
-
-  .smile:nth-child(6) { width: 10.2vw; }
-  .smile:nth-child(7) { width: 7.8vw; }
-  .smile:nth-child(8) { width: 8.6vw; }
-  .smile:nth-child(9) { width: 9.4vw; }
-
-  .art-link { width: 20.2vw; max-width: 258px; padding: 2.3vw 1.25vw 0.94vw; border-width: 0.16vw; transform: rotate(-2.5deg); }
-  .art-link .al-label { font-size: 1.64vw; margin-bottom: 0.78vw; padding-bottom: 0.47vw; }
-  .art-link .al-site { font-size: 1.48vw; }
-  .art-link .al-handle { font-size: 1.17vw; }
-  .art-link .al-icon { font-size: 1.1vw; }
-  .art-link::before { width: 7.2vw; height: 1.56vw; top: -0.78vw; }
+  /* "find me on" note: let swiping scroll work over it on touch */
+  .art-link { touch-action: auto; }
 
   /* ---------- doodle toolbar: keep it usable on a phone ---------- */
   .pencil-btn { left: 14px; bottom: 14px; width: 62px; height: 62px; }
