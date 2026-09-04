@@ -1296,3 +1296,92 @@ html.has-custom-cursor * {
 .dt-btn.active { background: #cf3503; border-color: #cf3503; color: #fff; }
 .dt-close { border-color: #cf3503; color: #cf3503; }
 .dt-close:hover { background: #cf3503; color: #fff; }
+
+/* ============ Responsive: phones & tablets ============ */
+@media (max-width: 820px) {
+
+  /* smaller social buttons that still dodge the page counter */
+  .fab { right: 14px; bottom: 66px; gap: 10px; }
+  .fab-btn { width: 54px; height: 54px; }
+
+  /* page counter stays centered but smaller + higher (clear of FAB) */
+  .page-counter { bottom: 12px; padding: 6px 14px; gap: 10px; }
+  .pc-dot { width: 20px; height: 20px; }
+
+  /* backdrop panel fills the phone screen instead of a small inset slab */
+  .page-2, .page-3, .page-4, .page-5 {
+    background-size: 100% auto;
+    background-position: center top;
+  }
+
+  /* ---------- Page 2: gamedev ---------- */
+  .gamedev-title { left: 50%; top: 4vh; width: min(84vw, 360px); transform: translateX(-50%); }
+  .gamedev-sticker { width: clamp(64px, 17vw, 110px); }
+  .gs-1 { left: auto; right: 4vw; top: 82vh; }
+  .gs-2 { left: 4vw; top: 78vh; }
+
+  /* post-its: responsive stack — 2 columns that fit the screen width */
+  .postit { width: min(44vw, 170px); padding: 5px; }
+  .postit .cov { height: 88px; }
+  .postit .pname { font-size: 15px; margin-top: 4px; }
+  .postit:nth-child(4) { left: 7vw; top: 30vh; transform: rotate(-5deg); }
+  .postit:nth-child(5) { left: 51vw; top: 26vh; transform: rotate(3deg); }
+  .postit:nth-child(6) { left: 26vw; top: 66vh; transform: rotate(5deg); }
+  /* shrink tape so it stays on a small post-it */
+  .postit::before { width: min(60px, 70%); height: 18px; top: -9px; }
+  .postit:nth-child(5)::before { width: 66px; }
+  .postit:nth-child(6)::before { width: 54px; }
+
+  /* ---------- Page 3: 2d art ---------- */
+  .art-title { left: 50%; top: 4vh; width: min(78vw, 340px); transform: translateX(-50%); }
+
+  /* polaroid pieces: 2-col responsive grid inside the panel */
+  .art-piece { width: min(43vw, 165px); padding: 4px; }
+  .art-piece img { height: 110px; }
+  .art-piece:nth-child(2) { left: 6vw;  top: 26vh; transform: rotate(-3deg); }
+  .art-piece:nth-child(3) { left: 52vw; top: 24vh; transform: rotate(2.5deg); }
+  .art-piece:nth-child(4) { left: 6vw;  top: 62vh; transform: rotate(-2deg); }
+  .art-piece:nth-child(5) { left: 52vw; top: 60vh; transform: rotate(4deg); }
+  .art-piece::before { width: min(52px, 70%); height: 16px; top: -8px; }
+
+  /* smileys: smaller, tucked between the polaroids so none overlap */
+  .smile { width: clamp(52px, 12vw, 84px); }
+  .smile:nth-child(6) { left: 34vw; top: 47vh; width: 74px; }
+  .smile:nth-child(7) { left: 76vw; top: 40vh; width: 62px; }
+  .smile:nth-child(8) { left: 34vw; top: 82vh; width: 64px; }
+  .smile:nth-child(9) { left: 78vw; top: 76vh; width: 70px; }
+
+  /* "find me on" post-it: full-width across the bottom edge */
+  .art-link { left: 50% !important; width: min(74vw, 300px); top: auto !important; bottom: 84px; transform: translateX(-50%) rotate(-1.5deg); }
+  .art-link .al-label { font-size: 22px; }
+  .art-link .al-site { font-size: 16px; }
+
+  /* ---------- doodle toolbar: keep it usable on a phone ---------- */
+  .pencil-btn { left: 14px; bottom: 14px; width: 62px; height: 62px; }
+  .draw-tools { left: 14px; bottom: 86px; width: min(78vw, 284px); }
+
+  /* hide the drawing layer's pen cursor hint on touch */
+  .draw-layer.active { cursor: default; }
+}
+
+/* extra-small phones: drop to a single column so nothing overlaps */
+@media (max-width: 520px) {
+  .postit { width: min(60vw, 170px); }
+  .postit:nth-child(4) { left: 6vw;  top: 28vh; }
+  .postit:nth-child(5) { left: 43vw; top: 26vh; }
+  .postit:nth-child(6) { left: 20vw;  top: 66vh; }
+
+  .art-piece { width: min(54vw, 165px); }
+  .art-piece:nth-child(2) { left: 5vw;  top: 25vh; }
+  .art-piece:nth-child(3) { left: 48vw; top: 23vh; }
+  .art-piece:nth-child(4) { left: 5vw;  top: 60vh; }
+  .art-piece:nth-child(5) { left: 48vw; top: 58vh; }
+
+  .smile:nth-child(6)  { left: 31vw; top: 46vh; width: 66px; }
+  .smile:nth-child(7)  { left: 78vw; top: 42vh; width: 54px; }
+  .smile:nth-child(8)  { left: 32vw; top: 82vh; width: 56px; }
+  .smile:nth-child(9)  { left: 80vw; top: 78vh; width: 62px; }
+
+  .art-link { width: min(84vw, 280px); bottom: 82px; }
+  .draw-tools { width: 86vw; }
+}
