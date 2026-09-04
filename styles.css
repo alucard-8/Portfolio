@@ -1308,53 +1308,45 @@ html.has-custom-cursor * {
   .page-counter { bottom: 12px; padding: 6px 14px; gap: 10px; }
   .pc-dot { width: 20px; height: 20px; }
 
-/* backdrop panel fills the whole phone screen (cover) */
+/* backdrop panel fills the whole phone screen (cover) so the scaled
+     composition stays inside it */
   .page-2, .page-3, .page-4, .page-5 {
     background-size: cover;
     background-position: center;
   }
 
-  /* ---------- Page 2: gamedev — centered 3-col grid like page 1 ---------- */
-  .gamedev { display: grid; grid-template-columns: repeat(3, 1fr); justify-items: center; align-content: center; gap: 3.2vh 3vw; }
-  .gamedev-title { position: static; width: min(70vw, 300px); grid-column: 1 / -1; }
-  .gamedev-sticker { width: clamp(56px, 15vw, 96px); }
-  .gs-1 { position: absolute; left: auto; right: 3vw; top: 78vh; }
-  .gs-2 { position: absolute; left: 3vw; top: 74vh; }
+  /* ---------- Page 2: gamedev — same layout, whole group scaled ---------- */
+  /* keep every vw/vh position; turn fixed px sizes into proportional vw */
+  .gamedev-title { left: 22vw; top: 9vh; width: min(58vw, 700px); }
+  .gamedev-sticker { width: min(15vw, 90px); }
+  .gs-1 { left: 73.9vw; top: 76.3vh; }
+  .gs-2 { left: 40.4vw; top: 32.8vh; transform: rotate(9deg) scale(0.8); }
 
-  /* post-its: three in one centered row (grid items, never overflow) */
-  .postit { position: static; width: 100%; max-width: 190px; min-width: 0; padding: 5px; transform: none !important; }
-  .postit:nth-child(4) { transform: rotate(-4deg) !important; }
-  .postit:nth-child(5) { transform: rotate(2deg) !important; }
-  .postit:nth-child(6) { transform: rotate(4deg) !important; }
-  .postit .cov { height: 96px; }
-  .postit .pname { font-size: 15px; margin-top: 4px; }
-  .postit::before { width: min(56px, 70%); height: 17px; top: -9px; transform: translateX(-50%) rotate(-3deg); }
+  .postit { width: 23.4vw; max-width: 300px; padding: 0.6vw; border-width: 0.23vw; border-radius: 0.47vw; }
+  .postit .cov { height: 11.7vw; border-radius: 0.31vw; }
+  .postit .pname { font-size: 1.48vw; margin-top: 0.62vw; }
+  .postit::before { width: 7.6vw; height: 1.87vw; top: -0.86vw; transform: translateX(-50%) rotate(-4deg); border-width: 0.16vw; }
+  .postit:nth-child(5)::before { width: 8.6vw; transform: translateX(-50%) rotate(3deg); }
+  .postit:nth-child(6)::before { width: 7vw; transform: translateX(-50%) rotate(-7deg); }
 
-  /* ---------- Page 3: 2d art — centered 2-col grid like page 1 ---------- */
-  .art { display: grid; grid-template-columns: repeat(2, 1fr); justify-items: center; align-content: center; gap: 3vh 4vw; }
-  .art-title { position: static; width: min(64vw, 280px); grid-column: 1 / -1; }
+  /* ---------- Page 3: 2d art — same layout, whole group scaled ---------- */
+  .art-title { left: 22vw; top: 5vh; width: min(50vw, 600px); }
 
-  /* polaroid pieces: flow into a neat 2x2 grid */
-  .art-piece { position: static; width: 100%; max-width: 168px; padding: 4px; transform: none !important; }
-  .art-piece:nth-child(2) { transform: rotate(-3deg) !important; }
-  .art-piece:nth-child(3) { transform: rotate(2.5deg) !important; }
-  .art-piece:nth-child(4) { transform: rotate(-2deg) !important; }
-  .art-piece:nth-child(5) { transform: rotate(4deg) !important; }
-  .art-piece img { height: 118px; }
-  .art-piece::before { width: min(50px, 70%); height: 15px; top: -8px; }
+  .art-piece { width: 21.9vw; max-width: 280px; padding: 0.47vw; border-width: 0.23vw; }
+  .art-piece img { height: 16.4vw; }
+  .art-piece::before { width: 7vw; height: 1.72vw; top: -0.86vw; transform: translateX(-50%) rotate(-3deg); }
 
-  /* smileys: a tidy row pair under the pieces, centered */
-  .smile { position: static; width: clamp(52px, 13vw, 80px); }
-  .smile:nth-child(6) { width: 74px; --sd: 0.0s; }
-  .smile:nth-child(7) { width: 64px; --sd: 0.5s; }
-  .smile:nth-child(8) { width: 66px; --sd: 0.8s; }
-  .smile:nth-child(9) { width: 70px; --sd: 0.3s; }
+  .smile:nth-child(6) { width: 10.2vw; }
+  .smile:nth-child(7) { width: 7.8vw; }
+  .smile:nth-child(8) { width: 8.6vw; }
+  .smile:nth-child(9) { width: 9.4vw; }
 
-  /* "find me on" post-it: fits under the smileys, centered */
-  .art-link { position: static; width: min(66vw, 280px); grid-column: 1 / -1; transform: rotate(-1.5deg); touch-action: auto; }
-  .art-link .al-label { font-size: 20px; }
-  .art-link .al-site { font-size: 16px; }
-  .art-link .al-handle { font-size: 13px; }
+  .art-link { width: 20.2vw; max-width: 258px; padding: 2.3vw 1.25vw 0.94vw; border-width: 0.16vw; transform: rotate(-2.5deg); }
+  .art-link .al-label { font-size: 1.64vw; margin-bottom: 0.78vw; padding-bottom: 0.47vw; }
+  .art-link .al-site { font-size: 1.48vw; }
+  .art-link .al-handle { font-size: 1.17vw; }
+  .art-link .al-icon { font-size: 1.1vw; }
+  .art-link::before { width: 7.2vw; height: 1.56vw; top: -0.78vw; }
 
   /* ---------- doodle toolbar: keep it usable on a phone ---------- */
   .pencil-btn { left: 14px; bottom: 14px; width: 62px; height: 62px; }
@@ -1364,14 +1356,7 @@ html.has-custom-cursor * {
   .draw-layer.active { cursor: default; }
 }
 
-/* extra-small phones: nudge gaps so the row still breathes */
+/* extra-small phones: just keep the doodle toolbar fingertip-sized */
 @media (max-width: 520px) {
-  .gamedev { gap: 2.6vh 2.4vw; }
-  .art { gap: 2.4vh 3vw; }
-  .postit .cov { height: 78px; }
-  .postit .pname { font-size: 14px; }
-  .art-piece { max-width: 148px; }
-  .art-piece img { height: 96px; }
-  .art-link { width: min(74vw, 260px); }
   .draw-tools { width: 86vw; }
 }
