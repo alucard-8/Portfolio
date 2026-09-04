@@ -99,10 +99,10 @@ body {
   height: 100%;
   perspective: 1200px;
 }
-/* fixed-size design stage: every item is locked inside it and the
-   whole stage is scaled as one unit (like the page-1 sticker fit) */
-.gamedev .stage,
-.art .stage,
+/* the gui page keeps a fixed-size design stage scaled as one unit on
+   small screens. Gamedev + art use their original vw/vh layouts, and a
+   JS one-shot group-scale on small screens only (page-1 sticker fit), so
+   the hand-placed desktop positions stay untouched. */
 .gui .stage {
   position: absolute;
   left: 50%;
@@ -111,6 +111,10 @@ body {
   height: 800px;
   transform: translate(-50%, -50%) scale(var(--gs, 1));
   transform-origin: center center;
+  pointer-events: none;
+}
+.gui .stage > * {
+  pointer-events: auto;
 }
 /* staggered fade-reveal when the page becomes active (opacity only, so the
    per-item rotations stay intact) */
@@ -126,9 +130,9 @@ body {
 /* title sits on the panel, upper area */
 .gamedev-title {
   position: absolute;
-  left: 22%;
-  top: 9%;
-  width: 700px;
+  left: 22vw;
+  top: 9vh;
+  width: min(58vw, 700px);
   height: auto;
   display: block;
   pointer-events: none;
@@ -136,7 +140,7 @@ body {
 /* the gamedev sticker appears twice at random spots; click = special effect */
 .gamedev-sticker {
   position: absolute;
-  width: 170px;
+  width: clamp(90px, 15vw, 170px);
   height: auto;
   display: block;
   cursor: pointer;
@@ -144,8 +148,8 @@ body {
   filter: drop-shadow(0 8px 12px rgba(24, 31, 66, 0.35));
   transition: transform 0.4s cubic-bezier(0.34, 1.45, 0.64, 1);
 }
-.gs-1 { left: 73.9%; top: 76.3%; transform: rotate(-12deg); }
-.gs-2 { left: 40.4%; top: 32.8%; transform: rotate(9deg)  scale(0.8); }
+.gs-1 { left: 73.9vw; top: 76.3vh; transform: rotate(-12deg); }
+.gs-2 { left: 40.4vw; top: 32.8vh; transform: rotate(9deg)  scale(0.8); }
 .gamedev-sticker:hover { transform: scale(1.12); }
 .gamedev-sticker.burst { animation: gsJump 0.45s cubic-bezier(0.34, 1.45, 0.64, 1); }
 
@@ -175,9 +179,9 @@ body {
   box-shadow: 0 18px 34px rgba(24, 31, 66, 0.35);
 }
 /* where each post-it sits (set via placement tool) */
-.postit:nth-child(4) { left: 20.3%; top: 37.7%; transform: rotate(-5deg); }
-.postit:nth-child(5) { left: 41.9%; top: 60.2%; transform: rotate(3deg); }
-.postit:nth-child(6) { left: 57.4%; top: 29.2%; transform: rotate(5deg); }
+.postit:nth-child(4) { left: 20.3vw; top: 37.7vh; transform: rotate(-5deg); }
+.postit:nth-child(5) { left: 41.9vw; top: 60.2vh; transform: rotate(3deg); }
+.postit:nth-child(6) { left: 57.4vw; top: 29.2vh; transform: rotate(5deg); }
 .postit .cov {
   width: 100%;
   height: 150px;
@@ -788,9 +792,9 @@ html.has-custom-cursor * {
 /* art title (2dart.png) sits at the top of the panel */
 .art-title {
   position: absolute;
-  left: 22%;
-  top: 5%;
-  width: 600px;
+  left: 22vw;
+  top: 5vh;
+  width: min(50vw, 600px);
   height: auto;
   display: block;
   pointer-events: none;
@@ -824,10 +828,10 @@ html.has-custom-cursor * {
   background: #eef0f6;
   border: 2px solid rgba(0, 0, 0, 0.08);
 }
-.art-piece:nth-child(2) { left: 20.7%; top: 34.6%; transform: rotate(-3deg); }
-.art-piece:nth-child(3) { left: 45.2%; top: 33.8%; transform: rotate(2.5deg); }
-.art-piece:nth-child(4) { left: 65.6%; top: 19.4%; transform: rotate(-2deg); }
-.art-piece:nth-child(5) { left: 35.6%; top: 63.2%; transform: rotate(4deg); }
+.art-piece:nth-child(2) { left: 20.7vw; top: 34.6vh; transform: rotate(-3deg); }
+.art-piece:nth-child(3) { left: 45.2vw; top: 33.8vh; transform: rotate(2.5deg); }
+.art-piece:nth-child(4) { left: 65.6vw; top: 19.4vh; transform: rotate(-2deg); }
+.art-piece:nth-child(5) { left: 35.6vw; top: 63.2vh; transform: rotate(4deg); }
 /* tape strip pinning each polaroid to the panel */
 .art-piece::before {
   content: '';
@@ -848,7 +852,7 @@ html.has-custom-cursor * {
    and pops + bursts a rainbow ring when clicked */
 .smile {
   position: absolute;
-  width: 150px;
+  width: clamp(90px, 14vw, 150px);
   height: auto;
   display: block;
   cursor: pointer;
@@ -859,10 +863,10 @@ html.has-custom-cursor * {
   transition: transform 0.3s cubic-bezier(0.34, 1.45, 0.64, 1), filter 0.3s ease;
   will-change: transform;
 }
-.smile:nth-child(6)  { left: 37.2%; top: 36.3%; width: 130px; --sd: 0.0s; }
-.smile:nth-child(7)  { left: 65.9%; top: 48.9%; width: 100px; --sd: 0.5s; }
-.smile:nth-child(8)  { left: 22.7%; top: 66.1%; width: 110px; --sd: 0.8s; }
-.smile:nth-child(9)  { left: 57.4%; top: 11.2%; width: 120px; --sd: 0.3s; }
+.smile:nth-child(6)  { left: 37.2vw; top: 36.3vh; width: 130px; --sd: 0.0s; }
+.smile:nth-child(7)  { left: 65.9vw; top: 48.9vh; width: 100px; --sd: 0.5s; }
+.smile:nth-child(8)  { left: 22.7vw; top: 66.1vh; width: 110px; --sd: 0.8s; }
+.smile:nth-child(9)  { left: 57.4vw; top: 11.2vh; width: 120px; --sd: 0.3s; }
 .smile:hover {
   transform: scale(1.18) rotate(-6deg);
   filter: drop-shadow(0 14px 22px rgba(24, 31, 66, 0.5)) hue-rotate(40deg) saturate(1.3);
@@ -1035,7 +1039,7 @@ html.has-custom-cursor * {
 /* the playable screens, pinned up like polaroids */
 .ui-piece {
   position: absolute;
-  width: 300px;
+  width: 220px;
   background: #fff;
   border: 3px solid #2b3991;
   border-radius: 8px;
@@ -1043,7 +1047,6 @@ html.has-custom-cursor * {
   box-shadow: 0 10px 18px rgba(24, 31, 66, 0.28);
   transition: transform 0.25s cubic-bezier(0.34, 1.45, 0.64, 1), box-shadow 0.25s ease;
   z-index: 3;
-  cursor: pointer;
 }
 .ui-piece:hover {
   transform: rotate(0deg) scale(1.06);
@@ -1051,16 +1054,15 @@ html.has-custom-cursor * {
 }
 .ui-piece img {
   width: 100%;
-  height: 250px;
-  object-fit: cover;
+  height: auto;                 /* never crop the artwork */
   border-radius: 3px;
   display: block;
-  background: #eef0f6;
+  background: #1e2447;
   border: 2px solid rgba(0, 0, 0, 0.08);
 }
-.ui-piece:nth-child(4) { left: 8%;  top: 31%; transform: rotate(-3deg); }
-.ui-piece:nth-child(5) { left: 39%; top: 30%; transform: rotate(2deg); }
-.ui-piece:nth-child(6) { left: 70%; top: 32%; transform: rotate(-4deg); }
+.ui-piece:nth-child(4) { left: 14%; top: 31%; transform: rotate(-3deg); }
+.ui-piece:nth-child(5) { left: 41%; top: 30%; transform: rotate(2deg); }
+.ui-piece:nth-child(6) { left: 68%; top: 32%; transform: rotate(-4deg); }
 .ui-piece::before {
   content: '';
   position: absolute;
@@ -1081,7 +1083,7 @@ html.has-custom-cursor * {
 /* the big menu screens, pinned low */
 .ui-card {
   position: absolute;
-  width: 330px;
+  width: 250px;
   background: #fff;
   border: 3px solid #2b3991;
   border-radius: 8px;
@@ -1089,7 +1091,6 @@ html.has-custom-cursor * {
   box-shadow: 0 10px 18px rgba(24, 31, 66, 0.28);
   transition: transform 0.25s cubic-bezier(0.34, 1.45, 0.64, 1), box-shadow 0.25s ease;
   z-index: 3;
-  cursor: pointer;
 }
 .ui-card:hover {
   transform: rotate(0deg) scale(1.06);
@@ -1097,16 +1098,15 @@ html.has-custom-cursor * {
 }
 .ui-card img {
   width: 100%;
-  height: 250px;
-  object-fit: cover;
+  height: auto;                 /* never crop the artwork */
   border-radius: 3px;
   display: block;
-  background: #eef0f6;
+  background: #1e2447;
   border: 2px solid rgba(0, 0, 0, 0.08);
 }
-.ui-card:nth-child(7) { left: 16%; top: 67%; transform: rotate(-2deg); }
-.ui-card:nth-child(8) { left: 45%; top: 68%; transform: rotate(2deg); }
-.ui-card:nth-child(9) { left: 74%; top: 66%; transform: rotate(-3deg); }
+.ui-card:nth-child(7) { left: 18%; top: 66%; transform: rotate(-2deg); }
+.ui-card:nth-child(8) { left: 46%; top: 67%; transform: rotate(2deg); }
+.ui-card:nth-child(9) { left: 72%; top: 65%; transform: rotate(-3deg); }
 .ui-card::before {
   content: '';
   position: absolute;
@@ -1127,7 +1127,7 @@ html.has-custom-cursor * {
 /* tiny floating frames / icons / props scattered around like space debris */
 .ui-chip {
   position: absolute;
-  width: 140px;
+  width: 115px;
   background: #fff7e6;
   border: 2px solid #f5ce25;
   border-radius: 6px;
@@ -1135,7 +1135,6 @@ html.has-custom-cursor * {
   box-shadow: 0 6px 12px rgba(24, 31, 66, 0.25);
   transition: transform 0.25s cubic-bezier(0.34, 1.45, 0.64, 1), box-shadow 0.25s ease;
   z-index: 3;
-  cursor: pointer;
 }
 .ui-chip:hover {
   transform: rotate(0deg) scale(1.12);
@@ -1143,18 +1142,17 @@ html.has-custom-cursor * {
 }
 .ui-chip img {
   width: 100%;
-  height: 120px;
-  object-fit: cover;
+  height: auto;                 /* never crop the artwork */
   border-radius: 3px;
   display: block;
-  background: #eef0f6;
+  background: #1e2447;
   border: 1px solid rgba(0, 0, 0, 0.08);
 }
-.ui-chip:nth-child(10) { left: 8.5%;  top: 64%; transform: rotate(8deg); }
-.ui-chip:nth-child(11) { left: 36%;   top: 62.5%; transform: rotate(-6deg); }
-.ui-chip:nth-child(12) { left: 50.5%; top: 61.5%; transform: rotate(4deg); }
-.ui-chip:nth-child(13) { left: 65.5%; top: 63%; transform: rotate(-9deg); }
-.ui-chip:nth-child(14) { left: 87.5%; top: 60%; transform: rotate(7deg); }
+.ui-chip:nth-child(10) { left: 8%;   top: 60%; transform: rotate(8deg); }
+.ui-chip:nth-child(11) { left: 34%;  top: 56%; transform: rotate(-6deg); }
+.ui-chip:nth-child(12) { left: 50.5%; top: 62%; transform: rotate(4deg); }
+.ui-chip:nth-child(13) { left: 66%;  top: 59%; transform: rotate(-9deg); }
+.ui-chip:nth-child(14) { left: 85%;  top: 61%; transform: rotate(7deg); }
 
 /* the animated playable cover, teased as a vid chip */
 .ui-video {
@@ -1272,6 +1270,33 @@ html.has-custom-cursor * {
 .gui-link .gl-site { color: #2b3991; font-weight: bold; font-size: 15px; }
 .gui-link .gl-handle { color: #cf3503; font-size: 13px; }
 
+/* all the pinned bits on this page are draggable — grab them and
+   rearrange the collage (overlapping is fine, that's the point) */
+.gui .stage .ui-piece,
+.gui .stage .ui-card,
+.gui .stage .ui-chip,
+.gui .stage .ui-video,
+.gui .stage .gui-link,
+.gui .stage .ship {
+  cursor: grab;
+  touch-action: none;
+}
+.gui .stage .gl-grabbing {
+  cursor: grabbing;
+  transition: none !important;
+  z-index: 40 !important;
+}
+/* squash-and-stretch "put down" pop after a drag */
+.gui .stage .dp-down {
+  animation: dpDown 0.5s cubic-bezier(0.34, 1.6, 0.64, 1);
+}
+@keyframes dpDown {
+  0%   { transform: scale(1.06); }
+  45%  { transform: scale(0.92) translateY(3px); }
+  75%  { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
 /* tiny white=gold stars drifting upward (spawned in JS) */
 .hudstar {
   position: absolute;
@@ -1383,8 +1408,8 @@ html.has-custom-cursor * {
 /* freely draggable links post-it on the art page — hand-written note */
 .art-link {
   position: absolute;
-  left: 70%;
-  top: 58%;
+  left: 70vw;
+  top: 58vh;
   width: 258px;
   background: #fffdf2;
   border: 2px solid #2b3991;
@@ -1524,6 +1549,49 @@ html.has-custom-cursor * {
 }
 .pencil-btn:hover { transform: scale(1.12) rotate(-8deg); }
 .pencil-btn:active { animation: fabHit 0.32s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.draw-hint {
+  position: fixed;
+  left: 114px;
+  bottom: 34px;
+  z-index: 68;
+  display: none;
+  max-width: 240px;
+  padding: 8px 14px;
+  background: #fffdf2;
+  border: 2px solid #cf3503;
+  border-radius: 5px 13px 7px 11px / 11px 5px 13px 7px;
+  box-shadow: 0 8px 16px rgba(24, 31, 66, 0.3);
+  font-family: 'zai Lava', cursive;
+  font-size: 13px;
+  line-height: 1.3;
+  color: #5a5f86;
+  pointer-events: none;
+  transform: rotate(-3deg);
+}
+.draw-hint.show { display: block; animation: hintPop 0.4s cubic-bezier(0.34, 1.4, 0.64, 1); }
+.hint-tag {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  z-index: 62;
+  display: none;
+  padding: 7px 16px;
+  background: rgba(255, 247, 224, 0.92);
+  border: 2px solid #2b3991;
+  border-radius: 14px 10px 13px 9px / 9px 13px 10px 15px;
+  box-shadow: 0 6px 14px rgba(24, 31, 66, 0.28);
+  font-family: 'zai Lava', cursive;
+  font-size: 15px;
+  color: #2b3991;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.hint-tag.show { display: block; animation: hintPop 0.4s cubic-bezier(0.34, 1.4, 0.64, 1); }
+@keyframes hintPop {
+  from { opacity: 0; transform: translateX(-50%) rotate(-2deg) scale(0.85); }
+  to   { opacity: 1; transform: translateX(-50%) rotate(-2deg) scale(1); }
+}
 .draw-tools {
   position: fixed;
   left: 18px;
@@ -1732,11 +1800,11 @@ html.has-custom-cursor * {
 
   /* "find me on" note: let swiping scroll work over it on touch */
   .art-link { touch-action: auto; }
-  .gui-link { touch-action: auto; }
 
   /* ---------- doodle toolbar: keep it usable on a phone ---------- */
   .pencil-btn { left: 14px; bottom: 14px; width: 62px; height: 62px; }
   .draw-tools { left: 14px; bottom: 86px; width: min(78vw, 284px); }
+  .draw-hint { left: 90px; bottom: 24px; max-width: 200px; }
 
   /* hide the drawing layer's pen cursor hint on touch */
   .draw-layer.active { cursor: default; }

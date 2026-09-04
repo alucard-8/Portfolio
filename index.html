@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>portfolio — WASSIM</title>
-  <link rel="stylesheet" href="styles.css?v=77">
+  <link rel="stylesheet" href="styles.css?v=78">
 </head>
 <body>
 
@@ -23,7 +23,6 @@
 
     <section class="page page-2">
       <div class="gamedev">
-        <div class="stage">
           <img class="gamedev-title fade-item" src="images/gamedev.png" alt="gamedev">
           <img class="gamedev-sticker gs-1 fade-item" src="images/gamedevsticker.png" alt="gamedev sticker">
           <img class="gamedev-sticker gs-2 fade-item" src="images/gamedevsticker.png" alt="gamedev sticker">
@@ -40,12 +39,10 @@
             <img class="cov" src="images/covers/unseen.png" alt="Unseen">
             <span class="pname">Unseen</span>
           </a>
-        </div>
       </div>
     </section>
     <section class="page page-3">
       <div class="art">
-        <div class="stage">
           <img class="art-title fade-item" src="images/2dart.png" alt="2d art">
 
           <!-- the drawings, pinned straight into the panel like polaroids -->
@@ -83,7 +80,6 @@
               <span class="al-handle">@wassim___draw</span>
             </a>
           </div>
-        </div>
       </div>
     </section>
     <section class="page page-4">
@@ -186,6 +182,8 @@
       <path d="M3 17.25V21h3.75L17.8 9.94l-3.75-3.75L3 17.25zM20.7 7.04a1 1 0 0 0 0-1.41l-2.33-2.33a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.82-1.84z"/>
     </svg>
   </button>
+  <!-- small note that pops next to the pencil, telling you there's a drawing mode -->
+  <div class="draw-hint" id="drawHint">there's a drawing mode — tap the pencil</div>
   <canvas id="drawLayer" class="draw-layer"></canvas>
   <div class="draw-tools" id="drawTools">
     <span class="dt-title">quick doodle</span>
@@ -283,6 +281,9 @@
       </div>
     </div>
   </div>
+
+  <!-- top tag: "click this to see it bigger" on the art + game-ui pages -->
+  <div class="hint-tag" id="hintTag" aria-hidden="true"></div>
 
   <!-- full-size drawing viewer (click a drawing / ui screen to open) -->
   <div class="overlay" id="overlay-viewer" aria-hidden="true">
@@ -549,6 +550,8 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
       Array.prototype.forEach.call(viewerItems, function (item) {
         item.addEventListener('click', function () {
           if (!viewer) return;
+          // ignore the click that a drag fires when you let go
+          if (item.__suppressClick) { item.__suppressClick = false; return; }
           // hide both first so only the right one shows up
           viewerImg.style.display = 'none';
           if (viewerVid) {
@@ -608,31 +611,54 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
     })();
 
     (function () {
-      // the "mission brief" post-it is freely draggable on the gui page
-      var link = document.querySelector('.gui-link');
-      if (link) {
+      // everything pinned on the gui page can be dragged around — the
+      // pieces keep the design-space positions of the fixed stage, so the
+      // drag math converts viewport coords back through the stage scale
+      var stage = document.querySelector('.gui .stage');
+      if (!stage) return;
+      var items = document.querySelectorAll('.gui .stage .ui-piece, .gui .stage .ui-card, .gui .stage .ui-chip, .gui .stage .ui-video, .gui .stage .gui-link, .gui .stage .ship');
+      Array.prototype.forEach.call(items, function (el) {
         var drag = null;
-        link.addEventListener('mousedown', function (e) {
-          if (e.target.closest && e.target.closest('a')) return;
-          e.preventDefault();
-          var r = link.getBoundingClientRect();
-          drag = { dx: e.clientX - r.left, dy: e.clientY - r.top };
-          link.classList.add('al-grabbing');
+        el.addEventListener('pointerdown', function (e) {
+          if (e.target.closest && e.target.closest('a')) return;   // let links open
+          var sr = stage.getBoundingClientRect();
+          var scale = sr.width / 1280;                             // 1280 = design width
+          var r = el.getBoundingClientRect();
+          drag = {
+            dx: (e.clientX - sr.left) / scale - (r.left - sr.left) / scale,
+            dy: (e.clientY - sr.top)  / scale - (r.top  - sr.top)  / scale,
+            moved: false
+          };
+          el.classList.add('gl-grabbing');
+          if (el.setPointerCapture) el.setPointerCapture(e.pointerId);
         });
-        document.addEventListener('mousemove', function (e) {
+        el.addEventListener('pointermove', function (e) {
           if (!drag) return;
-          link.style.left = (e.clientX - drag.dx) + 'px';
-          link.style.top = (e.clientY - drag.dy) + 'px';
+          var sr = stage.getBoundingClientRect();
+          var scale = sr.width / 1280;
+          var nx = (e.clientX - sr.left) / scale - drag.dx;
+          var ny = (e.clientY - sr.top)  / scale - drag.dy;
+          el.style.left = nx + 'px';
+          el.style.top  = ny + 'px';
+          if (Math.abs((e.clientX - sr.left) / scale - drag.dx) > 4 ||
+              Math.abs((e.clientY - sr.top)  / scale - drag.dy) > 4) {
+            drag.moved = true;
+          }
         });
-        document.addEventListener('mouseup', function () {
+        function up() {
           if (!drag) return;
+          var wasMoved = drag.moved;
           drag = null;
-          link.classList.remove('al-grabbing');
-          link.classList.remove('al-down');
-          void link.offsetWidth;
-          link.classList.add('al-down');
-        });
-      }
+          el.classList.remove('gl-grabbing');
+          if (!wasMoved) { el.__suppressClick = false; return; }
+          el.__suppressClick = true;           // swallow the click after a real drag
+          el.classList.remove('dp-down');
+          void el.offsetWidth;
+          el.classList.add('dp-down');
+        }
+        el.addEventListener('pointerup', up);
+        el.addEventListener('pointercancel', up);
+      });
     })();
 
     (function () {
@@ -732,6 +758,9 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
 
       penBtn.addEventListener('click', function () {
         enable(!canvas.classList.contains('active'));
+        var dh = document.getElementById('drawHint');
+        if (dh) dh.classList.toggle('show',
+          !canvas.classList.contains('active') && !penBtn.classList.contains('enabled'));
       });
 
       canvas.addEventListener('pointerdown', function (e) {
@@ -822,16 +851,29 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
         if (e.key === 'Escape' && canvas.classList.contains('active')) enable(false);
       });
 
-      // show the drawing panel by default on the art page (index 2); the
-      // pencil button toggles it open/closed
+      // the pencil button is always available on the art page; the
+      // drawing panel only opens when the user presses it. A small note
+      // near the button tells people a drawing mode exists, and a top
+      // tag reminds them clicking a drawing opens it big.
       var trackEl = document.getElementById('track');
+      var hintTag = document.getElementById('hintTag');
+      var drawHint = document.getElementById('drawHint');
       function focusPage() {
         var pw = trackEl.clientWidth || window.innerWidth;
         var idx = Math.round(trackEl.scrollLeft / pw);
         var onArt = (idx === 2);
         penBtn.style.display = onArt ? '' : 'none';
-        if (onArt && !canvas.classList.contains('active')) enable(true);
         if (!onArt && canvas.classList.contains('active')) enable(false);
+        if (hintTag) {
+          hintTag.classList.remove('show');
+          if (idx === 2) hintTag.textContent = 'click a drawing to see it bigger';
+          else if (idx === 3) hintTag.textContent = 'click a screen to see it bigger';
+          if (idx === 2 || idx === 3) hintTag.classList.add('show');
+        }
+        if (drawHint) {
+          drawHint.classList.toggle('show',
+            onArt && !penBtn.classList.contains('enabled') && !canvas.classList.contains('active'));
+        }
       }
       if (trackEl) {
         trackEl.addEventListener('scroll', focusPage, { passive: true });
@@ -974,20 +1016,25 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
     })();
 
     (function () {
-      // scale the fixed-size stages (gamedev + art) as one locked group,
-      // exactly like the page-1 sticker fit: uniform factor, both axes
-      var STAGE_W = 1280, STAGE_H = 800;
-      function fitStages() {
-        var s = Math.min(window.innerWidth / STAGE_W, window.innerHeight / STAGE_H);
-        s = Math.min(s, 1);          // never upscale past its design size
-        var stages = document.querySelectorAll('.gamedev .stage, .art .stage, .gui .stage');
-        for (var i = 0; i < stages.length; i++) {
-          stages[i].style.setProperty('--gs', s);
+      // Gamedev + art stay in their hand-placed vw/vh desktop positions.
+      // On SMALL screens only, the whole group is scaled as one unit —
+      // exactly like the page-1 sticker fit (uniform factor, both axes).
+      // The gui page keeps its design-stage scaling via the --gs prop.
+      var BASE_W = 1280, BASE_H = 800;
+      function fitAll() {
+        var s = Math.min(window.innerWidth / BASE_W, window.innerHeight / BASE_H);
+        s = Math.min(s, 1); // never upscale past the design size
+        var groups = document.querySelectorAll('.gamedev, .art');
+        for (var i = 0; i < groups.length; i++) {
+          groups[i].style.transform = 'scale(' + s + ')';
+          groups[i].style.transformOrigin = 'center center';
         }
+        var stage = document.querySelector('.gui .stage');
+        if (stage) stage.style.setProperty('--gs', s);
       }
-      fitStages();
-      window.addEventListener('resize', fitStages);
-      window.addEventListener('orientationchange', function () { setTimeout(fitStages, 120); });
+      fitAll();
+      window.addEventListener('resize', fitAll);
+      window.addEventListener('orientationchange', function () { setTimeout(fitAll, 120); });
     })();
   </script>
 </body>
