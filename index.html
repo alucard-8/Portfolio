@@ -1,0 +1,829 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>portfolio — WASSIM</title>
+  <link rel="stylesheet" href="styles.css?v=71">
+</head>
+<body>
+
+  <div class="cursor" id="cursorBlob"></div>
+
+  <div class="track" id="track">
+
+    <section class="page page-1">
+      <div class="sticker" id="sticker">
+        <img class="panel" src="images/panel.png" alt="">
+        <img class="star star-big"   data-rot="14.44"  src="images/star.png" alt="">
+        <img class="star star-mid"   data-rot="-32.04" src="images/star.png" alt="">
+        <img class="star star-small" data-rot="-8.95"  src="images/star.png" alt="">
+      </div>
+    </section>
+
+    <section class="page page-2">
+      <div class="gamedev">
+        <img class="gamedev-title fade-item" src="images/gamedev.png" alt="gamedev">
+        <img class="gamedev-sticker gs-1 fade-item" src="images/gamedevsticker.png" alt="gamedev sticker">
+        <img class="gamedev-sticker gs-2 fade-item" src="images/gamedevsticker.png" alt="gamedev sticker">
+
+        <a class="postit c-red fade-item" href="https://nomad-2088.itch.io/rogue-protocol" target="_blank" rel="noopener">
+          <img class="cov" src="images/covers/rogue.gif" alt="Rogue Protocol">
+          <span class="pname">Rogue Protocol</span>
+        </a>
+        <a class="postit c-blue fade-item" href="https://toccata.itch.io/pokado" target="_blank" rel="noopener">
+          <img class="cov" src="images/covers/pokado.png" alt="pokado">
+          <span class="pname">pokado</span>
+        </a>
+        <a class="postit c-green fade-item" href="https://naaylla.itch.io/unseen" target="_blank" rel="noopener">
+          <img class="cov" src="images/covers/unseen.png" alt="Unseen">
+          <span class="pname">Unseen</span>
+        </a>
+      </div>
+    </section>
+    <section class="page page-3">
+      <div class="art">
+        <img class="art-title fade-item" src="images/2dart.png" alt="2d art">
+
+        <!-- the drawings, pinned straight into the panel like polaroids -->
+        <div class="art-piece fade-item" data-full="images/drawing/angel promo.png">
+          <img src="images/drawing/angel promo.png" alt="artwork">
+        </div>
+        <div class="art-piece fade-item" data-full="images/drawing/arthur promo 1.png">
+          <img src="images/drawing/arthur promo 1.png" alt="artwork">
+        </div>
+        <div class="art-piece fade-item" data-full="images/drawing/eternal_sugar_cookie_2.jpg">
+          <img src="images/drawing/eternal_sugar_cookie_2.jpg" alt="artwork">
+        </div>
+        <div class="art-piece fade-item" data-full="images/drawing/kaiju_kafka.jpg">
+          <img src="images/drawing/kaiju_kafka.jpg" alt="artwork">
+        </div>
+
+        <!-- a few smiley stickers scattered around the panel -->
+        <img class="smile fade-item" src="images/smile.png" alt="smiley">
+        <img class="smile fade-item" src="images/smile.png" alt="smiley">
+        <img class="smile fade-item" src="images/smile.png" alt="smiley">
+        <img class="smile fade-item" src="images/smile.png" alt="smiley">
+
+        <!-- freely draggable links post-it (no drag mode needed) -->
+        <div class="art-link fade-item">
+          <img class="al-pin" src="images/pin.png" alt="">
+          <span class="al-label">find me on</span>
+          <a class="al-row" href="https://www.artstation.com/alucard08" target="_blank" rel="noopener">
+            <span class="al-icon">✦</span>
+            <span class="al-site">ArtStation</span>
+            <span class="al-handle">alucard08</span>
+          </a>
+          <a class="al-row" href="https://www.instagram.com/wassim___draw/" target="_blank" rel="noopener">
+            <span class="al-icon">✿</span>
+            <span class="al-site">Instagram</span>
+            <span class="al-handle">@wassim___draw</span>
+          </a>
+        </div>
+      </div>
+    </section>
+    <section class="page page-4"></section>
+    <section class="page page-5"></section>
+  </div>
+
+
+  <!-- static social / info buttons (bottom right, always visible) -->
+  <div class="fab" id="fabBar">
+    <button class="fab-btn fab-discord" data-overlay="overlay-discord" aria-label="Discord">
+      <img src="images/discord.png" alt="Discord">
+    </button>
+    <button class="fab-btn fab-insta" data-overlay="overlay-insta" aria-label="Instagram">
+      <img src="images/insta.png" alt="Instagram">
+    </button>
+    <button class="fab-btn fab-info" data-overlay="overlay-info" aria-label="Info">
+      <img src="images/info.png" alt="Info">
+    </button>
+  </div>
+
+  <!-- doodle / drawing mode (art page) -->
+  <button class="pencil-btn" id="pencilBtn" aria-label="Draw on the art page">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="#fff" aria-hidden="true">
+      <path d="M3 17.25V21h3.75L17.8 9.94l-3.75-3.75L3 17.25zM20.7 7.04a1 1 0 0 0 0-1.41l-2.33-2.33a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.82-1.84z"/>
+    </svg>
+  </button>
+  <canvas id="drawLayer" class="draw-layer"></canvas>
+  <div class="draw-tools" id="drawTools">
+    <span class="dt-title">quick doodle</span>
+    <div class="dt-cols">
+      <div class="dt-group">
+        <span class="dt-label">color</span>
+        <div class="dt-colors">
+          <button class="dt-swatch active" data-c="#2b3991" style="background:#2b3991" aria-label="navy"></button>
+          <button class="dt-swatch" data-c="#cf3503" style="background:#cf3503" aria-label="orange"></button>
+          <button class="dt-swatch" data-c="#3a9d23" style="background:#3a9d23" aria-label="green"></button>
+          <button class="dt-swatch" data-c="#f5ce25" style="background:#f5ce25" aria-label="yellow"></button>
+          <button class="dt-swatch" data-c="#7a2cbf" style="background:#7a2cbf" aria-label="purple"></button>
+          <button class="dt-swatch" data-c="#1f2447" style="background:#1f2447" aria-label="ink"></button>
+        </div>
+      </div>
+      <div class="dt-divider"></div>
+      <div class="dt-group">
+        <span class="dt-label">size</span>
+        <div class="dt-size">
+          <button class="dt-sizebtn" data-w="2">S</button>
+          <button class="dt-sizebtn active" data-w="5">M</button>
+          <button class="dt-sizebtn" data-w="10">L</button>
+        </div>
+        <label class="dt-custom" title="pick any color">
+          <input type="color" id="dtColor" value="#2b3991">
+          <span class="dt-custom-swatch"></span>
+          <span class="dt-custom-label">any color</span>
+        </label>
+      </div>
+    </div>
+    <div class="dt-btns">
+      <button class="dt-btn" id="dtEraser">eraser</button>
+      <button class="dt-btn" id="dtClear">clear</button>
+      <button class="dt-btn dt-close" id="dtClose">done</button>
+    </div>
+  </div>
+
+  <!-- overlay papers -->
+  <div class="overlay" id="overlay-insta" aria-hidden="true">
+    <div class="paper">
+      <img class="paper-pin" src="images/pin.png" alt="">
+      <img class="paper-clippy" src="images/clippy.png" alt="">
+      <h2 class="paper-title">Instagram</h2>
+      <p class="paper-sub">where all my drawings live</p>
+      <div class="paper-body">
+        <a class="ig-link" href="https://www.instagram.com/wassim___draw/" target="_blank" rel="noopener">
+          <span class="ig-handle">@wassim___draw</span>
+          <span class="ig-go">visit →</span>
+        </a>
+        <a class="ig-link" href="https://www.instagram.com/art.bywassim/" target="_blank" rel="noopener">
+          <span class="ig-handle">@art.bywassim</span>
+          <span class="ig-go">visit →</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay-discord" aria-hidden="true">
+    <div class="paper">
+      <img class="paper-pin" src="images/pin.png" alt="">
+      <img class="paper-clippy" src="images/clippy.png" alt="">
+      <h2 class="paper-title">Discord</h2>
+      <p class="paper-sub">for commissions, just DM me</p>
+      <div class="paper-body">
+        <p class="paper-text">Open for commissions — hit me up and we'll make something cool.<br><span class="hl">w_assim8</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay-info" aria-hidden="true">
+    <div class="paper">
+      <img class="paper-pin" src="images/pin.png" alt="">
+      <img class="paper-clippy" src="images/clippy.png" alt="">
+      <h2 class="paper-title">About Me</h2>
+      <p class="paper-sub">Graphic Designer <span class="amp">&amp;</span> Game Developer</p>
+      <div class="paper-body">
+        <p class="paper-cats">
+          <span class="cat">Graphic Design</span><span class="dot">•</span>
+          <span class="cat">Game Development</span><span class="dot">•</span>
+          <span class="cat">Game UI</span><span class="dot">•</span>
+          <span class="cat">2D Art</span>
+        </p>
+        <p class="paper-text">
+          hey, I'm <span class="hl">MESSAIF MOHAMED WASSIM</span> — 18,
+          a 2nd-year engineering student in <span class="hl">Informatique</span>
+          at <span class="hl">USTHB</span>. People call me
+          <span class="hl">Alucard</span> (or <span class="hl">alulu</span>).
+        </p>
+        <p class="paper-text">
+          My thing is <span class="hl">graphic design</span> — clean layouts,
+          bold colors, and UI that actually feels good to look at, from poster
+          work to <span class="hl">2D game UI</span>. I'm always up for new
+          projects and collabs, and my art lives on my Instagram.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- full-size drawing viewer (click a drawing to open) -->
+  <div class="overlay" id="overlay-viewer" aria-hidden="true">
+    <div class="viewer">
+      <img class="viewer-img" id="viewerImg" src="" alt="artwork">
+    </div>
+  </div>
+
+
+  <!-- themed page counter (5 pages) -->
+  <nav class="page-counter" id="pageCounter" aria-label="Pages">
+    <button class="pc-dot" data-page="0"><i></i></button>
+    <button class="pc-dot" data-page="1"><i></i></button>
+    <button class="pc-dot" data-page="2"><i></i></button>
+    <button class="pc-dot" data-page="3"><i></i></button>
+    <button class="pc-dot" data-page="4"><i></i></button>
+  </nav>
+
+  <script src="cursor.js"></script>
+  <script>
+    (function () {
+      var DESIGN_W = 1280, DESIGN_H = 1080;
+      var PAGES = 5;
+
+      var panel = document.querySelector('.sticker .panel');
+      var sticker = document.getElementById('sticker');
+      var stars = {
+        big:   { el: document.querySelector('.sticker .star-big'),   x: 682,  y: 215,  s: 150 },
+        mid:   { el: document.querySelector('.sticker .star-mid'),   x: 477,  y: 436,  s: 126 },
+        small: { el: document.querySelector('.sticker .star-small'), x: 98,   y: 309,  s: 104 }
+      }; // x/y are offset from the panel's top-left (panel design pos 154,147)
+
+      var easRot = { big: 14.44, mid: -32.04, small: -8.95 };
+      var spins = { big: 0, mid: 0, small: 0 };
+      var dots = Array.prototype.slice.call(document.querySelectorAll('.pc-dot'));
+      var track = document.getElementById('track');
+      var page = 0;
+      var prevPage = 0;
+
+      function clampPage() {
+        page = Math.max(0, Math.min(PAGES - 1, page));
+      }
+
+      function placeSticker(w, h) {
+        // the WASSIM sticker lives only on page 1; sized big but guaranteed
+        // to stay inside the page so it never leaks onto the other pages
+        var e = Math.min((w * 0.88) / 971, (h * 0.92) / 756);
+        var bh = DESIGN_H * e;
+        var by = (h - bh) / 2;
+
+        var px = (w - 971 * e) / 2;    // center the panel horizontally
+        var py = by + 147 * e;
+
+        var k = Math.min(e, 1.25);     // star sharpness cap
+
+        sticker.style.left = px + 'px';
+        sticker.style.top  = py + 'px';
+        sticker.style.width  = (971 * e) + 'px';
+        sticker.style.height = (756 * e) + 'px';
+
+        panel.style.width  = (971 * e) + 'px';
+        panel.style.height = (756 * e) + 'px';
+
+        var s = stars.big.el;
+        s.style.left   = (stars.big.x * e) + 'px';
+        s.style.top    = (stars.big.y * e) + 'px';
+        s.style.width  = (stars.big.s * k) + 'px';
+        s.style.height = (stars.big.s * k) + 'px';
+        s.style.transform = 'rotate(' + (easRot.big + spins.big) + 'deg)';
+
+        s = stars.mid.el;
+        s.style.left   = (stars.mid.x * e) + 'px';
+        s.style.top    = (stars.mid.y * e) + 'px';
+        s.style.width  = (stars.mid.s * k) + 'px';
+        s.style.height = (stars.mid.s * k) + 'px';
+        s.style.transform = 'rotate(' + (easRot.mid + spins.mid) + 'deg)';
+
+        s = stars.small.el;
+        s.style.left   = (stars.small.x * e) + 'px';
+        s.style.top    = (stars.small.y * e) + 'px';
+        s.style.width  = (stars.small.s * k) + 'px';
+        s.style.height = (stars.small.s * k) + 'px';
+        s.style.transform = 'rotate(' + (easRot.small + spins.small) + 'deg)';
+      }
+
+      function setActive(p) {
+        dots.forEach(function (d, i) {
+          d.classList.toggle('active', i === p);
+        });
+        if (p !== prevPage) {
+          triggerPageTransition(p);
+          prevPage = p;
+        }
+      }
+
+      // cartoony transition when the active page changes
+      function triggerPageTransition(p) {
+        var dir = p > prevPage ? 1 : -1;
+        var pg = document.querySelector('.page-' + (p + 1));
+        if (pg) {
+          pg.classList.remove('pg-bounce');
+          void pg.offsetWidth;
+          pg.classList.add('pg-bounce');
+          setTimeout(function () { pg.classList.remove('pg-bounce'); }, 700);
+        }
+        // staggered content reveal whenever a page becomes active
+        var gd = document.querySelector('.gamedev');
+        if (gd) {
+          gd.classList.remove('enter');
+          if (p === 1) {
+            void gd.offsetWidth;
+            gd.classList.add('enter');
+          }
+        }
+        var art = document.querySelector('.art');
+        if (art) {
+          art.classList.remove('enter');
+          if (p === 2) {
+            void art.offsetWidth;
+            art.classList.add('enter');
+          }
+        }
+        comicStrike(dir);
+      }
+      // comic action lines bursting from the leading screen edge
+      function comicStrike(dir) {
+        for (var i = 0; i < 14; i++) {
+          var l = document.createElement('div');
+          l.className = 'comicline edge-' + (dir === 1 ? 'right' : 'left');
+          l.style.setProperty('--len', (40 + Math.random() * 70) + 'px');
+          l.style.setProperty('--top', (window.innerHeight / 2 + (Math.random() * 240 - 120)) + 'px');
+          l.style.setProperty('--ang', (Math.random() * 120 - 60) + 'deg');
+          document.body.appendChild(l);
+          l.addEventListener('animationend', function () { l.remove(); });
+        }
+      }
+
+      function goTo(p) {
+        page = p;
+        clampPage();
+        var pw = track.clientWidth || window.innerWidth;
+        track.scrollTo({ left: page * pw, behavior: 'smooth' });
+        setActive(page);
+      }
+
+      function syncFromScroll() {
+        var pw = track.clientWidth || window.innerWidth;
+        var idx = Math.round(track.scrollLeft / pw);
+        page = Math.max(0, Math.min(PAGES - 1, idx));
+        setActive(page);
+      }
+
+      function fit() {
+        placeSticker(window.innerWidth, window.innerHeight);
+        syncFromScroll();
+      }
+
+      fit();
+      window.addEventListener('resize', fit);
+      window.addEventListener('load', fit);
+      track.addEventListener('scroll', syncFromScroll, { passive: true });
+
+      // mouse wheel scrolls freely through the pages (left <-> right)
+      window.addEventListener('wheel', function (ev) {
+        ev.preventDefault();
+        var delta = (ev.deltaY || ev.deltaX);
+        track.scrollLeft += delta;
+      }, { passive: false });
+
+      dots.forEach(function (d) {
+        d.addEventListener('click', function () {
+          goTo(parseInt(d.getAttribute('data-page'), 10));
+        });
+      });
+
+      // tilt the sticker on click
+      sticker.addEventListener('click', function (ev) {
+        this.classList.add('tilt');
+        clearTimeout(this._tiltTimer);
+        this._tiltTimer = setTimeout(function () { sticker.classList.remove('tilt'); }, 500);
+        if (window.sparkleAt) sparkleAt(ev.clientX, ev.clientY);
+      });
+
+      // sparkle + spin stars on click
+      function sparkle(x, y, color) {
+        var angles = [-70, -110, 70, 110, 180];
+        for (var i = 0; i < angles.length; i++) {
+          var sp = document.createElement('div');
+          sp.className = 'sparkle';
+          var dist = 40 + Math.random() * 25;
+          var rad = (angles[i] + (Math.random() * 20 - 10)) * Math.PI / 180;
+          sp.style.left = (x - 7) + 'px';
+          sp.style.top  = (y - 7) + 'px';
+          sp.style.setProperty('--sx', Math.cos(rad) * dist + 'px');
+          sp.style.setProperty('--sy', Math.sin(rad) * dist + 'px');
+          sp.style.background = color || ('hsl(' + (40 + Math.random() * 30) + ', 95%, 62%)');
+          document.body.appendChild(sp);
+          sp.addEventListener('animationend', function () { sp.remove(); });
+        }
+      }
+      window.sparkleAt = sparkle;
+
+      Object.keys(stars).forEach(function (key) {
+        var s = stars[key];
+        s.el.addEventListener('click', function (ev) {
+          ev.stopPropagation();
+          spins[key] += 360;
+          s.el.style.transform = 'rotate(' + (easRot[key] + spins[key]) + 'deg)';
+          sparkle(ev.clientX, ev.clientY);
+        });
+      });
+    })();
+
+    (function () {
+      // the two gamedev stickers burst + sparkle on click
+      var stickers = document.querySelectorAll('.gamedev-sticker');
+      stickers.forEach(function (s) {
+        s.addEventListener('click', function (ev) {
+          ev.stopPropagation();
+          s.classList.remove('burst');
+          void s.offsetWidth;          // restart the animation
+          s.classList.add('burst');
+          if (window.sparkleAt) window.sparkleAt(ev.clientX, ev.clientY);
+        });
+      });
+    })();
+
+    (function () {
+      // smileys: on click, each one pops + bursts a rainbow ring (plus sparks)
+      function rainbowRing(x, y) {
+        var r = document.createElement('div');
+        r.className = 'ring-pop';
+        r.style.left = x + 'px';
+        r.style.top = y + 'px';
+        document.body.appendChild(r);
+        r.addEventListener('animationend', function () { r.remove(); });
+      }
+      Array.prototype.forEach.call(document.querySelectorAll('.smile'), function (sm) {
+        sm.addEventListener('click', function (ev) {
+          ev.stopPropagation();
+          sm.classList.remove('pop');
+          void sm.offsetWidth;
+          sm.classList.add('pop');
+          rainbowRing(ev.clientX, ev.clientY);
+          if (window.sparkleAt) window.sparkleAt(ev.clientX, ev.clientY, '#7ce577');
+          if (window.sparkleAt) window.sparkleAt(ev.clientX, ev.clientY, '#ff8bd6');
+        });
+      });
+
+      // clicking a drawing opens the full, uncropped image in a viewer
+      var viewer = document.getElementById('overlay-viewer');
+      var viewerImg = document.getElementById('viewerImg');
+      Array.prototype.forEach.call(document.querySelectorAll('.art-piece'), function (piece) {
+        piece.addEventListener('click', function () {
+          if (!viewer || !viewerImg) return;
+          var src = piece.getAttribute('data-full') || piece.querySelector('img').getAttribute('src');
+          viewerImg.setAttribute('src', src);
+          // close any other overlay, then open the viewer
+          Array.prototype.forEach.call(document.querySelectorAll('.overlay'), function (o) {
+            o.classList.remove('open');
+            o.setAttribute('aria-hidden', 'true');
+          });
+          viewer.classList.add('open');
+          viewer.setAttribute('aria-hidden', 'false');
+        });
+      });
+    })();
+
+    (function () {
+      // the "find me on" post-it is freely draggable anywhere on the art page
+      var link = document.querySelector('.art-link');
+      if (link) {
+        var drag = null;
+        link.addEventListener('mousedown', function (e) {
+          if (e.target.closest && e.target.closest('a')) return;  // let links open
+          e.preventDefault();
+          var r = link.getBoundingClientRect();
+          drag = { dx: e.clientX - r.left, dy: e.clientY - r.top };
+          link.classList.add('al-grabbing');
+        });
+        document.addEventListener('mousemove', function (e) {
+          if (!drag) return;
+          link.style.left = (e.clientX - drag.dx) + 'px';
+          link.style.top = (e.clientY - drag.dy) + 'px';
+        });
+        document.addEventListener('mouseup', function () {
+          if (!drag) return;
+          drag = null;
+          link.classList.remove('al-grabbing');
+          // squash-and-stretch "put down" pop when you release it
+          link.classList.remove('al-down');
+          void link.offsetWidth;
+          link.classList.add('al-down');
+        });
+      }
+    })();
+
+    (function () {
+      // ---- doodle mode: draw on the art page, erase, grayscale ----
+      var canvas = document.getElementById('drawLayer');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var tools = document.getElementById('drawTools');
+      var penBtn = document.getElementById('pencilBtn');
+      var drawing = false;
+      var color = '#2b3991';
+      var size = 5;
+      var eraser = false;
+      var last = null;
+
+      function resize() {
+        var dpr = window.devicePixelRatio || 1;
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = window.innerHeight * dpr;
+        canvas.style.width = window.innerWidth + 'px';
+        canvas.style.height = window.innerHeight + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      function enable(on) {
+        canvas.classList.toggle('active', on);
+        tools.classList.toggle('show', on);
+        if (on) resize();
+      }
+      function getPos(e) {
+        var r = canvas.getBoundingClientRect();
+        return { x: e.clientX - r.left, y: e.clientY - r.top };
+      }
+
+      penBtn.addEventListener('click', function () {
+        enable(!canvas.classList.contains('active'));
+      });
+
+      canvas.addEventListener('pointerdown', function (e) {
+        drawing = true;
+        last = getPos(e);
+        canvas.setPointerCapture(e.pointerId);
+      });
+      canvas.addEventListener('pointermove', function (e) {
+        if (!drawing) return;
+        var p = getPos(e);
+        ctx.globalCompositeOperation = eraser ? 'destination-out' : 'source-over';
+        ctx.strokeStyle = eraser ? 'rgba(0,0,0,1)' : color;
+        ctx.lineWidth = eraser ? size * 6 : size;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.beginPath();
+        ctx.moveTo(last.x, last.y);
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+        last = p;
+      });
+      canvas.addEventListener('pointerup', function () { drawing = false; });
+      canvas.addEventListener('pointerleave', function () { drawing = false; });
+
+      // color swatches
+      function clearCustomHighlight() {
+        var cClone = document.querySelector('.dt-custom');
+        if (cClone) cClone.classList.remove('active-swatch');
+      }
+      Array.prototype.forEach.call(document.querySelectorAll('.dt-swatch'), function (b) {
+        b.addEventListener('click', function () {
+          color = b.getAttribute('data-c');
+          eraser = false;
+          clearCustomHighlight();
+          Array.prototype.forEach.call(document.querySelectorAll('.dt-swatch'), function (s) {
+            s.classList.remove('active');
+          });
+          b.classList.add('active');
+          document.getElementById('dtEraser').classList.remove('active');
+        });
+      });
+      // custom color wheel
+      var colorInput = document.getElementById('dtColor');
+      var dtCustom = document.querySelector('.dt-custom');
+      function setCustomColor(c) {
+        color = c;
+        eraser = false;
+        if (dtCustom) {
+          dtCustom.style.setProperty('--cur', c);
+          dtCustom.classList.add('active-swatch');
+        }
+        Array.prototype.forEach.call(document.querySelectorAll('.dt-swatch'), function (s) {
+          s.classList.remove('active');
+        });
+        if (document.getElementById('dtEraser')) document.getElementById('dtEraser').classList.remove('active');
+      }
+      if (colorInput) colorInput.addEventListener('input', function () {
+        setCustomColor(colorInput.value);
+      });
+      // pencil size
+      Array.prototype.forEach.call(document.querySelectorAll('.dt-sizebtn'), function (b) {
+        b.addEventListener('click', function () {
+          size = parseInt(b.getAttribute('data-w'), 10);
+          Array.prototype.forEach.call(document.querySelectorAll('.dt-sizebtn'), function (s) {
+            s.classList.remove('active');
+          });
+          b.classList.add('active');
+        });
+      });
+      // eraser
+      document.getElementById('dtEraser').addEventListener('click', function () {
+        eraser = true;
+        this.classList.add('active');
+        Array.prototype.forEach.call(document.querySelectorAll('.dt-swatch'), function (s) {
+          s.classList.remove('active');
+        });
+      });
+      // clear the canvas
+      document.getElementById('dtClear').addEventListener('click', function () {
+        ctx.save();
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.restore();
+      });
+      // close drawing mode
+      document.getElementById('dtClose').addEventListener('click', function () { enable(false); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && canvas.classList.contains('active')) enable(false);
+      });
+
+      // show the drawing panel by default on the art page (index 2); the
+      // pencil button toggles it open/closed
+      var trackEl = document.getElementById('track');
+      function focusPage() {
+        var pw = trackEl.clientWidth || window.innerWidth;
+        var idx = Math.round(trackEl.scrollLeft / pw);
+        var onArt = (idx === 2);
+        penBtn.style.display = onArt ? '' : 'none';
+        if (onArt && !canvas.classList.contains('active')) enable(true);
+        if (!onArt && canvas.classList.contains('active')) enable(false);
+      }
+      if (trackEl) {
+        trackEl.addEventListener('scroll', focusPage, { passive: true });
+        focusPage();
+      }
+    })();
+
+    (function () {
+      // colorful paint-spark particles drifting up the art page
+      var arts = document.querySelector('.art');
+      if (!arts) return;
+      var colors = ['#ff5c5c', '#ffd23f', '#7ce577', '#5c9dff', '#ff8bd6', '#5cf0ff', '#ff9d3f', '#b78cff'];
+      for (var i = 0; i < 34; i++) {
+        var p = document.createElement('div');
+        p.className = 'artspark';
+        p.style.left = (Math.random() * 100).toFixed(1) + 'vw';
+        p.style.top = (5 + Math.random() * 82).toFixed(1) + 'vh';
+        var sz = (5 + Math.random() * 11).toFixed(1);
+        p.style.width = sz + 'px';
+        p.style.height = sz + 'px';
+        var c = colors[(Math.random() * colors.length) | 0];
+        p.style.background = c;
+        p.style.color = c;
+        p.style.setProperty('--ad', (3.5 + Math.random() * 5).toFixed(1) + 's');
+        p.style.setProperty('--ao', (0.7 + Math.random() * 0.3).toFixed(2));
+        p.style.animationDelay = (-Math.random() * 10).toFixed(1) + 's';
+        arts.appendChild(p);
+      }
+    })();
+
+
+    (function () {
+      // floating retro pixels rising from the gamedev page
+      var container = document.querySelector('.page-2') || document.body;
+      var colors = ['#ffd23f', '#ff5c5c', '#5c9dff', '#7ce577', '#ff8bd6', '#b78cff', '#ffffff', '#5cf0ff'];
+      for (var i = 0; i < 40; i++) {
+        var p = document.createElement('div');
+        p.className = 'pixel';
+        p.style.left = (Math.random() * 100).toFixed(1) + 'vw';
+        p.style.top = (5 + Math.random() * 80).toFixed(1) + 'vh';
+        var sz = (6 + Math.random() * 11).toFixed(1);
+        p.style.width = sz + 'px';
+        p.style.height = sz + 'px';
+        var c = colors[(Math.random() * colors.length) | 0];
+        p.style.background = c;
+        p.style.color = c;
+        p.style.setProperty('--pd', (3.5 + Math.random() * 5).toFixed(1) + 's');
+        p.style.setProperty('--po', (0.7 + Math.random() * 0.3).toFixed(2));
+        p.style.animationDelay = (-Math.random() * 10).toFixed(1) + 's';
+        container.appendChild(p);
+      }
+    })();
+
+    (function () {
+      // professional 3D tilt on the project post-its (preserves base rotation)
+      var postits = document.querySelectorAll('.postit');
+      postits.forEach(function (el) {
+        var base = 0;
+        (function () {
+          var c = getComputedStyle(el).transform;
+          var m = c && c !== 'none' ? c.match(/matrix\(([^)]+)\)/) : null;
+          if (m) {
+            var v = m[1].split(',');
+            base = Math.round(Math.atan2(parseFloat(v[1]), parseFloat(v[0])) * 180 / Math.PI);
+          }
+        })();
+        el.addEventListener('mousemove', function (e) {
+          var r = el.getBoundingClientRect();
+          var px = (e.clientX - r.left) / r.width - 0.5;
+          var py = (e.clientY - r.top) / r.height - 0.5;
+          var rx = (-py * 14).toFixed(2);
+          var ry = (px * 16).toFixed(2);
+          el.style.transform = 'rotate(' + base + 'deg) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) scale(1.05)';
+        });
+        el.addEventListener('mouseleave', function () { el.style.transform = ''; });
+      });
+    })();
+
+    (function () {
+      // faint ambient dust motes drifting across the hero page
+      var page = document.querySelector('.page-1');
+      if (!page) return;
+      for (var i = 0; i < 12; i++) {
+        var m = document.createElement('div');
+        m.className = 'mote';
+        var sz = 6 + Math.random() * 14;
+        m.style.width = sz + 'px';
+        m.style.height = sz + 'px';
+        m.style.left = (8 + Math.random() * 84).toFixed(1) + 'vw';
+        m.style.top = (8 + Math.random() * 80).toFixed(1) + 'vh';
+        m.style.setProperty('--mx', (Math.random() * 60 - 30).toFixed(1) + 'px');
+        m.style.setProperty('--my', (Math.random() * -80 - 10).toFixed(1) + 'px');
+        m.style.setProperty('--md', (8 + Math.random() * 10).toFixed(1) + 's');
+        m.style.setProperty('--mo', (0.25 + Math.random() * 0.35).toFixed(2));
+        m.style.animationDelay = (-Math.random() * 18).toFixed(1) + 's';
+        page.appendChild(m);
+      }
+    })();
+
+    (function () {
+      // static buttons open overlay papers
+      var overlays = Array.prototype.slice.call(document.querySelectorAll('.overlay'));
+
+      function closeAll() {
+        overlays.forEach(function (o) {
+          o.classList.remove('open');
+          o.setAttribute('aria-hidden', 'true');
+        });
+      }
+
+      Array.prototype.forEach.call(document.querySelectorAll('.fab-btn'), function (b) {
+        b.addEventListener('click', function () {
+          var target = b.getAttribute('data-overlay');
+          closeAll();
+          var ov = document.getElementById(target);
+          if (ov) {
+            ov.classList.add('open');
+            ov.setAttribute('aria-hidden', 'false');
+          }
+        });
+      });
+
+      overlays.forEach(function (o) {
+        // clicking the dim backdrop (outside the paper) closes it
+        o.addEventListener('click', function (e) {
+          if (e.target === o) {
+            o.classList.remove('open');
+            o.setAttribute('aria-hidden', 'true');
+          }
+        });
+      });
+
+      // Escape closes any open overlay
+      window.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeAll();
+      });
+    })();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
