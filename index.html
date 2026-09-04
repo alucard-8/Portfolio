@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>portfolio — WASSIM</title>
-  <link rel="stylesheet" href="styles.css?v=83">
+  <link rel="stylesheet" href="styles.css?v=84">
 </head>
 <body>
 
@@ -88,10 +88,6 @@
 
           <!-- sci-fi title banner -->
           <img class="gui-title fade-item" src="images/gameuigraphic/gamedevgraphics and ui.png" alt="gamedev - graphics and ui">
-
-          <!-- the spaceship stickers, warped around the panel (click = thrust) -->
-          <img class="ship sp-1 fade-item" src="images/gameuigraphic/sticker 4.png" alt="spaceship">
-          <img class="ship sp-2 fade-item" src="images/gameuigraphic/sticker 4.png" alt="spaceship">
 
           <!-- the big folder: click it to open the paper that holds every
                piece of work in a clean, non-overlapping layout -->
@@ -239,9 +235,9 @@
        by side — drag the sheet down / scroll to see it all -->
   <div class="ui-paper" id="uiPaper" aria-hidden="true" role="dialog" aria-label="My game UI work, laid out cleanly">
     <div class="ui-paper-sheet">
-      <img class="up-sticker" src="images/gameuigraphic/sticker 4.png" alt="space sticker">
+      <img class="ship p-s1" src="images/gameuigraphic/sticker 4.png" alt="spaceship">
+      <img class="ship p-s2" src="images/gameuigraphic/sticker 4.png" alt="spaceship">
       <div class="up-head">
-        <span class="up-title">my game UI &amp; graphics</span>
         <span class="up-count">14 pieces</span>
         <button class="up-close" id="uiPaperClose" aria-label="close the folder">✕</button>
       </div>
@@ -648,6 +644,26 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
         paper.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
         paper.scrollTop = 0;
+        var fr = folder.getBoundingClientRect();
+        confettiAt(fr.left + fr.width / 2, fr.top + fr.height / 2);
+      }
+      function confettiAt(x, y) {
+        var colors = ['#2b3991', '#e0a21f', '#cf3503', '#ffd23f', '#5cf0ff', '#ffffff'];
+        for (var i = 0; i < 22; i++) {
+          var c = document.createElement('div');
+          c.className = 'confetti';
+          c.style.left = x + 'px';
+          c.style.top = y + 'px';
+          c.style.background = colors[(Math.random() * colors.length) | 0];
+          var ang = Math.random() * Math.PI * 2;
+          var dist = 60 + Math.random() * 140;
+          c.style.setProperty('--cx', Math.round(Math.cos(ang) * dist) + 'px');
+          c.style.setProperty('--cy', Math.round(Math.sin(ang) * dist - 40) + 'px');
+          c.style.setProperty('--cr', Math.round(Math.random() * 540 - 270) + 'deg');
+          c.style.animationDelay = (Math.random() * 0.18).toFixed(2) + 's';
+          paper.appendChild(c);
+          c.addEventListener('animationend', function () { c.remove(); });
+        }
       }
       function closePaper() {
         paper.classList.remove('open');
@@ -683,8 +699,28 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
           streaks(r.left + r.width / 2, r.top + r.height / 2);
           if (window.sparkleAt) window.sparkleAt(ev.clientX, ev.clientY, '#ffd23f');
           if (window.sparkleAt) window.sparkleAt(ev.clientX, ev.clientY, '#5cf0ff');
+          shockAt(r.left + r.width / 2, r.top + r.height / 2, r.width);
         });
       });
+      function shockAt(x, y, w) {
+        var ring = document.createElement('div');
+        ring.className = 'shock';
+        ring.style.left = x + 'px';
+        ring.style.top = y + 'px';
+        ring.style.width = (w * 0.9) + 'px';
+        ring.style.height = (w * 0.9) + 'px';
+        document.body.appendChild(ring);
+        ring.addEventListener('animationend', function () { ring.remove(); });
+        var ring2 = document.createElement('div');
+        ring2.className = 'shock alt';
+        ring2.style.left = x + 'px';
+        ring2.style.top = y + 'px';
+        ring2.style.width = (w * 1.5) + 'px';
+        ring2.style.height = (w * 1.5) + 'px';
+        ring2.style.animationDelay = '0.07s';
+        document.body.appendChild(ring2);
+        ring2.addEventListener('animationend', function () { ring2.remove(); });
+      }
       function flameAt(x, y, w) {
         var f = document.createElement('div');
         f.className = 'shipflame';

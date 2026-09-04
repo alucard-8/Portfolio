@@ -1002,12 +1002,12 @@ html.has-custom-cursor * {
   filter: drop-shadow(0 8px 12px rgba(24, 31, 66, 0.4));
   transition: transform 0.35s cubic-bezier(0.34, 1.45, 0.64, 1), filter 0.35s ease;
 }
-.sp-1 { left: 79%; top: 6%; transform: rotate(12deg); }
-.sp-2 { left: 1%;  top: 13%; transform: rotate(-14deg) scale(0.9); }
-.ship:hover {
-  transform: translateY(-8px) scale(1.18) rotate(4deg);
-  filter: drop-shadow(0 0 18px rgba(92, 240, 255, 0.75));
-}
+/* when the ships hide out inside the paper they shrink into little sticker decals */
+.ui-paper-sheet .ship { width: 72px; filter: drop-shadow(0 8px 10px rgba(24, 31, 66, 0.35)); }
+.p-s1 { left: 50%; top: -20px; transform: translateX(-92px) rotate(-11deg); }
+.p-s2 { left: 50%; top: -15px; transform: translateX(2px) rotate(7deg) scale(0.82); z-index: 9; }
+.p-s1:hover { transform: translateX(-92px) translateY(-8px) scale(1.15) rotate(-11deg); filter: drop-shadow(0 0 14px rgba(92, 240, 255, 0.7)); }
+.p-s2:hover { transform: translateX(2px) translateY(-8px) scale(1.05) rotate(7deg); filter: drop-shadow(0 0 14px rgba(92, 240, 255, 0.7)); }
 /* quick thruster kick on click */
 .ship.thrust { animation: shipThrust 0.5s cubic-bezier(0.34, 1.45, 0.64, 1); }
 @keyframes shipThrust {
@@ -2087,22 +2087,35 @@ html.has-custom-cursor * {
   position: relative;
   animation: paperDrop 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
-/* a sticker decal loosely stuck inside the corner of the paper */
-.up-sticker {
-  position: absolute;
-  left: 20px;
-  bottom: 18px;
-  width: 62px;
-  height: auto;
-  z-index: 2;
+/* a shock ring that pops out of the ships on click (spawned in JS, too) */
+.shock {
+  position: fixed;
+  z-index: 9995;
   pointer-events: none;
-  transform: rotate(-9deg);
-  filter: drop-shadow(0 6px 10px rgba(24, 31, 66, 0.3));
-  animation: stickerWiggle 5.5s ease-in-out infinite;
+  border-radius: 50%;
+  border: 3px solid rgba(92, 240, 255, 0.9);
+  transform: translate(-50%, -50%);
+  animation: shockRing 0.6s ease-out forwards;
 }
-@keyframes stickerWiggle {
-  0%, 100% { transform: rotate(-9deg); }
-  50%      { transform: rotate(-6deg) translateY(-4px); }
+.shock.alt { border-color: rgba(255, 210, 63, 0.85); }
+@keyframes shockRing {
+  0%   { transform: translate(-50%, -50%) scale(0.15); opacity: 0.95; }
+  100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
+}
+/* paper confetti popped out of the folder when it opens */
+.confetti {
+  position: fixed;
+  width: 9px;
+  height: 13px;
+  z-index: 9996;
+  pointer-events: none;
+  border-radius: 2px;
+  opacity: 0;
+  animation: confettiFly 0.85s cubic-bezier(0.28, 0.84, 0.45, 1) forwards;
+}
+@keyframes confettiFly {
+  0%   { transform: translate(-50%, -50%) rotate(0deg); opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--cx)), calc(-50% + var(--cy))) rotate(var(--cr)); opacity: 0; }
 }
 @keyframes paperDrop {
   from { transform: translateY(22px); opacity: 0; }
@@ -2117,12 +2130,6 @@ html.has-custom-cursor * {
   padding-bottom: 14px;
   border-bottom: 2px solid transparent;
   border-image: linear-gradient(90deg, #2b3991, #e0a21f 55%, transparent) 1;
-}
-.up-title {
-  font-family: 'zai Lava', cursive;
-  font-size: clamp(20px, 3vw, 30px);
-  font-weight: bold;
-  color: #1f2447;
 }
 .up-count {
   flex: none;
