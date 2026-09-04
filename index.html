@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>portfolio — WASSIM</title>
-  <link rel="stylesheet" href="styles.css?v=76">
+  <link rel="stylesheet" href="styles.css?v=77">
 </head>
 <body>
 
@@ -86,8 +86,84 @@
         </div>
       </div>
     </section>
-    <section class="page page-4"></section>
-    <section class="page page-5"></section>
+    <section class="page page-4">
+      <div class="gui">
+        <div class="stage">
+
+          <!-- sci-fi title banner -->
+          <img class="gui-title fade-item" src="images/gameuigraphic/gamedevgraphics and ui.png" alt="gamedev - graphics and ui">
+
+          <!-- the spaceship sticker, warped around the panel (click = thrust) -->
+          <img class="ship sp-1 fade-item" src="images/gameuigraphic/sticker 4.png" alt="spaceship">
+          <img class="ship sp-2 fade-item" src="images/gameuigraphic/sticker 4.png" alt="spaceship">
+
+          <!-- a strip of UI screens, pinned up like polaroids (click to view) -->
+          <div class="ui-piece fade-item ui-play" data-full="images/gameuigraphic/1.png">
+            <img src="images/gameuigraphic/1.png" alt="gameplay frame">
+          </div>
+          <div class="ui-piece fade-item ui-play" data-full="images/gameuigraphic/a.png">
+            <img src="images/gameuigraphic/a.png" alt="gameplay frame">
+          </div>
+          <div class="ui-piece fade-item ui-play" data-full="images/gameuigraphic/banner.png">
+            <img src="images/gameuigraphic/banner.png" alt="game banner">
+          </div>
+
+          <!-- the big menu screens pinned to the bottom of the panel -->
+          <div class="ui-card fade-item" data-full="images/gameuigraphic/settings.png">
+            <img src="images/gameuigraphic/settings.png" alt="settings screen">
+          </div>
+          <div class="ui-card fade-item" data-full="images/gameuigraphic/pause menu.png">
+            <img src="images/gameuigraphic/pause menu.png" alt="pause menu">
+          </div>
+          <div class="ui-card fade-item" data-full="images/gameuigraphic/game over.png">
+            <img src="images/gameuigraphic/game over.png" alt="game over screen">
+          </div>
+
+          <!-- a scatter of extra frames / icons / props -->
+          <div class="ui-chip fade-item" data-full="images/gameuigraphic/Frame 2.png">
+            <img src="images/gameuigraphic/Frame 2.png" alt="frame">
+          </div>
+          <div class="ui-chip fade-item" data-full="images/gameuigraphic/game icon.png">
+            <img src="images/gameuigraphic/game icon.png" alt="game icon">
+          </div>
+          <div class="ui-chip fade-item" data-full="images/gameuigraphic/ember hunt.png">
+            <img src="images/gameuigraphic/ember hunt.png" alt="ember hunt">
+          </div>
+          <div class="ui-chip fade-item" data-full="images/gameuigraphic/void runner.png">
+            <img src="images/gameuigraphic/void runner.png" alt="void runner">
+          </div>
+          <div class="ui-chip fade-item" data-full="images/gameuigraphic/Frame 1.png">
+            <img src="images/gameuigraphic/Frame 1.png" alt="frame">
+          </div>
+          <div class="ui-chip fade-item" data-full="images/gameuigraphic/Frame 30.png">
+            <img src="images/gameuigraphic/Frame 30.png" alt="frame">
+          </div>
+          <div class="ui-chip fade-item" data-full="images/gameuigraphic/settings-1.png">
+            <img src="images/gameuigraphic/settings-1.png" alt="settings variant">
+          </div>
+
+          <!-- the animated cover reel, teased beside the frame cluster -->
+          <div class="ui-video fade-item" data-mp4="images/gameuigraphic/cover animated.mp4">
+            <span class="uv-label">animated playable cover</span>
+            <span class="uv-glyph">▶ play</span>
+          </div>
+
+          <!-- draggable mission-brief post-it -->
+          <div class="gui-link fade-item">
+            <img class="gl-pin" src="images/pin.png" alt="">
+            <span class="gl-label">mission brief</span>
+            <p class="gl-line">Graphic Designer · Game UI · 2D</p>
+            <a class="gl-row" href="https://www.instagram.com/wassim___draw/" target="_blank" rel="noopener">
+              <span class="gl-site">Instagram</span><span class="gl-handle">@wassim___draw</span>
+            </a>
+            <a class="gl-row" href="https://www.artstation.com/alucard08" target="_blank" rel="noopener">
+              <span class="gl-site">ArtStation</span><span class="gl-handle">alucard08</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
   </div>
 
 
@@ -208,28 +284,28 @@
     </div>
   </div>
 
-  <!-- full-size drawing viewer (click a drawing to open) -->
+  <!-- full-size drawing viewer (click a drawing / ui screen to open) -->
   <div class="overlay" id="overlay-viewer" aria-hidden="true">
     <div class="viewer">
       <img class="viewer-img" id="viewerImg" src="" alt="artwork">
+      <video class="viewer-vid" id="viewerVid" controls></video>
     </div>
   </div>
 
 
-  <!-- themed page counter (5 pages) -->
+<!-- themed page counter (4 pages) -->
   <nav class="page-counter" id="pageCounter" aria-label="Pages">
     <button class="pc-dot" data-page="0"><i></i></button>
     <button class="pc-dot" data-page="1"><i></i></button>
     <button class="pc-dot" data-page="2"><i></i></button>
     <button class="pc-dot" data-page="3"><i></i></button>
-    <button class="pc-dot" data-page="4"><i></i></button>
   </nav>
 
   <script src="cursor.js"></script>
   <script>
     (function () {
-      var DESIGN_W = 1280, DESIGN_H = 1080;
-      var PAGES = 5;
+var DESIGN_W = 1280, DESIGN_H = 1080;
+      var PAGES = 4;
 
       var panel = document.querySelector('.sticker .panel');
       var sticker = document.getElementById('sticker');
@@ -327,6 +403,14 @@
           if (p === 2) {
             void art.offsetWidth;
             art.classList.add('enter');
+          }
+        }
+        var gui = document.querySelector('.gui');
+        if (gui) {
+          gui.classList.remove('enter');
+          if (p === 3) {
+            void gui.offsetWidth;
+            gui.classList.add('enter');
           }
         }
         comicStrike(dir);
@@ -456,14 +540,33 @@
         });
       });
 
-      // clicking a drawing opens the full, uncropped image in a viewer
+      // clicking a drawing / ui screen / fabric piece opens the full-size
+      // viewer (images and the animated cover video share this popup)
       var viewer = document.getElementById('overlay-viewer');
       var viewerImg = document.getElementById('viewerImg');
-      Array.prototype.forEach.call(document.querySelectorAll('.art-piece'), function (piece) {
-        piece.addEventListener('click', function () {
-          if (!viewer || !viewerImg) return;
-          var src = piece.getAttribute('data-full') || piece.querySelector('img').getAttribute('src');
-          viewerImg.setAttribute('src', src);
+      var viewerVid = document.getElementById('viewerVid');
+      var viewerItems = document.querySelectorAll('.art-piece, .ui-piece, .ui-card, .ui-chip, .ui-video');
+      Array.prototype.forEach.call(viewerItems, function (item) {
+        item.addEventListener('click', function () {
+          if (!viewer) return;
+          // hide both first so only the right one shows up
+          viewerImg.style.display = 'none';
+          if (viewerVid) {
+            viewerVid.pause();
+            viewerVid.removeAttribute('src');
+            viewerVid.style.display = 'none';
+          }
+          var mp4 = item.getAttribute('data-mp4');
+          if (viewerVid && mp4) {
+            viewerVid.setAttribute('src', mp4);
+            viewerVid.style.display = 'block';
+            viewerVid.play();
+          } else if (viewerImg) {
+            var src = item.getAttribute('data-full') ||
+                      (item.querySelector('img') && item.querySelector('img').getAttribute('src'));
+            viewerImg.setAttribute('src', src);
+            viewerImg.style.display = 'block';
+          }
           // close any other overlay, then open the viewer
           Array.prototype.forEach.call(document.querySelectorAll('.overlay'), function (o) {
             o.classList.remove('open');
@@ -505,7 +608,99 @@
     })();
 
     (function () {
-      // ---- doodle mode: draw on the art page, erase, grayscale ----
+      // the "mission brief" post-it is freely draggable on the gui page
+      var link = document.querySelector('.gui-link');
+      if (link) {
+        var drag = null;
+        link.addEventListener('mousedown', function (e) {
+          if (e.target.closest && e.target.closest('a')) return;
+          e.preventDefault();
+          var r = link.getBoundingClientRect();
+          drag = { dx: e.clientX - r.left, dy: e.clientY - r.top };
+          link.classList.add('al-grabbing');
+        });
+        document.addEventListener('mousemove', function (e) {
+          if (!drag) return;
+          link.style.left = (e.clientX - drag.dx) + 'px';
+          link.style.top = (e.clientY - drag.dy) + 'px';
+        });
+        document.addEventListener('mouseup', function () {
+          if (!drag) return;
+          drag = null;
+          link.classList.remove('al-grabbing');
+          link.classList.remove('al-down');
+          void link.offsetWidth;
+          link.classList.add('al-down');
+        });
+      }
+    })();
+
+    (function () {
+      // the spaceship stickers: clicking them kicks a thruster burst —
+      // engine flame, light-speed streaks and sparks
+      var ships = document.querySelectorAll('.ship');
+      ships.forEach(function (s) {
+        s.addEventListener('click', function (ev) {
+          ev.stopPropagation();
+          s.classList.remove('thrust');
+          void s.offsetWidth;                 // restart the animation
+          s.classList.add('thrust');
+          var r = s.getBoundingClientRect();
+          flameAt(r.left + r.width / 2, r.bottom - 4, r.width);
+          streaks(r.left + r.width / 2, r.top + r.height / 2);
+          if (window.sparkleAt) window.sparkleAt(ev.clientX, ev.clientY, '#ffd23f');
+          if (window.sparkleAt) window.sparkleAt(ev.clientX, ev.clientY, '#5cf0ff');
+        });
+      });
+      function flameAt(x, y, w) {
+        var f = document.createElement('div');
+        f.className = 'shipflame';
+        f.style.left = (x - w * 0.12) + 'px';
+        f.style.top  = (y - w * 0.1) + 'px';
+        f.style.width  = (w * 0.24) + 'px';
+        f.style.height = (w * 0.55) + 'px';
+        document.body.appendChild(f);
+        f.addEventListener('animationend', function () { f.remove(); });
+      }
+      function streaks(x, y) {
+        for (var i = 0; i < 3; i++) {
+          var st = document.createElement('div');
+          st.className = 'streaky';
+          st.style.left = (x + (Math.random() * 50 - 25)) + 'px';
+          st.style.top  = (y + (Math.random() * 40 - 20)) + 'px';
+          st.style.width = (55 + Math.random() * 50) + 'px';
+          st.style.setProperty('--rot', (Math.random() * 60 - 30) + 'deg');
+          st.style.setProperty('--tx', (-(120 + Math.random() * 100)) + 'px');
+          document.body.appendChild(st);
+          st.addEventListener('animationend', function () { st.remove(); });
+        }
+      }
+    })();
+
+    (function () {
+      // faint gold/white stars drifting up through the gui page
+      var gui = document.querySelector('.gui');
+      if (!gui) return;
+      var stage = gui.querySelector('.stage') || gui;
+      var colors = ['#ffffff', '#ffffff', '#ffd23f', '#5cf0ff', '#ffffff'];
+      for (var i = 0; i < 28; i++) {
+        var p = document.createElement('div');
+        p.className = 'hudstar';
+        p.style.left = (Math.random() * 100).toFixed(1) + '%';
+        p.style.top = (5 + Math.random() * 82).toFixed(1) + '%';
+        var sz = (3 + Math.random() * 5).toFixed(1);
+        p.style.width = sz + 'px';
+        p.style.height = sz + 'px';
+        p.style.color = colors[(Math.random() * colors.length) | 0];
+        p.style.setProperty('--hd', (5 + Math.random() * 6).toFixed(1) + 's');
+        p.style.setProperty('--ho', (0.5 + Math.random() * 0.4).toFixed(2));
+        p.style.animationDelay = (-Math.random() * 12).toFixed(1) + 's';
+        stage.appendChild(p);
+      }
+    })();
+
+    (function () {
+      // doodle mode: draw on the art page, erase, grayscale ----
       var canvas = document.getElementById('drawLayer');
       if (!canvas) return;
       var ctx = canvas.getContext('2d');
@@ -742,6 +937,8 @@
       var overlays = Array.prototype.slice.call(document.querySelectorAll('.overlay'));
 
       function closeAll() {
+        var v = document.getElementById('viewerVid');
+        if (v) v.pause();
         overlays.forEach(function (o) {
           o.classList.remove('open');
           o.setAttribute('aria-hidden', 'true');
@@ -783,7 +980,7 @@
       function fitStages() {
         var s = Math.min(window.innerWidth / STAGE_W, window.innerHeight / STAGE_H);
         s = Math.min(s, 1);          // never upscale past its design size
-        var stages = document.querySelectorAll('.gamedev .stage, .art .stage');
+        var stages = document.querySelectorAll('.gamedev .stage, .art .stage, .gui .stage');
         for (var i = 0; i < stages.length; i++) {
           stages[i].style.setProperty('--gs', s);
         }
@@ -795,6 +992,7 @@
   </script>
 </body>
 </html>
+
 
 
 

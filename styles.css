@@ -102,7 +102,8 @@ body {
 /* fixed-size design stage: every item is locked inside it and the
    whole stage is scaled as one unit (like the page-1 sticker fit) */
 .gamedev .stage,
-.art .stage {
+.art .stage,
+.gui .stage {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -896,6 +897,401 @@ html.has-custom-cursor * {
   100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; }
 }
 
+/* ============ Page 4: game ui & graphics ============ */
+.gui {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  perspective: 1200px;
+}
+.gui .fade-item { opacity: 0; }
+.gui.enter .fade-item { animation: fadeItem 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.gui.enter .fade-item:nth-child(1)  { animation-delay: 0.02s; }
+.gui.enter .fade-item:nth-child(2)  { animation-delay: 0.08s; }
+.gui.enter .fade-item:nth-child(3)  { animation-delay: 0.14s; }
+.gui.enter .fade-item:nth-child(4)  { animation-delay: 0.20s; }
+.gui.enter .fade-item:nth-child(5)  { animation-delay: 0.26s; }
+.gui.enter .fade-item:nth-child(6)  { animation-delay: 0.32s; }
+.gui.enter .fade-item:nth-child(7)  { animation-delay: 0.38s; }
+.gui.enter .fade-item:nth-child(8)  { animation-delay: 0.44s; }
+.gui.enter .fade-item:nth-child(9)  { animation-delay: 0.50s; }
+.gui.enter .fade-item:nth-child(10) { animation-delay: 0.56s; }
+.gui.enter .fade-item:nth-child(11) { animation-delay: 0.62s; }
+.gui.enter .fade-item:nth-child(12) { animation-delay: 0.68s; }
+.gui.enter .fade-item:nth-child(13) { animation-delay: 0.74s; }
+.gui.enter .fade-item:nth-child(14) { animation-delay: 0.80s; }
+.gui.enter .fade-item:nth-child(15) { animation-delay: 0.86s; }
+.gui.enter .fade-item:nth-child(16) { animation-delay: 0.92s; }
+.gui.enter .fade-item:nth-child(17) { animation-delay: 0.98s; }
+.gui.enter .fade-item:nth-child(18) { animation-delay: 1.04s; }
+
+/* cool effect: a slow space-station scan sweeping down the page */
+.gui::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -30vh;
+  height: 18vh;
+  z-index: 5;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, rgba(120, 220, 255, 0.20), transparent);
+  animation: guiScan 6s linear infinite;
+}
+@keyframes guiScan {
+  0%   { top: -30vh; opacity: 0; }
+  8%   { opacity: 0.8; }
+  92%  { opacity: 0.8; }
+  100% { top: 115vh; opacity: 0; }
+}
+/* deep space glow breathing behind everything */
+.gui::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 30% 18%, rgba(92, 240, 255, 0.12), transparent 55%),
+              radial-gradient(ellipse at 75% 85%, rgba(255, 210, 63, 0.10), transparent 50%),
+              radial-gradient(ellipse at center, transparent 40%, rgba(24, 31, 66, 0.25) 100%);
+  animation: guiGlow 5.5s ease-in-out infinite;
+}
+@keyframes guiGlow {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 1; }
+}
+
+/* sci-fi title banner */
+.gui-title {
+  position: absolute;
+  left: 18%;
+  top: 5%;
+  width: 640px;
+  height: auto;
+  display: block;
+  pointer-events: none;
+  animation: titleGlow 2.6s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px rgba(92, 240, 255, 0.4));
+}
+
+/* ---- the spaceship sticker (sticker 4) ---- */
+.ship {
+  position: absolute;
+  width: 130px;
+  height: auto;
+  display: block;
+  cursor: pointer;
+  will-change: transform;
+  z-index: 8;
+  filter: drop-shadow(0 8px 12px rgba(24, 31, 66, 0.4));
+  transition: transform 0.35s cubic-bezier(0.34, 1.45, 0.64, 1), filter 0.35s ease;
+}
+.sp-1 { left: 79%; top: 6%; transform: rotate(12deg); }
+.sp-2 { left: 1%;  top: 13%; transform: rotate(-14deg) scale(0.9); }
+.ship:hover {
+  transform: translateY(-8px) scale(1.18) rotate(4deg);
+  filter: drop-shadow(0 0 18px rgba(92, 240, 255, 0.75));
+}
+/* quick thruster kick on click */
+.ship.thrust { animation: shipThrust 0.5s cubic-bezier(0.34, 1.45, 0.64, 1); }
+@keyframes shipThrust {
+  0%   { transform: scale(1) translate(0, 0); }
+  35%  { transform: scale(1.25) translateY(-22px) rotate(10deg); }
+  65%  { transform: scale(0.92) translateY(5px) rotate(-5deg); }
+  100% { transform: scale(1) translate(0, 0); }
+}
+/* engine flame cone bursting behind the ship (spawned in JS) */
+.shipflame {
+  position: fixed;
+  z-index: 9994;
+  pointer-events: none;
+  background: linear-gradient(to bottom, #fff7cf, #ffd23f 55%, rgba(255, 159, 63, 0));
+  clip-path: polygon(20% 0, 80% 0, 50% 100%);
+  transform-origin: 50% 0;
+  animation: flameFlick 0.45s ease-out forwards;
+}
+@keyframes flameFlick {
+  0%   { transform: scaleY(1) scaleX(1);    opacity: 0; }
+  18%  { transform: scaleY(1.35) scaleX(0.8); opacity: 0.95; }
+  55%  { transform: scaleY(0.75) scaleX(1.25); opacity: 0.9; }
+  100% { transform: scaleY(0) scaleX(1.4); opacity: 0; }
+}
+/* light-speed streak lines whipped out behind the ship (spawned in JS) */
+.streaky {
+  position: fixed;
+  height: 3px;
+  z-index: 9993;
+  pointer-events: none;
+  border-radius: 2px;
+  background: linear-gradient(to left, rgba(92, 240, 255, 0.9), rgba(92, 240, 255, 0));
+  animation: streakFly 0.5s ease-out forwards;
+}
+@keyframes streakFly {
+  0%   { transform: rotate(var(--rot, 0deg)) translateX(0); opacity: 0.9; }
+  100% { transform: rotate(var(--rot, 0deg)) translateX(var(--tx, -220px)); opacity: 0; }
+}
+
+/* the playable screens, pinned up like polaroids */
+.ui-piece {
+  position: absolute;
+  width: 300px;
+  background: #fff;
+  border: 3px solid #2b3991;
+  border-radius: 8px;
+  padding: 6px;
+  box-shadow: 0 10px 18px rgba(24, 31, 66, 0.28);
+  transition: transform 0.25s cubic-bezier(0.34, 1.45, 0.64, 1), box-shadow 0.25s ease;
+  z-index: 3;
+  cursor: pointer;
+}
+.ui-piece:hover {
+  transform: rotate(0deg) scale(1.06);
+  box-shadow: 0 16px 30px rgba(24, 31, 66, 0.35);
+}
+.ui-piece img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 3px;
+  display: block;
+  background: #eef0f6;
+  border: 2px solid rgba(0, 0, 0, 0.08);
+}
+.ui-piece:nth-child(4) { left: 8%;  top: 31%; transform: rotate(-3deg); }
+.ui-piece:nth-child(5) { left: 39%; top: 30%; transform: rotate(2deg); }
+.ui-piece:nth-child(6) { left: 70%; top: 32%; transform: rotate(-4deg); }
+.ui-piece::before {
+  content: '';
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 90px;
+  height: 22px;
+  background: rgba(244, 233, 175, 0.7);
+  border-left: 2px dashed rgba(140, 125, 80, 0.4);
+  border-right: 2px dashed rgba(140, 125, 80, 0.4);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+  z-index: 2;
+}
+.ui-piece:nth-child(5)::before { transform: translateX(-50%) rotate(4deg); width: 100px; }
+.ui-piece:nth-child(6)::before { transform: translateX(-50%) rotate(-5deg); width: 80px; }
+
+/* the big menu screens, pinned low */
+.ui-card {
+  position: absolute;
+  width: 330px;
+  background: #fff;
+  border: 3px solid #2b3991;
+  border-radius: 8px;
+  padding: 6px;
+  box-shadow: 0 10px 18px rgba(24, 31, 66, 0.28);
+  transition: transform 0.25s cubic-bezier(0.34, 1.45, 0.64, 1), box-shadow 0.25s ease;
+  z-index: 3;
+  cursor: pointer;
+}
+.ui-card:hover {
+  transform: rotate(0deg) scale(1.06);
+  box-shadow: 0 16px 30px rgba(24, 31, 66, 0.35);
+}
+.ui-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 3px;
+  display: block;
+  background: #eef0f6;
+  border: 2px solid rgba(0, 0, 0, 0.08);
+}
+.ui-card:nth-child(7) { left: 16%; top: 67%; transform: rotate(-2deg); }
+.ui-card:nth-child(8) { left: 45%; top: 68%; transform: rotate(2deg); }
+.ui-card:nth-child(9) { left: 74%; top: 66%; transform: rotate(-3deg); }
+.ui-card::before {
+  content: '';
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%) rotate(2deg);
+  width: 96px;
+  height: 22px;
+  background: rgba(244, 233, 175, 0.7);
+  border-left: 2px dashed rgba(140, 125, 80, 0.4);
+  border-right: 2px dashed rgba(140, 125, 80, 0.4);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+  z-index: 2;
+}
+.ui-card:nth-child(8)::before { transform: translateX(-50%) rotate(-4deg); }
+.ui-card:nth-child(9)::before { transform: translateX(-50%) rotate(5deg); }
+
+/* tiny floating frames / icons / props scattered around like space debris */
+.ui-chip {
+  position: absolute;
+  width: 140px;
+  background: #fff7e6;
+  border: 2px solid #f5ce25;
+  border-radius: 6px;
+  padding: 4px;
+  box-shadow: 0 6px 12px rgba(24, 31, 66, 0.25);
+  transition: transform 0.25s cubic-bezier(0.34, 1.45, 0.64, 1), box-shadow 0.25s ease;
+  z-index: 3;
+  cursor: pointer;
+}
+.ui-chip:hover {
+  transform: rotate(0deg) scale(1.12);
+  box-shadow: 0 12px 22px rgba(24, 31, 66, 0.35);
+}
+.ui-chip img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 3px;
+  display: block;
+  background: #eef0f6;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+.ui-chip:nth-child(10) { left: 8.5%;  top: 64%; transform: rotate(8deg); }
+.ui-chip:nth-child(11) { left: 36%;   top: 62.5%; transform: rotate(-6deg); }
+.ui-chip:nth-child(12) { left: 50.5%; top: 61.5%; transform: rotate(4deg); }
+.ui-chip:nth-child(13) { left: 65.5%; top: 63%; transform: rotate(-9deg); }
+.ui-chip:nth-child(14) { left: 87.5%; top: 60%; transform: rotate(7deg); }
+
+/* the animated playable cover, teased as a vid chip */
+.ui-video {
+  position: absolute;
+  left: 89%;
+  top: 18%;
+  width: 130px;
+  height: 92px;
+  background: #1e2447;
+  border: 2px dashed #5cf0ff;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #ffd23f;
+  font-family: 'zai Lava', cursive;
+  cursor: pointer;
+  box-shadow: 0 8px 14px rgba(24, 31, 66, 0.4);
+  container-type: size;
+}
+.ui-video:hover {
+  transform: scale(1.1) rotate(-2deg);
+  background: #2b3991;
+  box-shadow: 0 0 24px rgba(92, 240, 255, 0.65);
+}
+.ui-video .uv-label {
+  font-size: 11px;
+  line-height: 1.1;
+  text-align: center;
+  padding: 0 4px;
+}
+.ui-video .uv-glyph {
+  font-size: 13px;
+  background: #ffd23f;
+  color: #1e2447;
+  border-radius: 5px;
+  padding: 2px 8px;
+  animation: uvPulse 1.6s ease-in-out infinite;
+}
+@keyframes uvPulse {
+  0%, 100% { transform: scale(1);   box-shadow: 0 0 0 0 rgba(255, 210, 63, 0.5); }
+  50%      { transform: scale(1.08); box-shadow: 0 0 0 8px rgba(255, 210, 63, 0); }
+}
+
+/* draggable mission-brief post-it */
+.gui-link {
+  position: absolute;
+  left: 69%;
+  top: 7%;
+  width: 268px;
+  background: #fffdf2;
+  border: 2px solid #2b3991;
+  border-radius: 2px 8px 5px 9px;
+  padding: 30px 16px 12px;
+  box-shadow: 5px 7px 14px rgba(24, 31, 66, 0.28);
+  font-family: 'zai Lava', cursive;
+  cursor: grab;
+  touch-action: none;
+  z-index: 4;
+  transform: rotate(2deg);
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.03), transparent 14%);
+}
+.gui-link.al-grabbing { cursor: grabbing; }
+.gui-link.al-down { animation: glDrop 0.5s cubic-bezier(0.34, 1.6, 0.64, 1); }
+@keyframes glDrop {
+  0%   { transform: rotate(2deg) scale(1.06); }
+  45%  { transform: rotate(2deg) scale(0.92) translateY(3px); }
+  75%  { transform: rotate(2deg) scale(1.04); }
+  100% { transform: rotate(2deg) scale(1); }
+}
+.gui-link::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(5deg);
+  width: 92px;
+  height: 20px;
+  background: rgba(244, 233, 175, 0.75);
+  border-left: 2px dashed rgba(140, 125, 80, 0.4);
+  border-right: 2px dashed rgba(140, 125, 80, 0.4);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+}
+.gui-link .gl-pin { display: none; }
+.gui-link .gl-label {
+  display: block;
+  text-align: center;
+  color: #2b3991;
+  font-size: 21px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 2px dashed rgba(43, 57, 145, 0.35);
+}
+.gui-link .gl-line {
+  margin: 0 0 10px;
+  text-align: center;
+  color: #5a5f86;
+  font-size: 13px;
+}
+.gui-link .gl-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  text-decoration: none;
+  padding: 5px 6px;
+  border-radius: 4px;
+  transition: background 0.15s ease;
+}
+.gui-link .gl-row:hover { background: rgba(245, 206, 37, 0.25); }
+.gui-link .gl-site { color: #2b3991; font-weight: bold; font-size: 15px; }
+.gui-link .gl-handle { color: #cf3503; font-size: 13px; }
+
+/* tiny white=gold stars drifting upward (spawned in JS) */
+.hudstar {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  z-index: 6;
+  pointer-events: none;
+  background: currentColor;
+  box-shadow: 0 0 8px currentColor;
+  animation: hudDrift var(--hd, 7s) linear infinite;
+  opacity: 0;
+}
+@keyframes hudDrift {
+  0%   { transform: translateY(0); opacity: 0; }
+  12%  { opacity: var(--ho, 0.85); }
+  80%  { opacity: var(--ho, 0.85); }
+  100% { transform: translateY(-110vh) rotate(180deg); opacity: 0; }
+}
+
 /* ============ Full-size drawing viewer ============ */
 .viewer {
   max-width: 94vw;
@@ -921,6 +1317,14 @@ html.has-custom-cursor * {
   border-radius: 6px;
   margin: 0 auto;
   object-fit: contain;
+  background: #1e2447;
+}
+.viewer-vid {
+  display: none;
+  max-width: 100%;
+  max-height: calc(92vh - 20px);
+  border-radius: 6px;
+  margin: 0 auto;
   background: #1e2447;
 }
 
@@ -1328,6 +1732,7 @@ html.has-custom-cursor * {
 
   /* "find me on" note: let swiping scroll work over it on touch */
   .art-link { touch-action: auto; }
+  .gui-link { touch-action: auto; }
 
   /* ---------- doodle toolbar: keep it usable on a phone ---------- */
   .pencil-btn { left: 14px; bottom: 14px; width: 62px; height: 62px; }
