@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>portfolio — WASSIM</title>
-  <link rel="stylesheet" href="styles.css?v=78">
+  <link rel="stylesheet" href="styles.css?v=79">
 </head>
 <body>
 
@@ -89,73 +89,19 @@
           <!-- sci-fi title banner -->
           <img class="gui-title fade-item" src="images/gameuigraphic/gamedevgraphics and ui.png" alt="gamedev - graphics and ui">
 
-          <!-- the spaceship sticker, warped around the panel (click = thrust) -->
+          <!-- the spaceship stickers, warped around the panel (click = thrust) -->
           <img class="ship sp-1 fade-item" src="images/gameuigraphic/sticker 4.png" alt="spaceship">
           <img class="ship sp-2 fade-item" src="images/gameuigraphic/sticker 4.png" alt="spaceship">
 
-          <!-- a strip of UI screens, pinned up like polaroids (click to view) -->
-          <div class="ui-piece fade-item ui-play" data-full="images/gameuigraphic/1.png">
-            <img src="images/gameuigraphic/1.png" alt="gameplay frame">
-          </div>
-          <div class="ui-piece fade-item ui-play" data-full="images/gameuigraphic/a.png">
-            <img src="images/gameuigraphic/a.png" alt="gameplay frame">
-          </div>
-          <div class="ui-piece fade-item ui-play" data-full="images/gameuigraphic/banner.png">
-            <img src="images/gameuigraphic/banner.png" alt="game banner">
-          </div>
-
-          <!-- the big menu screens pinned to the bottom of the panel -->
-          <div class="ui-card fade-item" data-full="images/gameuigraphic/settings.png">
-            <img src="images/gameuigraphic/settings.png" alt="settings screen">
-          </div>
-          <div class="ui-card fade-item" data-full="images/gameuigraphic/pause menu.png">
-            <img src="images/gameuigraphic/pause menu.png" alt="pause menu">
-          </div>
-          <div class="ui-card fade-item" data-full="images/gameuigraphic/game over.png">
-            <img src="images/gameuigraphic/game over.png" alt="game over screen">
-          </div>
-
-          <!-- a scatter of extra frames / icons / props -->
-          <div class="ui-chip fade-item" data-full="images/gameuigraphic/Frame 2.png">
-            <img src="images/gameuigraphic/Frame 2.png" alt="frame">
-          </div>
-          <div class="ui-chip fade-item" data-full="images/gameuigraphic/game icon.png">
-            <img src="images/gameuigraphic/game icon.png" alt="game icon">
-          </div>
-          <div class="ui-chip fade-item" data-full="images/gameuigraphic/ember hunt.png">
-            <img src="images/gameuigraphic/ember hunt.png" alt="ember hunt">
-          </div>
-          <div class="ui-chip fade-item" data-full="images/gameuigraphic/void runner.png">
-            <img src="images/gameuigraphic/void runner.png" alt="void runner">
-          </div>
-          <div class="ui-chip fade-item" data-full="images/gameuigraphic/Frame 1.png">
-            <img src="images/gameuigraphic/Frame 1.png" alt="frame">
-          </div>
-          <div class="ui-chip fade-item" data-full="images/gameuigraphic/Frame 30.png">
-            <img src="images/gameuigraphic/Frame 30.png" alt="frame">
-          </div>
-          <div class="ui-chip fade-item" data-full="images/gameuigraphic/settings-1.png">
-            <img src="images/gameuigraphic/settings-1.png" alt="settings variant">
-          </div>
-
-          <!-- the animated cover reel, teased beside the frame cluster -->
-          <div class="ui-video fade-item" data-mp4="images/gameuigraphic/cover animated.mp4">
-            <span class="uv-label">animated playable cover</span>
-            <span class="uv-glyph">▶ play</span>
-          </div>
-
-          <!-- draggable mission-brief post-it -->
-          <div class="gui-link fade-item">
-            <img class="gl-pin" src="images/pin.png" alt="">
-            <span class="gl-label">mission brief</span>
-            <p class="gl-line">Graphic Designer · Game UI · 2D</p>
-            <a class="gl-row" href="https://www.instagram.com/wassim___draw/" target="_blank" rel="noopener">
-              <span class="gl-site">Instagram</span><span class="gl-handle">@wassim___draw</span>
-            </a>
-            <a class="gl-row" href="https://www.artstation.com/alucard08" target="_blank" rel="noopener">
-              <span class="gl-site">ArtStation</span><span class="gl-handle">alucard08</span>
-            </a>
-          </div>
+          <!-- the big folder: click it to open the paper that holds every
+               piece of work in a clean, non-overlapping layout -->
+          <button class="ui-folder fade-item" id="uiFolder" aria-haspopup="dialog" aria-label="Open the folder to see all my game UI work">
+            <div class="uf-tab"></div>
+            <div class="uf-pocket">
+              <span class="uf-label">my game UI<br>&amp; graphics</span>
+            </div>
+            <span class="uf-badge">click to open</span>
+          </button>
 
         </div>
       </div>
@@ -284,6 +230,75 @@
 
   <!-- top tag: "click this to see it bigger" on the art + game-ui pages -->
   <div class="hint-tag" id="hintTag" aria-hidden="true"></div>
+
+  <!-- the folder's paper: unrolls with every piece laid out cleanly side
+       by side — drag the sheet down / scroll to see it all -->
+  <div class="ui-paper" id="uiPaper" aria-hidden="true" role="dialog" aria-label="My game UI work, laid out cleanly">
+    <div class="ui-paper-sheet">
+      <div class="up-head">
+        <span class="up-title">my game UI &amp; graphics</span>
+        <button class="up-close" id="uiPaperClose" aria-label="close the folder">✕</button>
+      </div>
+      <div class="up-grid">
+        <figure class="pwork" data-full="images/gameuigraphic/1.png">
+          <img src="images/gameuigraphic/1.png" alt="gameplay frame 1">
+          <figcaption>gameplay frame 1</figcaption>
+        </figure>
+        <figure class="pwork" data-full="images/gameuigraphic/a.png">
+          <img src="images/gameuigraphic/a.png" alt="gameplay frame 2">
+          <figcaption>gameplay frame 2</figcaption>
+        </figure>
+        <figure class="pwork" data-full="images/gameuigraphic/banner.png">
+          <img src="images/gameuigraphic/banner.png" alt="game banner">
+          <figcaption>banner</figcaption>
+        </figure>
+        <figure class="pwork" data-mp4="images/gameuigraphic/cover animated.mp4">
+          <span class="pw-video"><span class="pw-play">▶</span>animated cover (play)</span>
+          <figcaption>animated cover</figcaption>
+        </figure>
+        <figure class="pwork" data-full="images/gameuigraphic/ember hunt.png">
+          <img src="images/gameuigraphic/ember hunt.png" alt="ember hunt artwork">
+          <figcaption>ember hunt</figcaption>
+        </figure>
+        <figure class="pwork" data-full="images/gameuigraphic/Frame 1.png">
+          <img src="images/gameuigraphic/Frame 1.png" alt="frame 1">
+          <figcaption>frame 1</figcaption>
+        </figure>
+        <figure class="pwork" data-full="images/gameuigraphic/Frame 2.png">
+          <img src="images/gameuigraphic/Frame 2.png" alt="frame 2">
+          <figcaption>frame 2</figcaption>
+        </figure>
+        <figure class="pwork" data-full="images/gameuigraphic/Frame 30.png">
+          <img src="images/gameuigraphic/Frame 30.png" alt="frame 30">
+          <figcaption>frame 30</figcaption>
+        </figure>
+        <figure class="pwork" data-full="images/gameuigraphic/game icon.png">
+          <img src="images/gameuigraphic/game icon.png" alt="game icon">
+          <figcaption>game icon</figcaption>
+        </figure>
+        <figure class="pwork" data-full="images/gameuigraphic/game over.png">
+          <img src="images/gameuigraphic/game over.png" alt="game over screen">
+          <figcaption>game over</figcaption>
+        </figure>
+        <figure class="pwork" data-full="images/gameuigraphic/pause menu.png">
+          <img src="images/gameuigraphic/pause menu.png" alt="pause menu">
+          <figcaption>pause menu</figcaption>
+        </figure>
+        <figure class="pwork" data-full="images/gameuigraphic/settings.png">
+          <img src="images/gameuigraphic/settings.png" alt="settings screen">
+          <figcaption>settings</figcaption>
+        </figure>
+        <figure class="pwork" data-full="images/gameuigraphic/settings-1.png">
+          <img src="images/gameuigraphic/settings-1.png" alt="settings variant">
+          <figcaption>settings v2</figcaption>
+        </figure>
+        <figure class="pwork" data-full="images/gameuigraphic/void runner.png">
+          <img src="images/gameuigraphic/void runner.png" alt="void runner artwork">
+          <figcaption>void runner</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
 
   <!-- full-size drawing viewer (click a drawing / ui screen to open) -->
   <div class="overlay" id="overlay-viewer" aria-hidden="true">
@@ -541,12 +556,12 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
         });
       });
 
-      // clicking a drawing / ui screen / fabric piece opens the full-size
-      // viewer (images and the animated cover video share this popup)
+      // clicking a drawing / a piece of work on the paper opens the
+      // full-size viewer (images and the animated cover video share it)
       var viewer = document.getElementById('overlay-viewer');
       var viewerImg = document.getElementById('viewerImg');
       var viewerVid = document.getElementById('viewerVid');
-      var viewerItems = document.querySelectorAll('.art-piece, .ui-piece, .ui-card, .ui-chip, .ui-video');
+      var viewerItems = document.querySelectorAll('.art-piece, .pwork');
       Array.prototype.forEach.call(viewerItems, function (item) {
         item.addEventListener('click', function () {
           if (!viewer) return;
@@ -611,53 +626,31 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
     })();
 
     (function () {
-      // everything pinned on the gui page can be dragged around — the
-      // pieces keep the design-space positions of the fixed stage, so the
-      // drag math converts viewport coords back through the stage scale
-      var stage = document.querySelector('.gui .stage');
-      if (!stage) return;
-      var items = document.querySelectorAll('.gui .stage .ui-piece, .gui .stage .ui-card, .gui .stage .ui-chip, .gui .stage .ui-video, .gui .stage .gui-link, .gui .stage .ship');
-      Array.prototype.forEach.call(items, function (el) {
-        var drag = null;
-        el.addEventListener('pointerdown', function (e) {
-          if (e.target.closest && e.target.closest('a')) return;   // let links open
-          var sr = stage.getBoundingClientRect();
-          var scale = sr.width / 1280;                             // 1280 = design width
-          var r = el.getBoundingClientRect();
-          drag = {
-            dx: (e.clientX - sr.left) / scale - (r.left - sr.left) / scale,
-            dy: (e.clientY - sr.top)  / scale - (r.top  - sr.top)  / scale,
-            moved: false
-          };
-          el.classList.add('gl-grabbing');
-          if (el.setPointerCapture) el.setPointerCapture(e.pointerId);
-        });
-        el.addEventListener('pointermove', function (e) {
-          if (!drag) return;
-          var sr = stage.getBoundingClientRect();
-          var scale = sr.width / 1280;
-          var nx = (e.clientX - sr.left) / scale - drag.dx;
-          var ny = (e.clientY - sr.top)  / scale - drag.dy;
-          el.style.left = nx + 'px';
-          el.style.top  = ny + 'px';
-          if (Math.abs((e.clientX - sr.left) / scale - drag.dx) > 4 ||
-              Math.abs((e.clientY - sr.top)  / scale - drag.dy) > 4) {
-            drag.moved = true;
-          }
-        });
-        function up() {
-          if (!drag) return;
-          var wasMoved = drag.moved;
-          drag = null;
-          el.classList.remove('gl-grabbing');
-          if (!wasMoved) { el.__suppressClick = false; return; }
-          el.__suppressClick = true;           // swallow the click after a real drag
-          el.classList.remove('dp-down');
-          void el.offsetWidth;
-          el.classList.add('dp-down');
-        }
-        el.addEventListener('pointerup', up);
-        el.addEventListener('pointercancel', up);
+      // the big folder: clicking it unrolls the paper with the whole
+      // work layout, and you drag/scroll the sheet down to see it all
+      var folder = document.getElementById('uiFolder');
+      var paper = document.getElementById('uiPaper');
+      var closeBtn = document.getElementById('uiPaperClose');
+      if (!folder || !paper || !closeBtn) return;
+      function openPaper() {
+        paper.classList.add('open');
+        paper.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+      function closePaper() {
+        paper.classList.remove('open');
+        paper.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        var vid = document.getElementById('viewerVid');
+        if (vid) { vid.pause(); vid.removeAttribute('src'); }
+      }
+      folder.addEventListener('click', openPaper);
+      closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closePaper(); });
+      paper.addEventListener('click', function (e) {
+        if (e.target === paper) closePaper();      // click outside the sheet
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && paper.classList.contains('open')) closePaper();
       });
     })();
 
@@ -867,7 +860,7 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
         if (hintTag) {
           hintTag.classList.remove('show');
           if (idx === 2) hintTag.textContent = 'click a drawing to see it bigger';
-          else if (idx === 3) hintTag.textContent = 'click a screen to see it bigger';
+          else if (idx === 3) hintTag.textContent = 'open the folder to see my works';
           if (idx === 2 || idx === 3) hintTag.classList.add('show');
         }
         if (drawHint) {
