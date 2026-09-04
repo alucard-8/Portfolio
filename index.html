@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>portfolio — WASSIM</title>
-  <link rel="stylesheet" href="styles.css?v=80">
+  <link rel="stylesheet" href="styles.css?v=81">
 </head>
 <body>
 
@@ -633,13 +633,12 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
       var folder = document.getElementById('uiFolder');
       var paper = document.getElementById('uiPaper');
       var closeBtn = document.getElementById('uiPaperClose');
-      var sheet = paper ? paper.querySelector('.ui-paper-sheet') : null;
-      if (!folder || !paper || !closeBtn || !sheet) return;
+      if (!folder || !paper || !closeBtn) return;
       function openPaper() {
         paper.classList.add('open');
         paper.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
-        sheet.scrollTop = 0;
+        paper.scrollTop = 0;
       }
       function closePaper() {
         paper.classList.remove('open');
@@ -648,14 +647,8 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
         var vid = document.getElementById('viewerVid');
         if (vid) { vid.pause(); vid.removeAttribute('src'); }
       }
-      // mouse wheel anywhere over the popup scrolls the paper (native
-      // scrolling still wins when the cursor is already on the sheet)
-      paper.addEventListener('wheel', function (e) {
-        if (e.target !== sheet && !sheet.contains(e.target)) {
-          e.preventDefault();
-          sheet.scrollTop += e.deltaY;
-        }
-      }, { passive: false });
+      // the overlay itself is the scroll container, so the mouse wheel
+      // scrolls it natively no matter where the cursor is
       folder.addEventListener('click', openPaper);
       closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closePaper(); });
       paper.addEventListener('click', function (e) {

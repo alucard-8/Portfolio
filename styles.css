@@ -1983,18 +1983,26 @@ html.has-custom-cursor * {
   display: none;
   align-items: flex-start;
   justify-content: center;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
   background: rgba(16, 20, 46, 0.5);
+  background-attachment: fixed;
+  scrollbar-width: thin;
+  scrollbar-color: #2b3991 rgba(255, 253, 244, 0.5);
 }
 .ui-paper.open { display: flex; }
+.ui-paper::-webkit-scrollbar { width: 10px; }
+.ui-paper::-webkit-scrollbar-track { background: rgba(255, 253, 244, 0.5); border-radius: 8px; }
+.ui-paper::-webkit-scrollbar-thumb {
+  background: #2b3991;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 253, 244, 0.6);
+}
 .ui-paper-sheet {
-  margin-top: 3vh;
+  margin: 3vh auto 4vh;
+  flex: none;
   width: min(1120px, 94vw);
-  max-height: 92vh;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-width: thin;
-  scrollbar-color: #2b3991 #fffdf4;
   background:
     radial-gradient(circle at 8% 4%, rgba(245, 206, 37, 0.18), transparent 34%),
     radial-gradient(circle at 94% 96%, rgba(122, 44, 191, 0.10), transparent 40%),
@@ -2005,13 +2013,6 @@ html.has-custom-cursor * {
   padding: 26px 26px 34px;
   position: relative;
   animation: paperDrop 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.ui-paper-sheet::-webkit-scrollbar { width: 10px; }
-.ui-paper-sheet::-webkit-scrollbar-track { background: #fffdf4; border-radius: 8px; }
-.ui-paper-sheet::-webkit-scrollbar-thumb {
-  background: #2b3991;
-  border-radius: 8px;
-  border: 2px solid #fffdf4;
 }
 @keyframes paperDrop {
   from { transform: translateY(-48px) rotate(-1.2deg); opacity: 0; }
