@@ -1000,26 +1000,48 @@ html.has-custom-cursor * {
   pointer-events: none;
   filter: drop-shadow(0 0 6px rgba(92, 240, 255, 0.6));
 }
-.hc.tl { left: 16px;  top: 16px;  border-left: 3px solid #5cf0ff; border-top: 3px solid #5cf0ff; border-radius: 6px 0 0 0; }
 .hc.tr { right: 16px; top: 16px;  border-right: 3px solid #5cf0ff; border-top: 3px solid #5cf0ff; border-radius: 0 6px 0 0; }
 .hc.bl { left: 16px;  bottom: 16px; border-left: 3px solid #5cf0ff; border-bottom: 3px solid #5cf0ff; border-radius: 0 0 0 6px; }
 .hc.br { right: 16px; bottom: 16px; border-right: 3px solid #5cf0ff; border-bottom: 3px solid #5cf0ff; border-radius: 0 0 6px 0; }
-/* little system readout, top-right */
-.hud-tele {
+/* sticky note pinned at the top-right of the panel, where the system text was */
+.hud-postit {
   position: absolute;
   right: 4%;
-  top: 9%;
+  top: 6%;
+  width: 190px;
   z-index: 6;
-  font-family: Consolas, 'Lucida Console', monospace;
-  font-size: 12px;
-  line-height: 1.7;
-  letter-spacing: 1px;
-  color: rgba(220, 250, 255, 0.7);
-  text-shadow: 0 0 8px rgba(92, 240, 255, 0.5);
-  pointer-events: none;
-  opacity: 0.85;
+  background: #fff3a3;
+  border: 3px solid #cf3503;
+  border-radius: 6px;
+  padding: 14px 12px;
+  box-shadow: 0 10px 20px rgba(10, 14, 40, 0.4);
+  transform: rotate(4deg);
+  animation: postitBob 5s ease-in-out infinite;
 }
-.hud-tele b { color: #5cf0ff; font-weight: normal; }
+.hud-postit::before {
+  content: '';
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-4deg);
+  width: 88px;
+  height: 24px;
+  background: rgba(255, 253, 236, 0.7);
+  border-left: 2px dashed rgba(140, 125, 80, 0.45);
+  border-right: 2px dashed rgba(140, 125, 80, 0.45);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.18);
+}
+@keyframes postitBob {
+  0%, 100% { transform: rotate(4deg) translateY(0); }
+  50%      { transform: rotate(3deg) translateY(-5px); }
+}
+.hud-postit .hp-note {
+  display: block;
+  font-family: 'zai Lava', cursive;
+  font-size: 16px;
+  line-height: 1.45;
+  color: #1f2447;
+}
 /* radar sweep, bottom-right */
 .hud-radar {
   position: absolute;
@@ -1110,7 +1132,7 @@ html.has-custom-cursor * {
 .sg-1 { left: 7%;  top: 30%; width: 110px; transform: rotate(9deg) scale(0.9); }
 .sg-2 { left: 74%; top: 52%; width: 96px;  transform: rotate(-12deg); }
 .sg-3 { left: 12%; top: 82%; width: 100px; transform: rotate(-7deg) scale(0.85); }
-.sg-4 { left: 84%; top: 24%; width: 84px;  transform: rotate(-5deg) scale(0.8); }
+.sg-4 { left: 84%; top: 32%; width: 84px;  transform: rotate(-5deg) scale(0.8); }
 .sg-1:hover { transform: rotate(9deg) translateY(-9px) scale(1.05); }
 .sg-2:hover { transform: rotate(-12deg) translateY(-9px) scale(1.1); }
 .sg-3:hover { transform: rotate(-7deg) translateY(-9px) scale(1.05); }
