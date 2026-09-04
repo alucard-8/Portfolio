@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>portfolio — WASSIM</title>
-  <link rel="stylesheet" href="styles.css?v=82">
+  <link rel="stylesheet" href="styles.css?v=83">
 </head>
 <body>
 
@@ -96,6 +96,8 @@
           <!-- the big folder: click it to open the paper that holds every
                piece of work in a clean, non-overlapping layout -->
           <button class="ui-folder fade-item" id="uiFolder" aria-haspopup="dialog" aria-label="Open the folder to see all my game UI work">
+            <span class="uf-glow"></span>
+            <span class="uf-orbit"><i class="uf-planet p1"></i><i class="uf-planet p2"></i><i class="uf-planet p3"></i></span>
             <div class="uf-sheet1"></div>
             <div class="uf-sheet2"></div>
             <div class="uf-tab"></div>
@@ -237,8 +239,10 @@
        by side — drag the sheet down / scroll to see it all -->
   <div class="ui-paper" id="uiPaper" aria-hidden="true" role="dialog" aria-label="My game UI work, laid out cleanly">
     <div class="ui-paper-sheet">
+      <img class="up-sticker" src="images/gameuigraphic/sticker 4.png" alt="space sticker">
       <div class="up-head">
         <span class="up-title">my game UI &amp; graphics</span>
+        <span class="up-count">14 pieces</span>
         <button class="up-close" id="uiPaperClose" aria-label="close the folder">✕</button>
       </div>
       <div class="up-grid">
@@ -299,6 +303,7 @@
           <figcaption>void runner</figcaption>
         </figure>
       </div>
+      <p class="up-end">that's the whole folder — tap any piece to zoom in</p>
     </div>
   </div>
 
@@ -725,6 +730,19 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
         p.style.animationDelay = (-Math.random() * 12).toFixed(1) + 's';
         stage.appendChild(p);
       }
+    })();
+
+    (function () {
+      // rare "warp flicker" — the gui panel glitches like a corrupted HUD every few seconds
+      var gui = document.querySelector('.gui');
+      if (!gui) return;
+      function warp() {
+        gui.classList.remove('warp');
+        void gui.offsetWidth;
+        gui.classList.add('warp');
+      }
+      setTimeout(warp, 3400);
+      setInterval(warp, 9000);
     })();
 
     (function () {

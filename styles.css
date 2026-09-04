@@ -965,6 +965,17 @@ html.has-custom-cursor * {
   0%, 100% { opacity: 0.55; }
   50%      { opacity: 1; }
 }
+/* rare "corrupted HUD" warp — the whole panel glitches for a blink */
+.gui.warp {
+  animation: guiWarp 0.30s steps(4, end) both;
+}
+@keyframes guiWarp {
+  0%   { filter: hue-rotate(22deg) saturate(1.6) contrast(1.08); transform: translateX(-7px); }
+  25%  { filter: hue-rotate(-28deg) saturate(0.55) contrast(0.92); transform: translateX(6px); }
+  50%  { filter: saturate(1.2) hue-rotate(8deg); transform: translate(-3px, 1px); }
+  75%  { filter: sepia(0.25) contrast(1.12); transform: translateX(3px); }
+  100% { filter: none; transform: none; }
+}
 
 /* sci-fi title banner */
 .gui-title {
@@ -1786,10 +1797,10 @@ html.has-custom-cursor * {
 .ui-folder {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 57%;
   transform: translate(-50%, -50%) rotate(-2deg);
-  width: clamp(360px, 40vw, 470px);
-  height: clamp(245px, 30vh, 300px);
+  width: clamp(415px, 45vw, 530px);
+  height: clamp(275px, 34vh, 335px);
   background: transparent;
   border: none;
   padding: 0;
@@ -1811,6 +1822,68 @@ html.has-custom-cursor * {
   0%   { transform: translate(-50%, -50%) scale(1); }
   50%  { transform: translate(-50%, -50%) scale(0.93) rotate(-1deg); }
   100% { transform: translate(-50%, -50%) scale(1); }
+}
+/* a little solar system orbiting the folder — the panel's living glow */
+.uf-glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 130%;
+  height: 150%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: -2;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(96, 240, 255, 0.32) 0%, rgba(122, 94, 255, 0.18) 42%, transparent 68%);
+  animation: glowPulse 4.5s ease-in-out infinite;
+}
+@keyframes glowPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.85; }
+  50%      { transform: translate(-50%, -50%) scale(1.08); opacity: 1; }
+}
+.uf-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 160%;
+  height: 168%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  pointer-events: none;
+  animation: orbitSpin 24s linear infinite;
+}
+.uf-orbit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 255, 255, 0.4);
+}
+.uf-orbit::after {
+  content: '';
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  border: 1px dotted rgba(255, 255, 255, 0.22);
+}
+@keyframes orbitSpin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+.uf-planet {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+  animation: planetBob 3.2s ease-in-out infinite;
+}
+.uf-planet.p1 { left: calc(50% - 10px); top: -10px; background: radial-gradient(circle at 32% 30%, #ffe291, #ff8a3d 60%, #cf4a12); }
+.uf-planet.p2 { left: calc(50% - 8px);  bottom: -8px; width: 16px; height: 16px; background: radial-gradient(circle at 32% 30%, #b7f6ff, #3aa7ff 62%, #1237a8); animation-delay: -1.5s; }
+.uf-planet.p3 { left: -9px; top: calc(50% - 10px); width: 18px; height: 18px; background: radial-gradient(circle at 32% 30%, #e8b6ff, #a24dff 62%, #4c138f); animation-delay: -2.4s; }
+@keyframes planetBob {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-6px) scale(1.12); }
 }
 
 /* document sheets peeking out of the folder top */
@@ -1989,6 +2062,8 @@ html.has-custom-cursor * {
   overflow-x: hidden;
   overscroll-behavior: contain;
   background: rgba(16, 20, 46, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   background-attachment: fixed;
   scrollbar-width: thin;
   scrollbar-color: #2b3991 rgba(255, 253, 244, 0.5);
@@ -2005,12 +2080,29 @@ html.has-custom-cursor * {
   margin: 3vh auto 4vh;
   flex: none;
   width: min(1120px, 94vw);
-  background: #ffffff;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfaf5 100%);
   border-radius: 18px;
   box-shadow: 0 24px 60px rgba(6, 8, 22, 0.4);
   padding: 30px 32px 38px;
   position: relative;
   animation: paperDrop 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* a sticker decal loosely stuck inside the corner of the paper */
+.up-sticker {
+  position: absolute;
+  left: 20px;
+  bottom: 18px;
+  width: 62px;
+  height: auto;
+  z-index: 2;
+  pointer-events: none;
+  transform: rotate(-9deg);
+  filter: drop-shadow(0 6px 10px rgba(24, 31, 66, 0.3));
+  animation: stickerWiggle 5.5s ease-in-out infinite;
+}
+@keyframes stickerWiggle {
+  0%, 100% { transform: rotate(-9deg); }
+  50%      { transform: rotate(-6deg) translateY(-4px); }
 }
 @keyframes paperDrop {
   from { transform: translateY(22px); opacity: 0; }
@@ -2023,13 +2115,25 @@ html.has-custom-cursor * {
   gap: 12px;
   margin-bottom: 20px;
   padding-bottom: 14px;
-  border-bottom: 1px solid #ece9df;
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(90deg, #2b3991, #e0a21f 55%, transparent) 1;
 }
 .up-title {
   font-family: 'zai Lava', cursive;
   font-size: clamp(20px, 3vw, 30px);
   font-weight: bold;
   color: #1f2447;
+}
+.up-count {
+  flex: none;
+  font-family: 'zai Lava', cursive;
+  font-size: 14px;
+  color: #6d7194;
+  background: #f3f1eb;
+  border: 1px solid #ece9df;
+  padding: 5px 12px;
+  border-radius: 999px;
+  transform: rotate(2deg);
 }
 .up-close {
   width: 42px;
@@ -2046,6 +2150,14 @@ html.has-custom-cursor * {
   transition: background 0.15s ease, transform 0.15s ease;
 }
 .up-close:hover { background: #2b3991; color: #fff; transform: rotate(90deg); }
+.up-end {
+  margin: 6px 0 0;
+  font-family: 'zai Lava', cursive;
+  font-size: 15px;
+  color: #9a9cbb;
+  text-align: center;
+  padding-top: 8px;
+}
 /* the pieces laid out in neat columns — no overlaps, everything visible */
 .up-grid {
   columns: 320px;
@@ -2072,7 +2184,9 @@ html.has-custom-cursor * {
   display: block;
   border-radius: 8px;
   background: #f2f0ea;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
+.pwork:hover img { transform: scale(1.03); }
 .pwork figcaption {
   font-family: 'zai Lava', cursive;
   font-size: 14px;
