@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>portfolio — WASSIM</title>
-  <link rel="stylesheet" href="styles.css?v=81">
+  <link rel="stylesheet" href="styles.css?v=82">
 </head>
 <body>
 
@@ -471,8 +471,12 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
       window.addEventListener('load', fit);
       track.addEventListener('scroll', syncFromScroll, { passive: true });
 
-      // mouse wheel scrolls freely through the pages (left <-> right)
+      // mouse wheel scrolls freely through the pages (left <-> right),
+      // except when the folder's paper popup is open — then the wheel
+      // scrolls that overlay natively instead
       window.addEventListener('wheel', function (ev) {
+        var paper = document.getElementById('uiPaper');
+        if (paper && paper.classList.contains('open')) return;
         ev.preventDefault();
         var delta = (ev.deltaY || ev.deltaX);
         track.scrollLeft += delta;
@@ -864,8 +868,8 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
         if (!onArt && canvas.classList.contains('active')) enable(false);
         if (hintTag) {
           hintTag.classList.remove('show');
-          if (idx === 2) hintTag.textContent = 'click a drawing to see it bigger';
-          else if (idx === 3) hintTag.textContent = 'open the folder to see my works';
+          if (idx === 2) hintTag.textContent = 'tap a drawing to see it full size';
+          else if (idx === 3) hintTag.textContent = 'open the folder to browse all my work';
           if (idx === 2 || idx === 3) hintTag.classList.add('show');
         }
         if (drawHint) {
