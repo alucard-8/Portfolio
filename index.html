@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>portfolio — WASSIM</title>
-  <link rel="stylesheet" href="styles.css?v=79">
+  <link rel="stylesheet" href="styles.css?v=80">
 </head>
 <body>
 
@@ -96,11 +96,13 @@
           <!-- the big folder: click it to open the paper that holds every
                piece of work in a clean, non-overlapping layout -->
           <button class="ui-folder fade-item" id="uiFolder" aria-haspopup="dialog" aria-label="Open the folder to see all my game UI work">
+            <div class="uf-sheet1"></div>
+            <div class="uf-sheet2"></div>
             <div class="uf-tab"></div>
             <div class="uf-pocket">
               <span class="uf-label">my game UI<br>&amp; graphics</span>
             </div>
-            <span class="uf-badge">click to open</span>
+            <span class="uf-badge">open me!</span>
           </button>
 
         </div>
@@ -631,11 +633,13 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
       var folder = document.getElementById('uiFolder');
       var paper = document.getElementById('uiPaper');
       var closeBtn = document.getElementById('uiPaperClose');
-      if (!folder || !paper || !closeBtn) return;
+      var sheet = paper ? paper.querySelector('.ui-paper-sheet') : null;
+      if (!folder || !paper || !closeBtn || !sheet) return;
       function openPaper() {
         paper.classList.add('open');
         paper.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
+        sheet.scrollTop = 0;
       }
       function closePaper() {
         paper.classList.remove('open');
@@ -644,6 +648,14 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
         var vid = document.getElementById('viewerVid');
         if (vid) { vid.pause(); vid.removeAttribute('src'); }
       }
+      // mouse wheel anywhere over the popup scrolls the paper (native
+      // scrolling still wins when the cursor is already on the sheet)
+      paper.addEventListener('wheel', function (e) {
+        if (e.target !== sheet && !sheet.contains(e.target)) {
+          e.preventDefault();
+          sheet.scrollTop += e.deltaY;
+        }
+      }, { passive: false });
       folder.addEventListener('click', openPaper);
       closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closePaper(); });
       paper.addEventListener('click', function (e) {
