@@ -1308,10 +1308,11 @@ html.has-custom-cursor * {
   .page-counter { bottom: 12px; padding: 6px 14px; gap: 10px; }
   .pc-dot { width: 20px; height: 20px; }
 
-  /* backdrop panel fills the phone screen instead of a small inset slab */
+/* backdrop panel fills the whole phone screen (cover) so every
+     card position falls inside the painted panel */
   .page-2, .page-3, .page-4, .page-5 {
-    background-size: 100% auto;
-    background-position: center top;
+    background-size: cover;
+    background-position: center;
   }
 
   /* ---------- Page 2: gamedev ---------- */
