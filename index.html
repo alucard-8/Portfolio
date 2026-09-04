@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>portfolio — WASSIM</title>
-  <link rel="stylesheet" href="styles.css?v=85">
+  <link rel="stylesheet" href="styles.css?v=86">
 </head>
 <body>
 
@@ -89,10 +89,25 @@
           <!-- sci-fi title banner -->
           <img class="gui-title fade-item" src="images/gameuigraphic/gamedevgraphics and ui.png" alt="gamedev - graphics and ui">
 
+          <!-- faint HUD chrome that frames the panel -->
+          <span class="hc tl"></span>
+          <span class="hc tr"></span>
+          <span class="hc bl"></span>
+          <span class="hc br"></span>
+          <div class="hud-tele">SYS // ONLINE<br>UI.004 // LOADED<br><b>FPS 114 [OK]</b></div>
+          <div class="hud-radar">
+            <i class="rd-blip b1"></i>
+            <i class="rd-blip b2"></i>
+          </div>
+          <img class="dstar d1" src="images/star.png" alt="">
+          <img class="dstar d2" src="images/star.png" alt="">
+          <img class="dstar d3" src="images/star.png" alt="">
+
           <!-- stickers taped around the panel (click = thruster pop) -->
           <img class="ship sg-1 fade-item" src="images/gameuigraphic/sticker 4.png" alt="spaceship sticker">
           <img class="ship sg-2 fade-item" src="images/gameuigraphic/sticker 4.png" alt="spaceship sticker">
           <img class="ship sg-3 fade-item" src="images/gameuigraphic/sticker 4.png" alt="spaceship sticker">
+          <img class="ship sg-4 fade-item" src="images/gameuigraphic/sticker 4.png" alt="spaceship sticker">
 
           <!-- the big folder: click it to open the paper that holds every
                piece of work in a clean, non-overlapping layout -->
@@ -757,7 +772,7 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
       if (!gui) return;
       var stage = gui.querySelector('.stage') || gui;
       var colors = ['#ffffff', '#ffffff', '#ffd23f', '#5cf0ff', '#ffffff'];
-      for (var i = 0; i < 28; i++) {
+      for (var i = 0; i < 40; i++) {
         var p = document.createElement('div');
         p.className = 'hudstar';
         p.style.left = (Math.random() * 100).toFixed(1) + '%';
