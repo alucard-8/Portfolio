@@ -1035,13 +1035,6 @@ html.has-custom-cursor * {
   0%, 100% { transform: rotate(4deg) translateY(0); }
   50%      { transform: rotate(3deg) translateY(-5px); }
 }
-.hud-postit .hp-note {
-  display: block;
-  font-family: 'zai Lava', cursive;
-  font-size: 16px;
-  line-height: 1.45;
-  color: #1f2447;
-}
 /* radar sweep, bottom-right */
 .hud-radar {
   position: absolute;
@@ -1129,13 +1122,9 @@ html.has-custom-cursor * {
 .p-s1:hover { transform: translateX(-92px) translateY(-8px) scale(1.15) rotate(-11deg); filter: drop-shadow(0 0 14px rgba(92, 240, 255, 0.7)); }
 .p-s2:hover { transform: translateX(2px) translateY(-8px) scale(1.05) rotate(7deg); filter: drop-shadow(0 0 14px rgba(92, 240, 255, 0.7)); }
 /* the panel stickers, taped at different spots (all avoid the folder) */
-.sg-1 { left: 7%;  top: 30%; width: 110px; transform: rotate(9deg) scale(0.9); }
 .sg-2 { left: 74%; top: 52%; width: 96px;  transform: rotate(-12deg); }
-.sg-3 { left: 12%; top: 82%; width: 100px; transform: rotate(-7deg) scale(0.85); }
 .sg-4 { left: 84%; top: 32%; width: 84px;  transform: rotate(-5deg) scale(0.8); }
-.sg-1:hover { transform: rotate(9deg) translateY(-9px) scale(1.05); }
 .sg-2:hover { transform: rotate(-12deg) translateY(-9px) scale(1.1); }
-.sg-3:hover { transform: rotate(-7deg) translateY(-9px) scale(1.05); }
 .sg-4:hover { transform: rotate(-5deg) translateY(-9px) scale(0.95); }
 /* quick thruster kick on click */
 .ship.thrust { animation: shipThrust 0.5s cubic-bezier(0.34, 1.45, 0.64, 1); }
@@ -1926,7 +1915,7 @@ html.has-custom-cursor * {
 .ui-folder {
   position: absolute;
   left: 50%;
-  top: 57%;
+  top: 63%;
   transform: translate(-50%, -50%) rotate(-2deg);
   width: clamp(415px, 45vw, 530px);
   height: clamp(275px, 34vh, 335px);
