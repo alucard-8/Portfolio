@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>portfolio — WASSIM</title>
-  <link rel="stylesheet" href="styles.css?v=101">
+  <link rel="stylesheet" href="styles.css?v=102">
 </head>
 <body>
 
@@ -152,6 +152,9 @@
             <div class="df-sheet"></div>
             <span class="df-badge">open me!</span>
           </button>
+
+          <!-- an ink stamp filling the empty bottom-left corner -->
+          <span class="gp-stamp fade-item" aria-hidden="true">portfolio<br>2026</span>
 
         </div>
       </div>
@@ -1340,6 +1343,69 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
         ring.style.top = cy + 'px';
         document.body.appendChild(ring);
         ring.addEventListener('animationend', function () { ring.remove(); });
+        // an inky spurt of droplets scattering out of the nib
+        var inkColors = ['#202a6e', '#7a2cbf', '#f5a623'];
+        for (var k = 0; k < 8; k++) {
+          var d = document.createElement('div');
+          d.className = 'pt-ink';
+          var a = Math.random() * Math.PI * 2;
+          var dist = 55 + Math.random() * 70;
+          var sz = 6 + Math.random() * 9;
+          d.style.width = sz + 'px';
+          d.style.height = sz + 'px';
+          d.style.left = (cx + Math.round(Math.cos(a) * 6)) + 'px';
+          d.style.top = (cy + Math.round(Math.sin(a) * 6)) + 'px';
+          d.style.background = inkColors[(Math.random() * inkColors.length) | 0];
+          d.style.setProperty('--dx', Math.round(Math.cos(a) * dist) + 'px');
+          d.style.setProperty('--dy', Math.round(Math.sin(a) * dist) + 'px');
+          document.body.appendChild(d);
+          d.addEventListener('animationend', function () { d.remove(); });
+        }
+      });
+    })();
+
+    (function () {
+      // the Behance card is a pinned note you can drag anywhere on the design
+      // panel — it lifts when you pick it up and settles when you set it down
+      var badge = document.querySelector('.behance-badge');
+      var stage = document.querySelector('.graphic .stage');
+      if (!badge || !stage) return;
+      var drag = null;
+      var moved = false;
+      badge.addEventListener('mousedown', function (e) {
+        e.preventDefault();
+        var sr = stage.getBoundingClientRect();
+        var s = sr.width / 1280;
+        var r = badge.getBoundingClientRect();
+        drag = {
+          ox: (e.clientX - sr.left) / s - (r.left - sr.left) / s,
+          oy: (e.clientY - sr.top) / s - (r.top - sr.top) / s,
+          sx: e.clientX, sy: e.clientY
+        };
+        moved = false;
+        badge.classList.add('be-grab');
+        badge.style.zIndex = '60';
+      });
+      document.addEventListener('mousemove', function (e) {
+        if (!drag) return;
+        var sr = stage.getBoundingClientRect();
+        var s = sr.width / 1280;
+        badge.style.left = ((e.clientX - sr.left) / s - drag.ox) + 'px';
+        badge.style.top = ((e.clientY - sr.top) / s - drag.oy) + 'px';
+        if (Math.abs(e.clientX - drag.sx) + Math.abs(e.clientY - drag.sy) > 5) moved = true;
+      });
+      document.addEventListener('mouseup', function () {
+        if (!drag) return;
+        drag = null;
+        badge.style.zIndex = '';
+        badge.classList.remove('be-grab');
+        badge.classList.remove('be-down');
+        void badge.offsetWidth;
+        badge.classList.add('be-down');
+      });
+      // after a real drag, don't follow the link (it lifts off if you move it)
+      badge.addEventListener('click', function (e) {
+        if (moved) { e.preventDefault(); e.stopPropagation(); }
       });
     })();
 
