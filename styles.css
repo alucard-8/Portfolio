@@ -2372,22 +2372,12 @@ html.has-custom-cursor * {
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .pwork:hover img { transform: scale(1.03); }
-.pwork figcaption {
-  font-family: 'zai Lava', cursive;
-  font-size: 14px;
-  color: #6d7194;
-  text-align: center;
-  padding: 8px 2px 2px;
-}
 .pwork .pw-video {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 150px;
   border-radius: 8px;
-  color: #fffdf2;
-  font-family: 'zai Lava', cursive;
-  font-size: 16px;
-  text-align: center;
-  padding-top: 56px;
   background:
     radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.22), transparent 60%),
     linear-gradient(140deg, #202a6e, #2b3991);
