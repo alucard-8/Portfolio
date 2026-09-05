@@ -39,9 +39,14 @@ function sheet() {
   var sh = ss.getSheetByName('ratings');
   if (!sh) {
     sh = ss.insertSheet('ratings');
-    sh.appendRow(['timestamp', 'device', 'stars', 'name']);
+    sh.appendRow(['timestamp (Algiers)', 'device', 'stars', 'name']);
   }
   return sh;
+}
+
+// timestamps shown in Algerian local time (UTC+1, no DST)
+function algiersNow() {
+  return Utilities.formatDate(new Date(), 'Africa/Algiers', 'yyyy-MM-dd HH:mm');
 }
 
 function rows(sh) {
@@ -80,7 +85,7 @@ function doGet(e) {
       var sh = sheet();
       var last = sh.getLastRow();
       if (last > 1) sh.deleteRows(2, last - 1);
-      sh.appendRow([new Date(), 'seed-v1', 5, 'wassim']);
+      sh.appendRow([algiersNow(), 'seed-v1', 5, 'wassim']);
       var vals = rows(sh);
       return reply({ ok: true, reset: true, avg: average(vals), count: vals.length, recent: recentList(vals) });
     }
@@ -109,8 +114,8 @@ function doPost(e) {
       }
     }
 
-    sh.appendRow([new Date(), fp, stars, name]);
-    vals.push([new Date(), fp, stars, name]);
+    sh.appendRow([algiersNow(), fp, stars, name]);
+    vals.push([algiersNow(), fp, stars, name]);
     return reply({ ok: true, avg: average(vals), count: vals.length, recent: recentList(vals) });
   } catch (err) {
     return reply({ ok: false, err: String(err) });
