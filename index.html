@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>portfolio — WASSIM</title>
-  <link rel="stylesheet" href="styles.css?v=92">
+  <link rel="stylesheet" href="styles.css?v=93">
 </head>
 <body>
 
@@ -375,6 +375,7 @@
           </a>
         </div>
       </div>
+      <div class="beh-line"><span>designs</span></div>
       <div class="up-grid">
         <figure class="pwork" data-full="images/designs/1.png"><img src="images/designs/1.png" alt="design piece"></figure>
         <figure class="pwork" data-full="images/designs/2.png"><img src="images/designs/2.png" alt="design piece"></figure>
@@ -1263,36 +1264,48 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
     })();
 
     (function () {
-      // the pen tool sticker makes its mark when clicked: a soft paint-bloom
-      // ring plus a few gentle colour dabs drifting away like wet ink
+      // the pen tool sticker "writes" its mark when clicked: a little press,
+      // then an animated ink swoosh curls out of its tip with a splash dot
       var penTool = document.getElementById('penTool');
       if (!penTool) return;
+
+      function inkSwoosh() {
+        var r = penTool.getBoundingClientRect();
+        var tipX = r.left + r.width * (0.12 + Math.random() * 0.22);
+        var tipY = r.bottom - 6;
+        var colors = ['#7a2cbf', '#e0a21f', '#5cf0ff', '#ff8bd6'];
+        var c = colors[(Math.random() * colors.length) | 0];
+        var ns = 'http://www.w3.org/2000/svg';
+        var svg = document.createElementNS(ns, 'svg');
+        svg.setAttribute('class', 'pen-swoosh');
+        var w = 130, h = 90;
+        svg.setAttribute('width', w + 'px');
+        svg.setAttribute('height', h + 'px');
+        svg.style.left = (tipX - 20) + 'px';
+        svg.style.top = (tipY - 14) + 'px';
+        svg.style.transform = 'rotate(' + (90 + Math.random() * 40 - 20).toFixed(1) + 'deg)';
+        var p1 = 20 + Math.random() * 28;
+        var path = document.createElementNS(ns, 'path');
+        path.setAttribute('d', 'M8 ' + (h - 22) + ' C' + (w * 0.35).toFixed(0) + ' ' + (h - 10) + ', ' + (w * 0.55).toFixed(0) + ' ' + p1 + ', ' + (w - 8) + ' ' + p1);
+        path.setAttribute('stroke', c);
+        svg.appendChild(path);
+        var dot = document.createElementNS(ns, 'circle');
+        dot.setAttribute('cx', w - 8);
+        dot.setAttribute('cy', p1);
+        dot.setAttribute('r', 6);
+        dot.setAttribute('class', 'pen-splash');
+        dot.setAttribute('fill', c);
+        svg.appendChild(dot);
+        document.body.appendChild(svg);
+        setTimeout(function () { svg.remove(); }, 1000);
+      }
+
       penTool.addEventListener('click', function (ev) {
         ev.stopPropagation();
         penTool.classList.remove('jump');
         void penTool.offsetWidth;
         penTool.classList.add('jump');
-        var ring = document.createElement('div');
-        ring.className = 'paint-ring';
-        ring.style.left = ev.clientX + 'px';
-        ring.style.top = ev.clientY + 'px';
-        document.body.appendChild(ring);
-        ring.addEventListener('animationend', function () { ring.remove(); });
-        var colors = ['#7a2cbf', '#5cf0ff', '#e0a21f', '#ff8bd6', '#2b3991'];
-        for (var i = 0; i < 6; i++) {
-          var d = document.createElement('div');
-          d.className = 'paint-dab';
-          d.style.left = ev.clientX + 'px';
-          d.style.top = ev.clientY + 'px';
-          var ang = Math.random() * Math.PI * 2;
-          var dist = 34 + Math.random() * 70;
-          d.style.setProperty('--ix', Math.round(Math.cos(ang) * dist) + 'px');
-          d.style.setProperty('--iy', Math.round(Math.sin(ang) * dist) + 'px');
-          var c = colors[(Math.random() * colors.length) | 0];
-          d.style.background = 'radial-gradient(circle at 35% 35%, ' + c + 'd9, ' + c + '30 70%)';
-          document.body.appendChild(d);
-          d.addEventListener('animationend', function () { d.remove(); });
-        }
+        inkSwoosh();
       });
     })();
 
