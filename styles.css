@@ -2471,56 +2471,29 @@ html.has-custom-cursor * {
   will-change: transform;
 }
 .pt-sticker:hover {
-  transform: rotate(-1deg) scale(1.08);
+  transform: rotate(-2deg) scale(1.06);
   filter: drop-shadow(0 14px 20px rgba(24, 31, 66, 0.45));
 }
-.pt-sticker.jump { animation: ptJump 0.5s cubic-bezier(0.34, 1.45, 0.64, 1); }
-@keyframes ptJump {
+.pt-sticker.press { animation: ptPress 0.4s cubic-bezier(0.34, 1.45, 0.64, 1); }
+@keyframes ptPress {
   0%   { transform: rotate(-8deg) scale(1); }
-  40%  { transform: rotate(7deg) scale(1.35); }
+  40%  { transform: rotate(-4deg) scale(0.92); }
   100% { transform: rotate(-8deg) scale(1); }
 }
-/* a wet-ink bloom + an animated pen swoosh when the pen tool is clicked */
-.paint-ring {
+/* one clean ripple ring blooming out of the pen tool when it's clicked */
+.pt-ring {
   position: fixed;
-  width: 96px;
-  height: 96px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   z-index: 9994;
   pointer-events: none;
-  background: radial-gradient(circle, rgba(122, 44, 191, 0.16) 0%, rgba(224, 162, 31, 0.1) 45%, transparent 72%);
-  animation: paintRing 0.7s ease-out forwards;
+  border: 2px solid rgba(122, 44, 191, 0.55);
+  animation: ptRing 0.55s ease-out forwards;
 }
-@keyframes paintRing {
-  0%   { transform: translate(-50%, -50%) scale(0.2); opacity: 0.9; }
-  100% { transform: translate(-50%, -50%) scale(2.5);   opacity: 0; }
-}
-.pen-swoosh {
-  position: fixed;
-  z-index: 9993;
-  pointer-events: none;
-  filter: drop-shadow(0 2px 3px rgba(24, 31, 66, 0.25));
-}
-.pen-swoosh path {
-  fill: none;
-  stroke-width: 5;
-  stroke-linecap: round;
-  stroke-dasharray: 600;
-  stroke-dashoffset: 600;
-  animation: penDraw 0.5s cubic-bezier(0.33, 1, 0.68, 1) forwards;
-}
-@keyframes penDraw {
-  to { stroke-dashoffset: 0; }
-}
-.pen-swoosh .pen-splash {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: splatPop 0.4s cubic-bezier(0.34, 1.6, 0.64, 1) 0.28s backwards;
-}
-@keyframes splatPop {
-  0%   { transform: scale(0); }
-  70%  { transform: scale(1.3); }
-  100% { transform: scale(1); }
+@keyframes ptRing {
+  0%   { transform: translate(-50%, -50%) scale(0.3); opacity: 0.9; }
+  100% { transform: translate(-50%, -50%) scale(2.4);  opacity: 0; }
 }
 /* my Behance profile, a little paper card pinned to the panel */
 .behance-badge {
@@ -2682,7 +2655,7 @@ html.has-custom-cursor * {
   border-radius: 999px;
   box-shadow: 0 3px 8px rgba(24, 31, 66, 0.3);
 }
-/* the design folder — a little portfolio, floaty and clickable */
+/* the design folder — a clean manila portfolio folder, floaty and clickable */
 .ds-folder {
   position: absolute;
   left: 50%;
@@ -2694,7 +2667,7 @@ html.has-custom-cursor * {
   border: 0;
   background: transparent;
   cursor: pointer;
-  filter: drop-shadow(0 16px 24px rgba(10, 14, 40, 0.45));
+  filter: drop-shadow(0 14px 22px rgba(10, 14, 40, 0.4));
   animation: dfFloat 3.4s ease-in-out infinite;
 }
 .ds-folder:hover { animation-play-state: paused; }
@@ -2705,80 +2678,85 @@ html.has-custom-cursor * {
 }
 @keyframes dfPress {
   0%   { transform: translate(-50%, -50%) scale(1); }
-  50%  { transform: translate(-50%, -50%) scale(0.93) rotate(-1deg); }
+  50%  { transform: translate(-50%, -50%) scale(0.94) rotate(-1deg); }
   100% { transform: translate(-50%, -50%) scale(1); }
 }
 .ds-folder .df-glow {
   position: absolute;
-  inset: -30px -20px;
-  background: radial-gradient(ellipse at 50% 60%, rgba(122, 44, 191, 0.22), rgba(224, 162, 31, 0.08) 55%, transparent 75%);
+  inset: -34px -26px;
+  background: radial-gradient(ellipse at 50% 55%, rgba(122, 44, 191, 0.18), rgba(92, 240, 255, 0.08) 52%, transparent 76%);
 }
 .ds-folder .df-tab {
   position: absolute;
   left: 12%;
-  top: 0;
-  width: 32%;
-  height: 38px;
+  top: 4px;
+  width: 34%;
+  height: 32px;
   z-index: 3;
-  background: linear-gradient(180deg, #8a35d8, #5b1f96);
-  border-radius: 12px 12px 0 0;
-  box-shadow: 0 -3px 8px rgba(24, 31, 66, 0.25);
+  background: linear-gradient(180deg, #b04dff, #7a2cbf);
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 -4px 10px rgba(24, 31, 66, 0.18);
 }
 .ds-folder .df-sheet {
   position: absolute;
   left: 0;
   right: 0;
   top: 20px;
-  bottom: 28px;
+  bottom: 0;
   z-index: 1;
-  background: linear-gradient(150deg, #2b3991 0%, #202a6e 60%, #171d47 100%);
-  border-radius: 4px 18px 18px 18px;
-  box-shadow: 0 18px 34px rgba(6, 8, 22, 0.55);
+  background-color: #fffdf6;
+  background-image: radial-gradient(rgba(32, 42, 110, 0.07) 1.2px, transparent 1.7px);
+  background-size: 26px 26px;
+  border: 2px solid #202a6e;
+  border-radius: 2px 16px 16px 16px;
+  box-shadow: 0 18px 34px rgba(6, 8, 22, 0.35);
+}
+/* a cream page sticking out on one side, a white page on the other */
+.ds-folder .df-sheet::before {
+  content: '';
+  position: absolute;
+  left: -9px;
+  right: 16px;
+  top: -7px;
+  bottom: 12px;
+  z-index: -1;
+  background: #ffffff;
+  border-radius: 2px 16px 16px 16px;
+  box-shadow: 0 12px 24px rgba(6, 8, 22, 0.2);
+  transform: rotate(-3deg);
 }
 .ds-folder .df-sheet::after {
   content: '';
   position: absolute;
-  left: 10%;
-  right: 10%;
-  top: 40%;
-  height: 10px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #7a2cbf, #5cf0ff, #e0a21f, #ff8bd6, #7ce577);
-  opacity: 0.85;
-}
-.ds-folder .df-pocket {
-  position: absolute;
-  left: 7%;
-  right: 7%;
-  bottom: 14px;
-  height: 60px;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fffdf6;
-  border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(6, 8, 22, 0.35);
+  left: 20px;
+  right: -8px;
+  top: -4px;
+  bottom: 16px;
+  z-index: -2;
+  background: #f2eee2;
+  border-radius: 2px 16px 16px 16px;
+  box-shadow: 0 10px 20px rgba(6, 8, 22, 0.16);
+  transform: rotate(2.5deg);
 }
 .ds-folder .df-badge {
   position: absolute;
-  right: -14px;
-  top: -10px;
+  right: -16px;
+  top: -14px;
   z-index: 4;
   font-family: 'zai Lava', cursive;
   font-size: 13px;
   font-weight: bold;
-  color: #cf3503;
-  background: #f5ce25;
-  border: 2px solid #cf3503;
+  letter-spacing: 0.3px;
+  color: #fff;
+  background: #7a2cbf;
   border-radius: 999px;
-  padding: 5px 11px;
-  box-shadow: 0 5px 10px rgba(24, 31, 66, 0.3);
-  animation: badgeWiggle 2.4s ease-in-out infinite;
+  padding: 6px 13px;
+  box-shadow: 0 6px 14px rgba(24, 31, 66, 0.35);
+  animation: badgeWiggle 2.6s ease-in-out infinite;
 }
 @keyframes badgeWiggle {
-  0%, 100% { transform: rotate(7deg); }
-  50%      { transform: rotate(13deg); }
+  0%, 100% { transform: rotate(-3deg); }
+  50%      { transform: rotate(3deg); }
 }
 /* colorful swatch blobs drifting around the design page (spawned in JS) */
 .sw {

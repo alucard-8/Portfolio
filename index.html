@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>portfolio — WASSIM</title>
-  <link rel="stylesheet" href="styles.css?v=94">
+  <link rel="stylesheet" href="styles.css?v=95">
 </head>
 <body>
 
@@ -150,8 +150,6 @@
             <span class="df-glow"></span>
             <span class="df-tab"></span>
             <div class="df-sheet"></div>
-            <div class="df-pocket">
-            </div>
             <span class="df-badge">open me!</span>
           </button>
 
@@ -1263,48 +1261,24 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
     })();
 
     (function () {
-      // the pen tool sticker "writes" its mark when clicked: a little press,
-      // then an animated ink swoosh curls out of its tip with a splash dot
+      // the pen tool sticker: a soft press, then a single clean ripple ring
+      // blooms out from it — simple and tidy
       var penTool = document.getElementById('penTool');
       if (!penTool) return;
-
-      function inkSwoosh() {
-        var r = penTool.getBoundingClientRect();
-        var tipX = r.left + r.width * (0.12 + Math.random() * 0.22);
-        var tipY = r.bottom - 6;
-        var colors = ['#7a2cbf', '#e0a21f', '#5cf0ff', '#ff8bd6'];
-        var c = colors[(Math.random() * colors.length) | 0];
-        var ns = 'http://www.w3.org/2000/svg';
-        var svg = document.createElementNS(ns, 'svg');
-        svg.setAttribute('class', 'pen-swoosh');
-        var w = 130, h = 90;
-        svg.setAttribute('width', w + 'px');
-        svg.setAttribute('height', h + 'px');
-        svg.style.left = (tipX - 20) + 'px';
-        svg.style.top = (tipY - 14) + 'px';
-        svg.style.transform = 'rotate(' + (90 + Math.random() * 40 - 20).toFixed(1) + 'deg)';
-        var p1 = 20 + Math.random() * 28;
-        var path = document.createElementNS(ns, 'path');
-        path.setAttribute('d', 'M8 ' + (h - 22) + ' C' + (w * 0.35).toFixed(0) + ' ' + (h - 10) + ', ' + (w * 0.55).toFixed(0) + ' ' + p1 + ', ' + (w - 8) + ' ' + p1);
-        path.setAttribute('stroke', c);
-        svg.appendChild(path);
-        var dot = document.createElementNS(ns, 'circle');
-        dot.setAttribute('cx', w - 8);
-        dot.setAttribute('cy', p1);
-        dot.setAttribute('r', 6);
-        dot.setAttribute('class', 'pen-splash');
-        dot.setAttribute('fill', c);
-        svg.appendChild(dot);
-        document.body.appendChild(svg);
-        setTimeout(function () { svg.remove(); }, 1000);
-      }
-
       penTool.addEventListener('click', function (ev) {
         ev.stopPropagation();
-        penTool.classList.remove('jump');
+        penTool.classList.remove('press');
         void penTool.offsetWidth;
-        penTool.classList.add('jump');
-        inkSwoosh();
+        penTool.classList.add('press');
+        var r = penTool.getBoundingClientRect();
+        var cx = r.left + r.width / 2;
+        var cy = r.top + r.height / 2;
+        var ring = document.createElement('div');
+        ring.className = 'pt-ring';
+        ring.style.left = cx + 'px';
+        ring.style.top = cy + 'px';
+        document.body.appendChild(ring);
+        ring.addEventListener('animationend', function () { ring.remove(); });
       });
     })();
 
