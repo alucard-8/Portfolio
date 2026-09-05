@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>portfolio — WASSIM</title>
-  <link rel="stylesheet" href="styles.css?v=95">
+  <link rel="stylesheet" href="styles.css?v=96">
 </head>
 <body>
 
@@ -152,6 +152,53 @@
             <div class="df-sheet"></div>
             <span class="df-badge">open me!</span>
           </button>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="page page-6">
+      <div class="rate">
+        <div class="stage">
+
+          <!-- the rate card: pin it, tap a star, watch the score move -->
+          <div class="rate-panel fade-item" id="ratePanel">
+            <img class="rp-pin" src="images/pin.png" alt="">
+            <span class="rp-sup">last page</span>
+            <span class="rp-title">rate my work</span>
+            <div class="rp-stars" id="rateStars" role="radiogroup" aria-label="rate from one to five stars">
+              <button class="rp-star" data-v="1" role="radio" aria-label="1 star">★</button>
+              <button class="rp-star" data-v="2" role="radio" aria-label="2 stars">★</button>
+              <button class="rp-star" data-v="3" role="radio" aria-label="3 stars">★</button>
+              <button class="rp-star" data-v="4" role="radio" aria-label="4 stars">★</button>
+              <button class="rp-star" data-v="5" role="radio" aria-label="5 stars">★</button>
+            </div>
+            <p class="rp-msg" id="rateMsg">tap a star to leave your rating</p>
+            <div class="rp-score">
+              <span class="rp-avg" id="rateAvg">•••</span>
+              <span class="rp-count" id="rateCount">loading score…</span>
+            </div>
+          </div>
+
+          <!-- commissions: get in touch, doors are open -->
+          <div class="comm-panel fade-item">
+            <span class="cp-tag">commissions open</span>
+            <p class="cp-note">open for design, UI &amp; game work — DM me anywhere</p>
+            <a class="cp-link cp-ig" href="https://www.instagram.com/wassim___draw/" target="_blank" rel="noopener">
+              <img src="images/instagram.png" alt="">
+              <span>@wassim___draw</span>
+              <i>open →</i>
+            </a>
+            <button class="cp-link cp-dc" id="cpDiscord" type="button">
+              <img src="images/discord.png" alt="">
+              <span>w_assim8</span>
+              <i>copy</i>
+            </button>
+          </div>
+
+          <img class="rate-star r-s1" src="images/star.png" alt="">
+          <img class="rate-star r-s2" src="images/star.png" alt="">
+          <img class="rate-star r-s3" src="images/star.png" alt="">
 
         </div>
       </div>
@@ -440,20 +487,21 @@
   </div>
 
 
-<!-- themed page counter (5 pages) -->
+<!-- themed page counter (6 pages) -->
   <nav class="page-counter" id="pageCounter" aria-label="Pages">
     <button class="pc-dot" data-page="0"><i></i></button>
     <button class="pc-dot" data-page="1"><i></i></button>
     <button class="pc-dot" data-page="2"><i></i></button>
     <button class="pc-dot" data-page="3"><i></i></button>
     <button class="pc-dot" data-page="4"><i></i></button>
+    <button class="pc-dot" data-page="5"><i></i></button>
   </nav>
 
   <script src="cursor.js"></script>
   <script>
     (function () {
 var DESIGN_W = 1280, DESIGN_H = 1080;
-      var PAGES = 5;
+      var PAGES = 6;
 
       var panel = document.querySelector('.sticker .panel');
       var sticker = document.getElementById('sticker');
@@ -567,6 +615,14 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
           if (p === 4) {
             void graphic.offsetWidth;
             graphic.classList.add('enter');
+          }
+        }
+        var rate = document.querySelector('.rate');
+        if (rate) {
+          rate.classList.remove('enter');
+          if (p === 5) {
+            void rate.offsetWidth;
+            rate.classList.add('enter');
           }
         }
         comicStrike(dir);
@@ -1064,7 +1120,8 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
           if (idx === 2) hintTag.textContent = 'tap a drawing to see it full size';
           else if (idx === 3) hintTag.textContent = 'open the folder to browse all my work';
           else if (idx === 4) hintTag.textContent = 'open the folder to browse all my design work';
-          if (idx === 2 || idx === 3 || idx === 4) hintTag.classList.add('show');
+          else if (idx === 5) hintTag.textContent = 'rate my work — it takes a second';
+          if (idx === 2 || idx === 3 || idx === 4 || idx === 5) hintTag.classList.add('show');
         }
         if (drawHint) {
           drawHint.classList.toggle('show',
@@ -1225,7 +1282,7 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
           groups[i].style.transform = 'scale(' + s + ')';
           groups[i].style.transformOrigin = 'center center';
         }
-        var stages = document.querySelectorAll('.gui .stage, .graphic .stage');
+        var stages = document.querySelectorAll('.gui .stage, .graphic .stage, .rate .stage');
         for (var i = 0; i < stages.length; i++) {
           stages[i].style.setProperty('--gs', s);
         }
@@ -1327,6 +1384,175 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
       });
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && paper.classList.contains('open')) closePaper();
+      });
+    })();
+
+    (function () {
+      // ============ page 6: the rating board ============
+      // Paste your Apps Script web-app URL here (see grade-backend.gs in the
+      // repo). Keep it empty for a local-only preview that works offline.
+      var RATE_API = '';
+
+      var msgEl = document.getElementById('rateMsg');
+      var avgEl = document.getElementById('rateAvg');
+      var cntEl = document.getElementById('rateCount');
+      var starsEl = document.getElementById('rateStars');
+      var panelEl = document.getElementById('ratePanel');
+      if (!msgEl || !starsEl || !avgEl || !cntEl) return;
+      var starBtns = Array.prototype.slice.call(starsEl.children).filter(function (b) {
+        return b.classList.contains('rp-star');
+      });
+      var subKey = 'wassim_rate_v1';
+      var myValue = parseInt(localStorage.getItem(subKey) || '0', 10) || 0;
+
+      function setStars(n) {
+        starBtns.forEach(function (b, i) {
+          b.classList.toggle('on', i < n);
+        });
+      }
+      function round1(x) { return Math.round(x * 10) / 10; }
+      function setScore(avg, count) {
+        var filled = Math.round(avg);
+        var s = '';
+        for (var i = 0; i < 5; i++) s += '<span class="' + (i < filled ? 'on' : '') + '">★</span>';
+        avgEl.innerHTML = s + '<em>' + round1(avg) + '</em>';
+        cntEl.textContent = count + (count === 1 ? ' rating' : ' ratings');
+        cntEl.classList.add('live');
+      }
+      function celebrate() {
+        var r = starsEl.getBoundingClientRect();
+        var x = r.left + r.width / 2, y = r.top + r.height / 2;
+        if (window.sparkleAt) window.sparkleAt(x, y);
+        if (panelEl) {
+          panelEl.classList.remove('rp-pop');
+          void panelEl.offsetWidth;
+          panelEl.classList.add('rp-pop');
+        }
+      }
+      function deviceId() {
+        try {
+          var c = document.createElement('canvas'), ctx = c.getContext('2d');
+          ctx.textBaseline = 'top';
+          ctx.font = '15px Arial';
+          ctx.fillText('wassim-grade-' + Math.random(), 2, 2);
+          var f = navigator.userAgent + '|' + screen.width + 'x' + screen.height + '|' +
+                  navigator.language + '|' + new Date().getTimezoneOffset() + '|' + c.toDataURL();
+          var h = 0;
+          for (var i = 0; i < f.length; i++) h = (Math.imul(h, 31) + f.charCodeAt(i)) | 0;
+          return 'fp' + (h >>> 0).toString(16);
+        } catch (e) {
+          return 'fp' + Math.random().toString(36).slice(2);
+        }
+      }
+
+      function loadScore() {
+        if (!RATE_API) {
+          avgEl.innerHTML = '<em>—</em>';
+          cntEl.textContent = 'score sync pending';
+          return;
+        }
+        fetch(RATE_API + (RATE_API.indexOf('?') === -1 ? '?' : '&') + 'action=get', { method: 'GET' })
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            if (d && typeof d.avg === 'number') setScore(d.avg, d.count || 0);
+            else { avgEl.innerHTML = '<em>—</em>'; cntEl.textContent = 'score currently unavailable'; }
+          })
+          .catch(function () {
+            avgEl.innerHTML = '<em>—</em>';
+            cntEl.textContent = 'couldn\u2019t reach the scoreboard';
+          });
+      }
+
+      function submit(v) {
+        setStars(v);
+        starsEl.classList.add('locked');
+        msgEl.textContent = 'sending your rating…';
+        if (!RATE_API) {
+          var loc = JSON.parse(localStorage.getItem('wassim_ratings_local') || '{"n":0,"s":0}');
+          loc.n++; loc.s += v;
+          localStorage.setItem('wassim_ratings_local', JSON.stringify(loc));
+          localStorage.setItem(subKey, String(v));
+          setScore(loc.s / loc.n, loc.n);
+          msgEl.textContent = 'thanks! (preview score — connect the backend for the live one)';
+          celebrate();
+          return;
+        }
+        fetch(RATE_API + (RATE_API.indexOf('?') === -1 ? '?' : '&') + 'action=add', {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify({ v: v, fp: deviceId() })
+        })
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            localStorage.setItem(subKey, String(v));
+            myValue = v;
+            if (d && d.ok) {
+              setScore(d.avg, d.count || 0);
+              msgEl.textContent = 'thanks for rating!';
+              celebrate();
+            } else if (d && d.already) {
+              msgEl.textContent = 'you already rated — one vote per device';
+              if (typeof d.avg === 'number') setScore(d.avg, d.count || 0);
+            } else {
+              msgEl.textContent = 'hmm, that didn\u2019t go through — try again';
+            }
+          })
+          .catch(function () { msgEl.textContent = 'couldn\u2019t reach the scoreboard — try again'; });
+      }
+
+      setStars(myValue);
+      if (myValue > 0) {
+        starsEl.classList.add('locked');
+        msgEl.textContent = 'you rated ' + myValue + (myValue > 1 ? ' stars' : ' star') + ' — thanks!';
+      }
+      starBtns.forEach(function (b) {
+        b.addEventListener('mouseenter', function () {
+          if (starsEl.classList.contains('locked')) return;
+          var v = parseInt(b.getAttribute('data-v'), 10);
+          setStars(v);
+          msgEl.textContent = 'leaving ' + v + (v > 1 ? ' stars' : ' star');
+        });
+        b.addEventListener('click', function () {
+          if (starsEl.classList.contains('locked')) {
+            msgEl.textContent = 'you already rated — the score below keeps counting yours';
+            return;
+          }
+          submit(parseInt(b.getAttribute('data-v'), 10));
+        });
+      });
+      starsEl.addEventListener('mouseleave', function () {
+        if (starsEl.classList.contains('locked')) return;
+        setStars(myValue);
+        msgEl.textContent = myValue ? 'you rated ' + myValue + ' — thanks!' : 'tap a star to leave your rating';
+      });
+      loadScore();
+    })();
+
+    (function () {
+      // Discord handle chip: clicking it copies "w_assim8" to the clipboard
+      var dc = document.getElementById('cpDiscord');
+      if (!dc) return;
+      dc.addEventListener('click', function () {
+        function done() {
+          var i = dc.querySelector('i');
+          if (!i) return;
+          var old = i.textContent;
+          i.textContent = 'copied!';
+          setTimeout(function () { i.textContent = old; }, 1500);
+        }
+        function fallback() {
+          var ta = document.createElement('textarea');
+          ta.value = 'w_assim8';
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); done(); } catch (e) {}
+          ta.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText('w_assim8').then(done, fallback);
+        } else fallback();
       });
     })();
   </script>
