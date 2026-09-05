@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>portfolio — WASSIM</title>
-  <link rel="stylesheet" href="styles.css?v=91">
+  <link rel="stylesheet" href="styles.css?v=92">
 </head>
 <body>
 
@@ -137,29 +137,12 @@
           <!-- the pen tool sticker: click it for a little ink burst -->
           <img class="pt-sticker fade-item" id="penTool" src="images/PENTOOL.png" alt="pen tool sticker">
 
-          <!-- my Behance profile, pinned like a little paper card -->
+          <!-- my Behance profile, pinned to the panel like a note -->
           <a class="behance-badge fade-item" href="https://www.behance.net/mohamedmessaif" target="_blank" rel="noopener">
+            <img class="be-pin" src="images/pin.png" alt="">
             <span class="be-tag">Be</span>
             <span class="be-name">mohamedmessaif</span>
             <span class="be-go">visit →</span>
-          </a>
-
-          <!-- three featured Behance projects with their covers -->
-          <a class="bcard b-cardha fade-item" href="https://www.behance.net/gallery/253741429/BRANDIHAS-MASCOTTE" target="_blank" rel="noopener">
-            <img class="cov" src="images/covers/brandiha.webp" alt="Brandiha's mascotte">
-            <span class="bc-title">Brandiha's Mascotte</span>
-            <span class="bc-site">behance →</span>
-          </a>
-          <a class="bcard b-fifa fade-item" href="https://www.behance.net/gallery/252415251/FIFA-World-Cup-ALGERIA-2038-Concept" target="_blank" rel="noopener">
-            <img class="cov" src="images/covers/fifa2038.webp" alt="FIFA World Cup Algeria 2038 concept">
-            <span class="bc-title">FIFA WC ALGERIA 2038</span>
-            <span class="bc-badge">team · science club</span>
-            <span class="bc-site">behance →</span>
-          </a>
-          <a class="bcard b-soummam fade-item" href="https://www.behance.net/gallery/252183197/Soummam-Yago-Billboard-Challenge" target="_blank" rel="noopener">
-            <img class="cov" src="images/covers/soummam.webp" alt="Soummam Yago billboard challenge">
-            <span class="bc-title">Soummam Yago Billboard</span>
-            <span class="bc-site">behance →</span>
           </a>
 
           <!-- the design folder: opens the paper with every piece, laid out cleanly -->
@@ -363,14 +346,35 @@
   <div class="ui-paper" id="uiPaperDsgn" aria-hidden="true" role="dialog" aria-label="My graphic design work, laid out cleanly">
     <div class="ui-paper-sheet ds-sheet">
       <div class="up-head">
-        <span class="up-count">52 pieces</span>
+        <span class="up-count">3 posts · 52 pieces</span>
         <button class="up-close" id="uiPaperDsgnClose" aria-label="close the folder">✕</button>
       </div>
       <p class="up-note">
         <span class="un-chip c-club">science club</span>
         <span class="un-chip c-team">team work</span>
-        some of this was made for my science club, and some of it is a team project
+        some of this is made for my science club, and some of it is team work
       </p>
+      <div class="beh-section">
+        <span class="beh-head">behance posts</span>
+        <div class="beh-row">
+          <a class="bcard" href="https://www.behance.net/gallery/253741429/BRANDIHAS-MASCOTTE" target="_blank" rel="noopener">
+            <img class="cov" src="images/covers/brandiha.webp" alt="Brandiha's mascotte">
+            <span class="bc-title">Brandiha's Mascotte</span>
+            <span class="bc-site">behance →</span>
+          </a>
+          <a class="bcard" href="https://www.behance.net/gallery/252415251/FIFA-World-Cup-ALGERIA-2038-Concept" target="_blank" rel="noopener">
+            <img class="cov" src="images/covers/fifa2038.webp" alt="FIFA World Cup Algeria 2038 concept">
+            <span class="bc-title">FIFA WC ALGERIA 2038</span>
+            <span class="bc-badge">science club · team work</span>
+            <span class="bc-site">behance →</span>
+          </a>
+          <a class="bcard" href="https://www.behance.net/gallery/252183197/Soummam-Yago-Billboard-Challenge" target="_blank" rel="noopener">
+            <img class="cov" src="images/covers/soummam.webp" alt="Soummam Yago billboard challenge">
+            <span class="bc-title">Soummam Yago Billboard</span>
+            <span class="bc-site">behance →</span>
+          </a>
+        </div>
+      </div>
       <div class="up-grid">
         <figure class="pwork" data-full="images/designs/1.png"><img src="images/designs/1.png" alt="design piece"></figure>
         <figure class="pwork" data-full="images/designs/2.png"><img src="images/designs/2.png" alt="design piece"></figure>
@@ -1259,8 +1263,8 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
     })();
 
     (function () {
-      // the pen tool sticker writes its mark when clicked: a little jump
-      // plus a colourful ink-burst of dots and sparks
+      // the pen tool sticker makes its mark when clicked: a soft paint-bloom
+      // ring plus a few gentle colour dabs drifting away like wet ink
       var penTool = document.getElementById('penTool');
       if (!penTool) return;
       penTool.addEventListener('click', function (ev) {
@@ -1268,22 +1272,27 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
         penTool.classList.remove('jump');
         void penTool.offsetWidth;
         penTool.classList.add('jump');
-        var colors = ['#202a6e', '#7a2cbf', '#2b3991', '#e0a21f', '#cf3503'];
-        for (var i = 0; i < 14; i++) {
+        var ring = document.createElement('div');
+        ring.className = 'paint-ring';
+        ring.style.left = ev.clientX + 'px';
+        ring.style.top = ev.clientY + 'px';
+        document.body.appendChild(ring);
+        ring.addEventListener('animationend', function () { ring.remove(); });
+        var colors = ['#7a2cbf', '#5cf0ff', '#e0a21f', '#ff8bd6', '#2b3991'];
+        for (var i = 0; i < 6; i++) {
           var d = document.createElement('div');
-          d.className = 'inkdot';
+          d.className = 'paint-dab';
           d.style.left = ev.clientX + 'px';
           d.style.top = ev.clientY + 'px';
           var ang = Math.random() * Math.PI * 2;
-          var dist = 30 + Math.random() * 95;
+          var dist = 34 + Math.random() * 70;
           d.style.setProperty('--ix', Math.round(Math.cos(ang) * dist) + 'px');
           d.style.setProperty('--iy', Math.round(Math.sin(ang) * dist) + 'px');
-          d.style.background = colors[(Math.random() * colors.length) | 0];
+          var c = colors[(Math.random() * colors.length) | 0];
+          d.style.background = 'radial-gradient(circle at 35% 35%, ' + c + 'd9, ' + c + '30 70%)';
           document.body.appendChild(d);
           d.addEventListener('animationend', function () { d.remove(); });
         }
-        if (window.sparkleAt) window.sparkleAt(ev.clientX, ev.clientY, '#7a2cbf');
-        if (window.sparkleAt) window.sparkleAt(ev.clientX, ev.clientY, '#e0a21f');
       });
     })();
 
