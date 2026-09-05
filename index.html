@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>portfolio — WASSIM</title>
-  <link rel="stylesheet" href="styles.css?v=99">
+  <link rel="stylesheet" href="styles.css?v=100">
 </head>
 <body>
 
@@ -173,12 +173,14 @@
               <button class="rp-star" data-v="4" role="radio" aria-label="4 stars">★</button>
               <button class="rp-star" data-v="5" role="radio" aria-label="5 stars">★</button>
             </div>
-            <p class="rp-msg" id="rateMsg">tap a star to leave your rating</p>
+            <input class="rp-name" id="rateName" type="text" maxlength="24" placeholder="your name — anything" aria-label="your name" autocomplete="off" spellcheck="false">
+            <p class="rp-msg" id="rateMsg">type your name, then tap a star</p>
             <div class="rp-score">
               <span class="rp-live"><b></b>live</span>
               <span class="rp-avg" id="rateAvg">•••</span>
               <span class="rp-count" id="rateCount">real votes — loading…</span>
             </div>
+            <p class="rp-recent" id="rateRecent" style="display:none"></p>
             <p class="rp-sub">one vote per device · straight from the live sheet</p>
           </div>
 
@@ -1400,12 +1402,16 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
       var cntEl = document.getElementById('rateCount');
       var starsEl = document.getElementById('rateStars');
       var panelEl = document.getElementById('ratePanel');
-      if (!msgEl || !starsEl || !avgEl || !cntEl) return;
+      var nameEl = document.getElementById('rateName');
+      var recentEl = document.getElementById('rateRecent');
+      if (!msgEl || !starsEl || !avgEl || !cntEl || !nameEl) return;
       var starBtns = Array.prototype.slice.call(starsEl.children).filter(function (b) {
         return b.classList.contains('rp-star');
       });
       var subKey = 'wassim_rate_v1';
+      var nameKey = 'wassim_rate_name_v1';
       var myValue = parseInt(localStorage.getItem(subKey) || '0', 10) || 0;
+      var myName = localStorage.getItem(nameKey) || '';
 
       function setStars(n) {
         starBtns.forEach(function (b, i) {
@@ -1447,6 +1453,15 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
         }
       }
 
+      function renderRecent(recent) {
+        if (!recentEl) return;
+        if (!recent || !recent.length) { recentEl.style.display = 'none'; return; }
+        recentEl.style.display = 'block';
+        recentEl.textContent = recent.slice(0, 3).map(function (r) {
+          return (r.n || 'someone') + ' ★' + r.s;
+        }).join('   ·   ');
+      }
+
       function loadScore() {
         if (!RATE_API) {
           avgEl.innerHTML = '<em>—</em>';
@@ -1456,8 +1471,10 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
         fetch(RATE_API + (RATE_API.indexOf('?') === -1 ? '?' : '&') + 'action=get', { method: 'GET' })
           .then(function (r) { return r.json(); })
           .then(function (d) {
-            if (d && typeof d.avg === 'number') setScore(d.avg, d.count || 0);
-            else { avgEl.innerHTML = '<em>—</em>'; cntEl.textContent = 'score currently unavailable'; }
+            if (d && typeof d.avg === 'number') {
+              setScore(d.avg, d.count || 0);
+              renderRecent(d.recent);
+            } else { avgEl.innerHTML = '<em>—</em>'; cntEl.textContent = 'score currently unavailable'; }
           })
           .catch(function () {
             avgEl.innerHTML = '<em>—</em>';
@@ -1465,7 +1482,9 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
           });
       }
 
-      function submit(v) {
+      function submit(v, name) {
+        nameEl.disabled = true;
+        nameEl.classList.remove('is-bad');
         setStars(v);
         starsEl.classList.add('locked');
         msgEl.textContent = 'sending your rating…';
@@ -1475,26 +1494,29 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
           localStorage.setItem('wassim_ratings_local', JSON.stringify(loc));
           localStorage.setItem(subKey, String(v));
           setScore(loc.s / loc.n, loc.n);
-          msgEl.textContent = 'thanks! (preview score — connect the backend for the live one)';
+          msgEl.textContent = 'thanks ' + name + '! (preview score — connect the backend for the live one)';
           celebrate();
           return;
         }
         fetch(RATE_API + (RATE_API.indexOf('?') === -1 ? '?' : '&') + 'action=add', {
           method: 'POST',
           headers: { 'Content-Type': 'text/plain' },
-          body: JSON.stringify({ v: v, fp: deviceId() })
+          body: JSON.stringify({ v: v, fp: deviceId(), name: name })
         })
           .then(function (r) { return r.json(); })
           .then(function (d) {
             localStorage.setItem(subKey, String(v));
+            localStorage.setItem(nameKey, name);
             myValue = v;
             if (d && d.ok) {
               setScore(d.avg, d.count || 0);
-              msgEl.textContent = 'thanks for rating!';
+              renderRecent(d.recent);
+              msgEl.textContent = 'thanks ' + name + '!';
               celebrate();
             } else if (d && d.already) {
               msgEl.textContent = 'you already rated — one vote per device';
               if (typeof d.avg === 'number') setScore(d.avg, d.count || 0);
+              if (d.recent) renderRecent(d.recent);
             } else {
               msgEl.textContent = 'hmm, that didn\u2019t go through — try again';
             }
@@ -1505,7 +1527,9 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
       setStars(myValue);
       if (myValue > 0) {
         starsEl.classList.add('locked');
-        msgEl.textContent = 'you rated ' + myValue + (myValue > 1 ? ' stars' : ' star') + ' — thanks!';
+        nameEl.value = myName;
+        nameEl.disabled = true;
+        msgEl.textContent = 'you rated ' + myValue + (myValue > 1 ? ' stars' : ' star') + (myName ? ' — thanks ' + myName + '!' : ' — thanks!');
       }
       starBtns.forEach(function (b) {
         b.addEventListener('mouseenter', function () {
@@ -1519,13 +1543,21 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
             msgEl.textContent = 'you already rated — the score below keeps counting yours';
             return;
           }
-          submit(parseInt(b.getAttribute('data-v'), 10));
+          var nm = nameEl.value.replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 24);
+          if (!nm) {
+            nameEl.classList.add('is-bad');
+            msgEl.textContent = 'type your name first — anything works';
+            nameEl.focus();
+            nameEl.removeAttribute('disabled');
+            return;
+          }
+          submit(parseInt(b.getAttribute('data-v'), 10), nm);
         });
       });
       starsEl.addEventListener('mouseleave', function () {
         if (starsEl.classList.contains('locked')) return;
         setStars(myValue);
-        msgEl.textContent = myValue ? 'you rated ' + myValue + ' — thanks!' : 'tap a star to leave your rating';
+        msgEl.textContent = myValue ? 'you rated ' + myValue + ' — thanks!' : 'type your name, then tap a star';
       });
       loadScore();
     })();

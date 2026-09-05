@@ -2952,6 +2952,41 @@ html.has-custom-cursor * {
   text-transform: uppercase;
   color: #5a5f86;
 }
+.rp-name {
+  display: block;
+  width: 240px;
+  margin: 0 auto 12px;
+  padding: 8px 14px;
+  font-family: 'zai Lava', cursive;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #2b3991;
+  background: #fff;
+  border: 2px dashed rgba(43, 57, 145, 0.45);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.rp-name::placeholder { color: rgba(122, 44, 191, 0.45); font-weight: bold; }
+.rp-name:focus { border-color: #2b3991; box-shadow: 0 0 0 3px rgba(43, 57, 145, 0.12); }
+.rp-name.is-bad { border-color: #cf3503; animation: rpShake 0.3s ease; }
+.rp-name:disabled { opacity: 0.55; }
+@keyframes rpShake {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-5px); }
+  75%      { transform: translateX(5px); }
+}
+.rp-recent {
+  margin: 10px 0 0;
+  font-family: 'zai Lava', cursive;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  color: #7a2cbf;
+}
 .rp-score {
   margin-top: 18px;
   padding-top: 14px;
