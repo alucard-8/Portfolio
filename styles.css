@@ -1759,9 +1759,9 @@ html.has-custom-cursor * {
   filter: brightness(1.04);
   z-index: 10;
 }
-/* individual positions — frame the centered folder */
-.dp-zat  { left: 8vw;  top: 30vh;  transform: rotate(-6deg); }
-.dp-angel { right: 8vw; left: auto; top: 30vh;  transform: rotate(5deg); }
+/* individual positions — frame the centered folder, clearly inside the panel */
+.dp-zat  { left: 18vw;  top: 26vh;  transform: rotate(-6deg); }
+.dp-angel { right: 18vw; left: auto; top: 26vh;  transform: rotate(5deg); }
 
 /* ============ Drawing folder: beautiful manila-style for the art panel ============ */
 .dr-folder {
@@ -2382,7 +2382,7 @@ html.has-custom-cursor * {
   scrollbar-width: thin;
   scrollbar-color: #2b3991 rgba(255, 253, 244, 0.5);
 }
-.ui-paper.open { display: flex; }
+.ui-paper.open { display: block; }
 .ui-paper::-webkit-scrollbar { width: 10px; }
 .ui-paper::-webkit-scrollbar-track { background: rgba(255, 253, 244, 0.5); border-radius: 8px; }
 .ui-paper::-webkit-scrollbar-thumb {
@@ -2979,6 +2979,24 @@ html.has-custom-cursor * {
   border: 2px dashed rgba(122, 44, 191, 0.28);
   border-radius: 14px;
   pointer-events: none;
+}
+/* the drawing paper: uniform piece heights so the whole sheet + collabs
+   fits comfortably and always scrolls */
+#uiPaperDraw .ui-paper-sheet {
+  width: min(1000px, 94vw);
+}
+#uiPaperDraw .pwork img,
+#uiPaperDraw .pwork .pw-video {
+  height: 300px;
+  object-fit: cover;
+}
+#uiPaperDraw .pwork .pw-video {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#uiPaperDraw .up-grid {
+  columns: 460px;
 }
 .up-note {
   display: flex;
