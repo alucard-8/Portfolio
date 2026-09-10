@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>portfolio — WASSIM</title>
-  <link rel="stylesheet" href="styles.css?v=102">
+  <link rel="stylesheet" href="styles.css?v=103">
 </head>
 <body>
 
@@ -18,6 +18,24 @@
         <img class="star star-big"   data-rot="14.44"  src="images/star.png" alt="">
         <img class="star star-mid"   data-rot="-32.04" src="images/star.png" alt="">
         <img class="star star-small" data-rot="-8.95"  src="images/star.png" alt="">
+
+        <!-- 2 drawing post-its pinned to the panel (also live inside the folder) -->
+        <div class="draw-postit dp-1" data-full="images/drawing/Zatannette.png">
+          <img src="images/drawing/Zatannette.png" alt="Zatannette drawing">
+          <span class="dp-label">Zatannette</span>
+        </div>
+        <div class="draw-postit dp-2" data-full="images/drawing/angel promo.png">
+          <img src="images/drawing/angel promo.png" alt="Angel promo drawing">
+          <span class="dp-label">Angel</span>
+        </div>
+
+        <!-- the drawing folder: opens the paper with every piece + collabs -->
+        <button class="dr-folder" id="drFolder" aria-haspopup="dialog" aria-label="Open the folder to see all my drawings">
+          <span class="df-glow"></span>
+          <span class="df-tab"></span>
+          <div class="df-sheet"></div>
+          <span class="df-badge">open me!</span>
+        </button>
       </div>
     </section>
 
@@ -485,6 +503,31 @@
     </div>
   </div>
 
+  <!-- the drawing folder's paper: all pieces + a collabs section -->
+  <div class="ui-paper" id="uiPaperDraw" aria-hidden="true" role="dialog" aria-label="My drawings, laid out cleanly">
+    <div class="ui-paper-sheet ds-sheet">
+      <div class="up-head">
+        <span class="up-count">6 pieces · 1 collab</span>
+        <button class="up-close" id="uiPaperDrawClose" aria-label="close the folder">✕</button>
+      </div>
+      <div class="up-grid">
+        <figure class="pwork" data-full="images/drawing/angel promo.png"><img src="images/drawing/angel%20promo.png" alt="angel promo"></figure>
+        <figure class="pwork" data-full="images/drawing/arthur promo 1.png"><img src="images/drawing/arthur%20promo%201.png" alt="arthur promo"></figure>
+        <figure class="pwork" data-full="images/drawing/eternal_sugar_cookie_2.jpg"><img src="images/drawing/eternal_sugar_cookie_2.jpg" alt="eternal sugar cookie"></figure>
+        <figure class="pwork" data-full="images/drawing/kaiju_kafka.jpg"><img src="images/drawing/kaiju_kafka.jpg" alt="kaiju kafka"></figure>
+        <figure class="pwork" data-full="images/drawing/Zatannette.png"><img src="images/drawing/Zatannette.png" alt="Zatannette"></figure>
+        <figure class="pwork" data-mp4="images/drawing/final pls.mp4">
+          <span class="pw-video"><span class="pw-play">▶</span></span>
+        </figure>
+      </div>
+      <div class="beh-line"><span>collabs</span></div>
+      <div class="up-grid">
+        <figure class="pwork" data-full="images/drawing/collabs/Alulu feat Vanny.png"><img src="images/drawing/collabs/Alulu%20feat%20Vanny.png" alt="Alulu feat Vanny collab"></figure>
+      </div>
+      <p class="up-end">that's the whole folder — tap any piece to zoom in</p>
+    </div>
+  </div>
+
   <!-- full-size drawing viewer (click a drawing / ui screen to open) -->
   <div class="overlay" id="overlay-viewer" aria-hidden="true">
     <div class="viewer">
@@ -517,6 +560,10 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
         mid:   { el: document.querySelector('.sticker .star-mid'),   x: 477,  y: 436,  s: 126 },
         small: { el: document.querySelector('.sticker .star-small'), x: 98,   y: 309,  s: 104 }
       }; // x/y are offset from the panel's top-left (panel design pos 154,147)
+      var postits = {
+        dp1: { el: document.querySelector('.sticker .dp-1'), x: 55,  y: 480, w: 175, h: 235, r: -5 },
+        dp2: { el: document.querySelector('.sticker .dp-2'), x: 720, y: 465, w: 165, h: 225, r: 4 }
+      };
 
       var easRot = { big: 14.44, mid: -32.04, small: -8.95 };
       var spins = { big: 0, mid: 0, small: 0 };
@@ -569,6 +616,24 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
         s.style.width  = (stars.small.s * k) + 'px';
         s.style.height = (stars.small.s * k) + 'px';
         s.style.transform = 'rotate(' + (easRot.small + spins.small) + 'deg)';
+
+        // drawing post-its pinned to the panel
+        var p1 = postits.dp1;
+        if (p1.el) {
+          p1.el.style.left = (p1.x * e) + 'px';
+          p1.el.style.top = (p1.y * e) + 'px';
+          p1.el.style.width = (p1.w * e) + 'px';
+          p1.el.style.height = (p1.h * e) + 'px';
+          p1.el.style.transform = 'rotate(' + p1.r + 'deg)';
+        }
+        var p2 = postits.dp2;
+        if (p2.el) {
+          p2.el.style.left = (p2.x * e) + 'px';
+          p2.el.style.top = (p2.y * e) + 'px';
+          p2.el.style.width = (p2.w * e) + 'px';
+          p2.el.style.height = (p2.h * e) + 'px';
+          p2.el.style.transform = 'rotate(' + p2.r + 'deg)';
+        }
       }
 
       function setActive(p) {
@@ -770,7 +835,7 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
       var viewer = document.getElementById('overlay-viewer');
       var viewerImg = document.getElementById('viewerImg');
       var viewerVid = document.getElementById('viewerVid');
-      var viewerItems = document.querySelectorAll('.art-piece, .pwork');
+      var viewerItems = document.querySelectorAll('.art-piece, .pwork, .draw-postit');
       Array.prototype.forEach.call(viewerItems, function (item) {
         item.addEventListener('click', function () {
           if (!viewer) return;
@@ -1426,6 +1491,54 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
       }
       function confettiAt(x, y) {
         var colors = ['#7a2cbf', '#5cf0ff', '#2b3991', '#e0a21f', '#ff8bd6', '#fffdf6'];
+        for (var i = 0; i < 26; i++) {
+          var c = document.createElement('div');
+          c.className = 'confetti';
+          c.style.left = x + 'px';
+          c.style.top = y + 'px';
+          c.style.background = colors[(Math.random() * colors.length) | 0];
+          var ang = Math.random() * Math.PI * 2;
+          var dist = 70 + Math.random() * 160;
+          c.style.setProperty('--cx', Math.round(Math.cos(ang) * dist) + 'px');
+          c.style.setProperty('--cy', Math.round(Math.sin(ang) * dist - 40) + 'px');
+          c.style.setProperty('--cr', Math.round(Math.random() * 540 - 270) + 'deg');
+          c.style.animationDelay = (Math.random() * 0.18).toFixed(2) + 's';
+          paper.appendChild(c);
+          c.addEventListener('animationend', function () { c.remove(); });
+        }
+      }
+      function closePaper() {
+        paper.classList.remove('open');
+        paper.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+      folder.addEventListener('click', openPaper);
+      closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closePaper(); });
+      paper.addEventListener('click', function (e) {
+        if (e.target === paper) closePaper();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && paper.classList.contains('open')) closePaper();
+      });
+    })();
+
+    (function () {
+      // the drawing folder: clicking it unrolls the paper with every drawing
+      // piece + the collabs section — drag / scroll the sheet to see it all
+      var folder = document.getElementById('drFolder');
+      var paper = document.getElementById('uiPaperDraw');
+      var closeBtn = document.getElementById('uiPaperDrawClose');
+      if (!folder || !paper || !closeBtn) return;
+      function openPaper() {
+        paper.classList.add('open');
+        paper.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        paper.scrollTop = 0;
+        var fr = folder.getBoundingClientRect();
+        confettiAt(fr.left + fr.width / 2, fr.top + fr.height / 2);
+      }
+      function confettiAt(x, y) {
+        var colors = ['#7a2cbf', '#5cf0ff', '#e0a21f', '#ff8bd6', '#fffdf6', '#d5ff2f'];
         for (var i = 0; i < 26; i++) {
           var c = document.createElement('div');
           c.className = 'confetti';
