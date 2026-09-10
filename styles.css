@@ -1769,8 +1769,8 @@ html.has-custom-cursor * {
   left: 50%;
   top: 55%;
   transform: translate(-50%, -50%) rotate(-1deg);
-  width: clamp(260px, 30vw, 380px);
-  height: clamp(200px, 26vh, 280px);
+  width: clamp(320px, 36vw, 460px);
+  height: clamp(240px, 30vh, 340px);
   padding: 0;
   border: 0;
   background: transparent;
@@ -1786,9 +1786,9 @@ html.has-custom-cursor * {
   top: 0;
   left: 12%;
   width: 32%;
-  height: 32px;
+  height: 38px;
   font-family: 'zai Lava', cursive;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -1804,8 +1804,8 @@ html.has-custom-cursor * {
 .dr-folder .df-tab::after { content: 'drawings'; }
 .dr-folder .df-sheet {
   position: absolute;
-  left: 0; right: 0; top: 28px; bottom: 0;
-  border-radius: 0 0 14px 14px;
+  left: 0; right: 0; top: 34px; bottom: 0;
+  border-radius: 0 0 16px 16px;
   background-color: #f6e0ac;
   background-image: radial-gradient(rgba(122, 44, 191, 0.08) 1.2px, transparent 1.8px),
                     linear-gradient(180deg, #fdf3d3 0%, #f6e0ac 100%);
@@ -1817,15 +1817,15 @@ html.has-custom-cursor * {
 }
 .dr-folder .df-badge {
   position: absolute;
-  top: -14px;
-  right: -10px;
+  top: -16px;
+  right: -12px;
   background: linear-gradient(135deg, #d5ff2f, #b8e61a);
   color: #1a1a2e;
   font-family: 'zai Lava', cursive;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
-  padding: 6px 14px;
-  border-radius: 24px;
+  padding: 8px 16px;
+  border-radius: 28px;
   border: 2px solid #8b6914;
   box-shadow: 0 4px 12px rgba(139, 105, 20, 0.35);
   pointer-events: none;

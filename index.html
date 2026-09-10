@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>portfolio — WASSIM</title>
-  <link rel="stylesheet" href="styles.css?v=106">
+  <link rel="stylesheet" href="styles.css?v=107">
 </head>
 <body>
 
@@ -680,13 +680,15 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
       track.addEventListener('scroll', syncFromScroll, { passive: true });
 
       // mouse wheel scrolls freely through the pages (left <-> right),
-      // except when the folder's paper popup is open — then the wheel
+      // except when a folder's paper popup is open — then the wheel
       // scrolls that overlay natively instead
       window.addEventListener('wheel', function (ev) {
         var paper = document.getElementById('uiPaper');
         var dsgnPaper = document.getElementById('uiPaperDsgn');
+        var drawPaper = document.getElementById('uiPaperDraw');
         if ((paper && paper.classList.contains('open')) ||
-            (dsgnPaper && dsgnPaper.classList.contains('open'))) return;
+            (dsgnPaper && dsgnPaper.classList.contains('open')) ||
+            (drawPaper && drawPaper.classList.contains('open'))) return;
         ev.preventDefault();
         var delta = (ev.deltaY || ev.deltaX);
         track.scrollLeft += delta;
