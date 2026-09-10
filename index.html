@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>portfolio — WASSIM</title>
-  <link rel="stylesheet" href="styles.css?v=104">
+  <link rel="stylesheet" href="styles.css?v=105">
 </head>
 <body>
 
@@ -44,42 +44,6 @@
     <section class="page page-3">
       <div class="art">
           <img class="art-title fade-item" src="images/2dart.png" alt="2d art">
-
-          <!-- the drawings, pinned straight into the panel like polaroids -->
-          <div class="art-piece fade-item" data-full="images/drawing/angel promo.png">
-            <img src="images/drawing/angel promo.png" alt="artwork">
-          </div>
-          <div class="art-piece fade-item" data-full="images/drawing/arthur promo 1.png">
-            <img src="images/drawing/arthur promo 1.png" alt="artwork">
-          </div>
-          <div class="art-piece fade-item" data-full="images/drawing/eternal_sugar_cookie_2.jpg">
-            <img src="images/drawing/eternal_sugar_cookie_2.jpg" alt="artwork">
-          </div>
-          <div class="art-piece fade-item" data-full="images/drawing/kaiju_kafka.jpg">
-            <img src="images/drawing/kaiju_kafka.jpg" alt="artwork">
-          </div>
-
-          <!-- a few smiley stickers scattered around the panel -->
-          <img class="smile fade-item" src="images/smile.png" alt="smiley">
-          <img class="smile fade-item" src="images/smile.png" alt="smiley">
-          <img class="smile fade-item" src="images/smile.png" alt="smiley">
-          <img class="smile fade-item" src="images/smile.png" alt="smiley">
-
-          <!-- freely draggable links post-it (no drag mode needed) -->
-          <div class="art-link fade-item">
-            <img class="al-pin" src="images/pin.png" alt="">
-            <span class="al-label">find me on</span>
-            <a class="al-row" href="https://www.artstation.com/alucard08" target="_blank" rel="noopener">
-              <span class="al-icon">✦</span>
-              <span class="al-site">ArtStation</span>
-              <span class="al-handle">alucard08</span>
-            </a>
-            <a class="al-row" href="https://www.instagram.com/wassim___draw/" target="_blank" rel="noopener">
-              <span class="al-icon">✿</span>
-              <span class="al-site">Instagram</span>
-              <span class="al-handle">@wassim___draw</span>
-            </a>
-          </div>
 
           <!-- 2 drawing post-its pinned to the panel (also live inside the folder) -->
           <div class="draw-postit dp-zat fade-item" data-full="images/drawing/Zatannette.png">
@@ -1283,7 +1247,7 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
 
       function closeAll() {
         var v = document.getElementById('viewerVid');
-        if (v) v.pause();
+        if (v) { v.pause(); v.currentTime = 0; }
         overlays.forEach(function (o) {
           o.classList.remove('open');
           o.setAttribute('aria-hidden', 'true');
@@ -1306,6 +1270,8 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
         // clicking the dim backdrop (outside the paper) closes it
         o.addEventListener('click', function (e) {
           if (e.target === o) {
+            var v = document.getElementById('viewerVid');
+            if (v) { v.pause(); v.currentTime = 0; }
             o.classList.remove('open');
             o.setAttribute('aria-hidden', 'true');
           }

@@ -784,13 +784,6 @@ html.has-custom-cursor * {
 .art.enter .fade-item:nth-child(4) { animation-delay: 0.22s; }
 .art.enter .fade-item:nth-child(5) { animation-delay: 0.28s; }
 .art.enter .fade-item:nth-child(6) { animation-delay: 0.34s; }
-.art.enter .fade-item:nth-child(7) { animation-delay: 0.40s; }
-.art.enter .fade-item:nth-child(8) { animation-delay: 0.46s; }
-.art.enter .fade-item:nth-child(9) { animation-delay: 0.52s; }
-.art.enter .fade-item:nth-child(10) { animation-delay: 0.58s; }
-.art.enter .fade-item:nth-child(11) { animation-delay: 0.64s; }
-.art.enter .fade-item:nth-child(12) { animation-delay: 0.70s; }
-.art.enter .fade-item:nth-child(13) { animation-delay: 0.76s; }
 
 /* art title (2dart.png) sits at the top of the panel */
 .art-title {
@@ -1766,58 +1759,75 @@ html.has-custom-cursor * {
   filter: brightness(1.04);
   z-index: 10;
 }
-/* individual positions — fill gaps in the existing art-piece layout */
-.dp-zat  { left: 5vw;  top: 18vh;  transform: rotate(-5deg); }
-.dp-angel { left: 73vw; top: 58vh;  transform: rotate(3deg); }
+/* individual positions — frame the centered folder */
+.dp-zat  { left: 8vw;  top: 30vh;  transform: rotate(-6deg); }
+.dp-angel { right: 8vw; left: auto; top: 30vh;  transform: rotate(5deg); }
 
 /* ============ Drawing folder: beautiful manila-style for the art panel ============ */
 .dr-folder {
   position: absolute;
-  left: 12vw;
-  top: 68vh;
-  width: clamp(190px, 22vw, 260px);
-  height: clamp(140px, 18vh, 200px);
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%, -50%) rotate(-1deg);
+  width: clamp(260px, 30vw, 380px);
+  height: clamp(200px, 26vh, 280px);
   padding: 0;
   border: 0;
   background: transparent;
   cursor: pointer;
   z-index: 6;
-  filter: drop-shadow(0 12px 22px rgba(10, 14, 40, 0.45));
+  filter: drop-shadow(0 14px 28px rgba(10, 14, 40, 0.5));
   animation: drFloat 4s ease-in-out infinite;
 }
 .dr-folder:hover { animation-play-state: paused; }
 .dr-folder:active { animation: drPress 0.3s cubic-bezier(0.34, 1.45, 0.64, 1); }
 .dr-folder .df-tab {
-  height: 28px;
-  font-size: 10px;
-  letter-spacing: 2.5px;
+  position: absolute;
+  top: 0;
+  left: 12%;
+  width: 32%;
+  height: 32px;
+  font-family: 'zai Lava', cursive;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #2b3991;
+  background: linear-gradient(180deg, #ffe680 0%, #dfb740 100%);
+  display: grid;
+  place-items: center;
+  border-radius: 12px 12px 0 0;
+  box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.55), 0 -5px 12px rgba(24, 31, 66, 0.2);
+  border: 2px solid #8b6914;
+  border-bottom: 0;
 }
 .dr-folder .df-tab::after { content: 'drawings'; }
 .dr-folder .df-sheet {
   position: absolute;
-  left: 0; right: 0; top: 22px; bottom: 0;
-  border-radius: 0 0 10px 10px;
+  left: 0; right: 0; top: 28px; bottom: 0;
+  border-radius: 0 0 14px 14px;
   background-color: #f6e0ac;
-  background-image: radial-gradient(rgba(122, 44, 191, 0.08) 1.1px, transparent 1.6px),
+  background-image: radial-gradient(rgba(122, 44, 191, 0.08) 1.2px, transparent 1.8px),
                     linear-gradient(180deg, #fdf3d3 0%, #f6e0ac 100%);
-  background-size: 8px 8px, 100% 100%;
-  border: 2px solid #8b6914;
+  background-size: 10px 10px, 100% 100%;
+  border: 3px solid #8b6914;
   border-top: 0;
-  box-shadow: inset 0 6px 12px rgba(139, 105, 20, 0.12);
+  box-shadow: inset 0 8px 16px rgba(139, 105, 20, 0.15),
+              inset 0 -4px 12px rgba(139, 105, 20, 0.08);
 }
 .dr-folder .df-badge {
   position: absolute;
-  top: -12px;
-  right: -8px;
-  background: #d5ff2f;
+  top: -14px;
+  right: -10px;
+  background: linear-gradient(135deg, #d5ff2f, #b8e61a);
   color: #1a1a2e;
   font-family: 'zai Lava', cursive;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  padding: 5px 10px;
-  border-radius: 20px;
+  padding: 6px 14px;
+  border-radius: 24px;
   border: 2px solid #8b6914;
-  box-shadow: 0 4px 10px rgba(139, 105, 20, 0.3);
+  box-shadow: 0 4px 12px rgba(139, 105, 20, 0.35);
   pointer-events: none;
   animation: badgePulse 2.4s ease-in-out infinite;
 }
