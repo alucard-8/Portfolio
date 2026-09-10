@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>portfolio — WASSIM</title>
-  <link rel="stylesheet" href="styles.css?v=103">
+  <link rel="stylesheet" href="styles.css?v=104">
 </head>
 <body>
 
@@ -18,24 +18,6 @@
         <img class="star star-big"   data-rot="14.44"  src="images/star.png" alt="">
         <img class="star star-mid"   data-rot="-32.04" src="images/star.png" alt="">
         <img class="star star-small" data-rot="-8.95"  src="images/star.png" alt="">
-
-        <!-- 2 drawing post-its pinned to the panel (also live inside the folder) -->
-        <div class="draw-postit dp-1" data-full="images/drawing/Zatannette.png">
-          <img src="images/drawing/Zatannette.png" alt="Zatannette drawing">
-          <span class="dp-label">Zatannette</span>
-        </div>
-        <div class="draw-postit dp-2" data-full="images/drawing/angel promo.png">
-          <img src="images/drawing/angel promo.png" alt="Angel promo drawing">
-          <span class="dp-label">Angel</span>
-        </div>
-
-        <!-- the drawing folder: opens the paper with every piece + collabs -->
-        <button class="dr-folder" id="drFolder" aria-haspopup="dialog" aria-label="Open the folder to see all my drawings">
-          <span class="df-glow"></span>
-          <span class="df-tab"></span>
-          <div class="df-sheet"></div>
-          <span class="df-badge">open me!</span>
-        </button>
       </div>
     </section>
 
@@ -98,6 +80,24 @@
               <span class="al-handle">@wassim___draw</span>
             </a>
           </div>
+
+          <!-- 2 drawing post-its pinned to the panel (also live inside the folder) -->
+          <div class="draw-postit dp-zat fade-item" data-full="images/drawing/Zatannette.png">
+            <img src="images/drawing/Zatannette.png" alt="Zatannette drawing">
+            <span class="dp-label">Zatannette</span>
+          </div>
+          <div class="draw-postit dp-angel fade-item" data-full="images/drawing/angel promo.png">
+            <img src="images/drawing/angel promo.png" alt="Angel promo drawing">
+            <span class="dp-label">Angel</span>
+          </div>
+
+          <!-- the drawing folder: opens the paper with every piece + collabs -->
+          <button class="dr-folder fade-item" id="drFolder" aria-haspopup="dialog" aria-label="Open the folder to see all my drawings">
+            <span class="df-glow"></span>
+            <span class="df-tab"></span>
+            <div class="df-sheet"></div>
+            <span class="df-badge">open me!</span>
+          </button>
       </div>
     </section>
     <section class="page page-4">
@@ -560,10 +560,6 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
         mid:   { el: document.querySelector('.sticker .star-mid'),   x: 477,  y: 436,  s: 126 },
         small: { el: document.querySelector('.sticker .star-small'), x: 98,   y: 309,  s: 104 }
       }; // x/y are offset from the panel's top-left (panel design pos 154,147)
-      var postits = {
-        dp1: { el: document.querySelector('.sticker .dp-1'), x: 55,  y: 480, w: 175, h: 235, r: -5 },
-        dp2: { el: document.querySelector('.sticker .dp-2'), x: 720, y: 465, w: 165, h: 225, r: 4 }
-      };
 
       var easRot = { big: 14.44, mid: -32.04, small: -8.95 };
       var spins = { big: 0, mid: 0, small: 0 };
@@ -616,24 +612,6 @@ var DESIGN_W = 1280, DESIGN_H = 1080;
         s.style.width  = (stars.small.s * k) + 'px';
         s.style.height = (stars.small.s * k) + 'px';
         s.style.transform = 'rotate(' + (easRot.small + spins.small) + 'deg)';
-
-        // drawing post-its pinned to the panel
-        var p1 = postits.dp1;
-        if (p1.el) {
-          p1.el.style.left = (p1.x * e) + 'px';
-          p1.el.style.top = (p1.y * e) + 'px';
-          p1.el.style.width = (p1.w * e) + 'px';
-          p1.el.style.height = (p1.h * e) + 'px';
-          p1.el.style.transform = 'rotate(' + p1.r + 'deg)';
-        }
-        var p2 = postits.dp2;
-        if (p2.el) {
-          p2.el.style.left = (p2.x * e) + 'px';
-          p2.el.style.top = (p2.y * e) + 'px';
-          p2.el.style.width = (p2.w * e) + 'px';
-          p2.el.style.height = (p2.h * e) + 'px';
-          p2.el.style.transform = 'rotate(' + p2.r + 'deg)';
-        }
       }
 
       function setActive(p) {

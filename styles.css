@@ -346,81 +346,6 @@ body::after {
   filter: drop-shadow(0 8px 16px rgba(24, 31, 66, 0.55)) brightness(1.08);
 }
 
-/* drawing post-its: small polaroid previews pinned to the page-1 panel */
-.draw-postit {
-  position: absolute;
-  overflow: hidden;
-  background: #fffdf2;
-  border: 2px solid #202a6e;
-  box-shadow: 3px 5px 14px rgba(24, 31, 66, 0.35);
-  cursor: pointer;
-  z-index: 4;
-  transition: transform 0.3s cubic-bezier(0.34, 1.45, 0.64, 1),
-              box-shadow 0.3s ease;
-}
-.draw-postit img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.dp-label {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(32, 42, 110, 0.88);
-  color: #fffdf2;
-  font-family: 'zai Lava', cursive;
-  font-size: 11px;
-  letter-spacing: 1px;
-  text-align: center;
-  padding: 4px 0;
-}
-.draw-postit:hover {
-  transform: scale(1.1) rotate(0deg) !important;
-  box-shadow: 0 14px 28px rgba(24, 31, 66, 0.5);
-  z-index: 10;
-}
-/* drawing folder: smaller variant of ds-folder for the page-1 panel */
-.dr-folder {
-  position: absolute;
-  left: 50%;
-  top: 68%;
-  transform: translate(-50%, -50%) rotate(-1deg);
-  width: clamp(180px, 20vw, 240px);
-  height: clamp(130px, 16vh, 180px);
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  filter: drop-shadow(0 10px 18px rgba(10, 14, 40, 0.4));
-  animation: drFloat 3.6s ease-in-out infinite;
-}
-.dr-folder:hover { animation-play-state: paused; }
-.dr-folder:active { animation: drPress 0.3s cubic-bezier(0.34, 1.45, 0.64, 1); }
-.dr-folder .df-tab::after { content: 'drawings'; }
-.dr-folder .df-tab {
-  height: 26px;
-  font-size: 9px;
-  letter-spacing: 2px;
-}
-.dr-folder .df-badge {
-  font-size: 11px;
-  padding: 5px 10px;
-  right: -10px;
-  top: -10px;
-}
-@keyframes drFloat {
-  0%, 100% { transform: translate(-50%, -50%) rotate(-1deg) translateY(0); }
-  50%      { transform: translate(-50%, -50%) rotate(0deg) translateY(-5px); }
-}
-@keyframes drPress {
-  0%   { transform: translate(-50%, -50%) scale(1); }
-  50%  { transform: translate(-50%, -50%) scale(0.93); }
-  100% { transform: translate(-50%, -50%) scale(1); }
-}
-
 /* ============ Cartoon page transition ============ */
 /* squash-and-stretch bounce when a new page slides in */
 .pg-bounce { animation: pgBoing 0.6s cubic-bezier(0.28, 1.6, 0.4, 1); }
@@ -863,6 +788,9 @@ html.has-custom-cursor * {
 .art.enter .fade-item:nth-child(8) { animation-delay: 0.46s; }
 .art.enter .fade-item:nth-child(9) { animation-delay: 0.52s; }
 .art.enter .fade-item:nth-child(10) { animation-delay: 0.58s; }
+.art.enter .fade-item:nth-child(11) { animation-delay: 0.64s; }
+.art.enter .fade-item:nth-child(12) { animation-delay: 0.70s; }
+.art.enter .fade-item:nth-child(13) { animation-delay: 0.76s; }
 
 /* art title (2dart.png) sits at the top of the panel */
 .art-title {
@@ -1783,6 +1711,129 @@ html.has-custom-cursor * {
 }
 .art-link .al-row:nth-child(3) .al-handle::before { content: '→  '; }
 .art-link .al-row:nth-child(4) .al-handle::before { content: '→  '; }
+
+/* ============ Drawing post-its pinned to the page-3 art panel ============ */
+.draw-postit {
+  position: absolute;
+  width: 180px;
+  overflow: hidden;
+  background: #fffdf2;
+  border: 3px solid #7a2cbf;
+  border-radius: 8px;
+  box-shadow: 4px 6px 18px rgba(122, 44, 191, 0.3);
+  cursor: pointer;
+  z-index: 5;
+  transition: transform 0.3s cubic-bezier(0.34, 1.45, 0.64, 1),
+              box-shadow 0.3s ease,
+              filter 0.3s ease;
+}
+.draw-postit img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  border-radius: 5px 5px 0 0;
+}
+.dp-label {
+  display: block;
+  text-align: center;
+  font-family: 'zai Lava', cursive;
+  font-size: 13px;
+  color: #7a2cbf;
+  letter-spacing: 1.5px;
+  padding: 6px 0 5px;
+  background: linear-gradient(135deg, #fffdf2, #f3e8ff);
+  border-top: 2px dashed rgba(122, 44, 191, 0.25);
+}
+/* tape strip on each post-it */
+.draw-postit::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 70px;
+  height: 20px;
+  background: rgba(213, 255, 47, 0.55);
+  border-left: 2px dashed rgba(120, 140, 30, 0.35);
+  border-right: 2px dashed rgba(120, 140, 30, 0.35);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+.draw-postit:hover {
+  transform: rotate(0deg) scale(1.08) !important;
+  box-shadow: 0 18px 36px rgba(122, 44, 191, 0.45);
+  filter: brightness(1.04);
+  z-index: 10;
+}
+/* individual positions — fill gaps in the existing art-piece layout */
+.dp-zat  { left: 5vw;  top: 18vh;  transform: rotate(-5deg); }
+.dp-angel { left: 73vw; top: 58vh;  transform: rotate(3deg); }
+
+/* ============ Drawing folder: beautiful manila-style for the art panel ============ */
+.dr-folder {
+  position: absolute;
+  left: 12vw;
+  top: 68vh;
+  width: clamp(190px, 22vw, 260px);
+  height: clamp(140px, 18vh, 200px);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  z-index: 6;
+  filter: drop-shadow(0 12px 22px rgba(10, 14, 40, 0.45));
+  animation: drFloat 4s ease-in-out infinite;
+}
+.dr-folder:hover { animation-play-state: paused; }
+.dr-folder:active { animation: drPress 0.3s cubic-bezier(0.34, 1.45, 0.64, 1); }
+.dr-folder .df-tab {
+  height: 28px;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+}
+.dr-folder .df-tab::after { content: 'drawings'; }
+.dr-folder .df-sheet {
+  position: absolute;
+  left: 0; right: 0; top: 22px; bottom: 0;
+  border-radius: 0 0 10px 10px;
+  background-color: #f6e0ac;
+  background-image: radial-gradient(rgba(122, 44, 191, 0.08) 1.1px, transparent 1.6px),
+                    linear-gradient(180deg, #fdf3d3 0%, #f6e0ac 100%);
+  background-size: 8px 8px, 100% 100%;
+  border: 2px solid #8b6914;
+  border-top: 0;
+  box-shadow: inset 0 6px 12px rgba(139, 105, 20, 0.12);
+}
+.dr-folder .df-badge {
+  position: absolute;
+  top: -12px;
+  right: -8px;
+  background: #d5ff2f;
+  color: #1a1a2e;
+  font-family: 'zai Lava', cursive;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: 2px solid #8b6914;
+  box-shadow: 0 4px 10px rgba(139, 105, 20, 0.3);
+  pointer-events: none;
+  animation: badgePulse 2.4s ease-in-out infinite;
+}
+@keyframes drFloat {
+  0%, 100% { transform: rotate(-1deg) translateY(0); }
+  50%      { transform: rotate(0.5deg) translateY(-6px); }
+}
+@keyframes drPress {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+@keyframes badgePulse {
+  0%, 100% { transform: scale(1);   box-shadow: 0 4px 10px rgba(139, 105, 20, 0.3); }
+  50%      { transform: scale(1.06); box-shadow: 0 6px 16px rgba(139, 105, 20, 0.45); }
+}
 
 /* ============ Doodle / drawing mode (art page) ============ */
 .draw-layer {
