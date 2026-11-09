@@ -1,6 +1,21 @@
 (() => {
   const $ = (s, el = document) => el.querySelector(s);
   const src = p => encodeURI(p);
+  // optimized copies live in images/thumb (grids) and images/web (viewer); gifs/videos stay original
+  const v = (p, kind) => /\.(gif|mp4)$/i.test(p) ? p : p.replace(/^images\//, `images/${kind}/`).replace(/\.\w+$/, ".webp");
+
+  /* ---------- COMMISSIONS: edit prices + slots here ---------- */
+  const COMMISSIONS = {
+    slotsOpen: 3,
+    slotsTotal: 5,
+    currency: "$",
+    tiers: [
+      { name: "SKETCH", price: 15, eta: "2-3 days", items: ["clean sketch", "1 character", "bust or half body"] },
+      { name: "FULL ILLUSTRATION", price: 45, eta: "1-2 weeks", items: ["full color + rendering", "simple background", "2 revision rounds"], hot: true },
+      { name: "GAME UI PACK", price: 60, eta: "1-2 weeks", items: ["menus, buttons, HUD", "source files", "styled to your game"] },
+      { name: "LOGO / BRANDING", price: 50, eta: "1 week", items: ["3 concepts", "final logo + variants", "mini brand guide"] }
+    ]
+  };
 
   /* ---------- games (from alucardd8.itch.io) ---------- */
   const GAMES = [
@@ -16,10 +31,28 @@
   $("#gamesGrid").innerHTML = GAMES.map(g => `
     <article class="win game">
       <div class="win-bar"><span>${esc(g.t.toUpperCase())}</span><span class="win-btns"><b></b><b></b><b class="x"></b></span></div>
-      <a class="game-img" href="${g.u}" target="_blank" rel="noopener">${g.new ? '<span class="new">NEW!</span>' : ""}<img src="${src(g.img)}" alt="${esc(g.t)} cover" loading="lazy"></a>
+      <a class="game-img" href="${g.u}" target="_blank" rel="noopener">${g.new ? '<span class="new">NEW!</span>' : ""}<img src="${src(v(g.img, "thumb"))}" alt="${esc(g.t)} cover" loading="lazy"></a>
       ${g.d ? `<p class="game-d">${esc(g.d)}</p>` : ""}
       <div class="game-foot"><span class="tag">${esc(g.g)}</span><a class="btn tiny" href="${g.u}" target="_blank" rel="noopener">PLAY ▶</a></div>
     </article>`).join("");
+
+  /* ---------- commissions render ---------- */
+  {
+    const C = COMMISSIONS;
+    $("#slotsTxt").innerHTML = C.slotsOpen > 0
+      ? `<span class="dot"></span> ${C.slotsOpen}/${C.slotsTotal} SLOTS OPEN`
+      : `<span class="dot off"></span> CLOSED — DM TO JOIN THE WAITLIST`;
+    $("#slotRow").innerHTML = Array.from({ length: C.slotsTotal }, (_, i) => `<i class="${i < C.slotsTotal - C.slotsOpen ? "taken" : ""}"></i>`).join("");
+    $("#tiers").innerHTML = C.tiers.map(t => `
+      <article class="win tier${t.hot ? " hot" : ""}">
+        <div class="win-bar"><span>${esc(t.name)}</span>${t.hot ? '<span class="pop-tag">POPULAR</span>' : ""}</div>
+        <div class="tier-body">
+          <p class="price"><small>from</small> ${C.currency}${t.price}</p>
+          <ul>${t.items.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+          <p class="eta">⧗ ${esc(t.eta)}</p>
+        </div>
+      </article>`).join("");
+  }
 
   /* ---------- gallery data ---------- */
   const DESIGN = ["brandiha 24h lime.png","poster.png","primary logo.png","Banner.png","Instagram post - 25.png","first page.png",
@@ -48,12 +81,12 @@
       b.type = "button";
       b.setAttribute("aria-label", "Open " + it.title);
       if (isVid(it.src)) {
-        b.innerHTML = `<video src="${src(it.src)}" muted loop playsinline preload="metadata"></video><span class="play">▶ VIDEO</span>`;
-        const v = b.querySelector("video");
-        b.addEventListener("mouseenter", () => v.play().catch(() => {}));
-        b.addEventListener("mouseleave", () => v.pause());
+        b.innerHTML = `<video src="${src(it.src)}" muted loop playsinline preload="none"></video><span class="play">▶ VIDEO</span>`;
+        const vid = b.querySelector("video");
+        b.addEventListener("mouseenter", () => vid.play().catch(() => {}));
+        b.addEventListener("mouseleave", () => vid.pause());
       } else {
-        b.innerHTML = `<img src="${src(it.src)}" alt="${it.title}" loading="lazy" decoding="async">`;
+        b.innerHTML = `<img src="${src(v(it.src, "thumb"))}" alt="${it.title}" loading="lazy" decoding="async">`;
       }
       b.addEventListener("click", () => openLB(items, i));
       grid.appendChild(b);
@@ -77,7 +110,7 @@
     const it = cur[idx];
     stage.innerHTML = isVid(it.src)
       ? `<video src="${src(it.src)}" controls autoplay loop playsinline></video>`
-      : `<img src="${src(it.src)}" alt="${it.title}">`;
+      : `<img src="${src(v(it.src, "web"))}" alt="${it.title}">`;
     $("#lbTitle").textContent = it.title.toUpperCase();
     $("#lbCount").textContent = `${idx + 1}/${cur.length}`;
   }
@@ -115,7 +148,7 @@
   const boot = $("#boot");
   let booted = false;
   try { booted = sessionStorage.getItem("booted") === "1"; } catch (e) {}
-  if (booted || matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  if (booted || /[?&]noboot/.test(location.search) || matchMedia("(prefers-reduced-motion: reduce)").matches) {
     document.documentElement.classList.add("no-boot");
   } else {
     const bar = $("#bootBar"), txt = $("#bootTxt");
@@ -152,13 +185,94 @@
 
   const toast = $("#toast");
   const say = m => { toast.textContent = m; toast.classList.add("show"); clearTimeout(say.t); say.t = setTimeout(() => toast.classList.remove("show"), 2200); };
-  $("#discordBtn").addEventListener("click", async () => {
+  document.querySelectorAll("#discordBtn,[data-copy-discord]").forEach(b => b.addEventListener("click", async () => {
     try { await navigator.clipboard.writeText("w_assim8"); say("COPIED: w_assim8 ✓"); }
     catch (e) { say("DISCORD: w_assim8"); }
-  });
+  }));
+
+  /* ---------- secret game: click the logo 5 times ---------- */
+  {
+    const logo = $(".mb-logo"), box = $("#game"), cv = $("#gCanvas"), ctx = cv.getContext("2d");
+    const W = cv.width, H = cv.height, GROUND = H - 40;
+    const BLUE = "#1d3bd6", RED = "#e8452c", INK = "#0d1440", SKY = "#7fb2ff", PAPER = "#f7f6ec";
+    let clicks = 0, clickT = 0, raf = 0, st;
+    let hi = 0; try { hi = +localStorage.getItem("jumpHi") || 0; } catch (e) {}
+    $("#gHi").textContent = hi;
+
+    logo.addEventListener("click", e => {
+      const now = Date.now();
+      clicks = now - clickT < 700 ? clicks + 1 : 1; clickT = now;
+      if (clicks >= 3 && clicks < 5) say(`${5 - clicks} MORE...`);
+      if (clicks >= 5) { e.preventDefault(); clicks = 0; openGame(); }
+    });
+
+    const reset = () => st = { y: GROUND, vy: 0, obs: [], clouds: [{ x: 120, y: 40 }, { x: 420, y: 70 }], t: 0, speed: 5, score: 0, next: 60, over: false, started: false };
+    function openGame() { reset(); box.hidden = false; document.body.style.overflow = "hidden"; cancelAnimationFrame(raf); loop(); }
+    function closeGame() { box.hidden = true; document.body.style.overflow = ""; cancelAnimationFrame(raf); }
+    function jump() {
+      if (st.over) { reset(); return; }
+      st.started = true;
+      if (st.y >= GROUND) st.vy = -11.5;
+    }
+    $("#gClose").onclick = closeGame;
+    box.addEventListener("click", e => { if (e.target === box) closeGame(); });
+    cv.addEventListener("pointerdown", e => { e.preventDefault(); jump(); });
+    document.addEventListener("keydown", e => {
+      if (box.hidden) return;
+      if (e.key === "Escape") closeGame();
+      if (e.code === "Space" || e.key === "ArrowUp") { e.preventDefault(); jump(); }
+    });
+
+    const rect = (x, y, w, h, c) => { ctx.fillStyle = c; ctx.fillRect(Math.round(x), Math.round(y), w, h); };
+    function loop() {
+      update(); draw();
+      raf = requestAnimationFrame(loop);
+    }
+    function update() {
+      if (!st.started || st.over) return;
+      st.t++; st.score += st.speed / 20; st.speed = 5 + st.t / 600;
+      st.vy += 0.6; st.y = Math.min(GROUND, st.y + st.vy);
+      if (--st.next <= 0) {
+        const tall = Math.random() < .35;
+        st.obs.push({ x: W, w: tall ? 18 : 26, h: tall ? 46 : 24, fly: !tall && st.t > 900 && Math.random() < .3 });
+        st.next = 45 + Math.random() * 60 - Math.min(25, st.t / 200);
+      }
+      st.obs.forEach(o => o.x -= st.speed);
+      st.obs = st.obs.filter(o => o.x + o.w > 0);
+      st.clouds.forEach(c => { c.x -= st.speed * .2; if (c.x < -60) c.x = W + Math.random() * 100; });
+      const px = 60, pw = 24, ph = 24, py = st.y - ph;
+      for (const o of st.obs) {
+        const oy = o.fly ? GROUND - 62 : GROUND - o.h;
+        if (px + pw - 3 > o.x && px + 3 < o.x + o.w && py + ph - 2 > oy && py + 2 < oy + o.h) {
+          st.over = true;
+          if (Math.floor(st.score) > hi) { hi = Math.floor(st.score); try { localStorage.setItem("jumpHi", hi); } catch (e) {} $("#gHi").textContent = hi; }
+        }
+      }
+      $("#gScore").textContent = String(Math.floor(st.score)).padStart(5, "0");
+    }
+    function draw() {
+      rect(0, 0, W, H, PAPER);
+      for (let x = 0; x < W; x += 16) for (let y = 0; y < GROUND; y += 16) rect(x, y, 1, 1, SKY);
+      st.clouds.forEach(c => { rect(c.x, c.y, 40, 8, SKY); rect(c.x + 8, c.y - 8, 20, 8, SKY); });
+      rect(0, GROUND, W, 3, BLUE);
+      for (let x = -(st.t * st.speed) % 24; x < W; x += 24) rect(x, GROUND + 10, 10, 3, BLUE);
+      // player: little blue window-guy
+      const py = st.y - 24, leg = st.started && !st.over && st.y >= GROUND && (st.t >> 3) % 2;
+      rect(60, py, 24, 20, BLUE); rect(63, py + 6, 18, 11, PAPER);
+      rect(67, py + 9, 3, 3, INK); rect(75, py + 9, 3, 3, INK);
+      rect(64 + (leg ? 2 : 0), py + 20, 5, 4, INK); rect(76 - (leg ? 2 : 0), py + 20, 5, 4, INK);
+      st.obs.forEach(o => {
+        const oy = o.fly ? GROUND - 62 : GROUND - o.h;
+        rect(o.x, oy, o.w, o.h, RED); rect(o.x + 3, oy + 3, o.w - 6, 3, PAPER);
+      });
+      ctx.fillStyle = BLUE; ctx.font = "16px Silkscreen, monospace"; ctx.textAlign = "center";
+      if (!st.started) ctx.fillText("PRESS SPACE OR TAP TO START", W / 2, 90);
+      if (st.over) { ctx.fillText("GAME OVER", W / 2, 80); ctx.font = "12px Silkscreen, monospace"; ctx.fillText("tap to retry", W / 2, 104); }
+    }
+  }
 
   /* ---------- reveal + active nav ---------- */
-  document.querySelectorAll(".sec-head, .game, .case, .about-win, .contact-win").forEach(el => el.classList.add("rv"));
+  document.querySelectorAll(".sec-head, .game, .case, .tier, .about-win, .contact-win").forEach(el => el.classList.add("rv"));
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
   }), { rootMargin: "0px 0px -8% 0px" });
