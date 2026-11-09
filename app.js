@@ -2,19 +2,24 @@
   const $ = (s, el = document) => el.querySelector(s);
   const src = p => encodeURI(p);
   // optimized copies live in images/thumb (grids) and images/web (viewer); gifs/videos stay original
-  const v = (p, kind) => /\.(gif|mp4)$/i.test(p) ? p : p.replace(/^images\//, `images/${kind}/`).replace(/\.\w+$/, ".webp");
+  const v = (p, kind) => /\.(gif|mp4)$/i.test(p) || p.startsWith("images/web/") ? p : p.replace(/^images\//, `images/${kind}/`).replace(/\.\w+$/, ".webp");
 
   /* ---------- COMMISSIONS: edit prices + slots here ---------- */
   const COMMISSIONS = {
-    slotsOpen: 3,
+    slotsOpen: null,          // set a number (e.g. 3) to show the slots meter, null hides it
     slotsTotal: 5,
     currency: "$",
     tiers: [
-      { name: "SKETCH", price: 15, eta: "2-3 days", items: ["clean sketch", "1 character", "bust or half body"] },
-      { name: "FULL ILLUSTRATION", price: 45, eta: "1-2 weeks", items: ["full color + rendering", "simple background", "2 revision rounds"], hot: true },
-      { name: "GAME UI PACK", price: 60, eta: "1-2 weeks", items: ["menus, buttons, HUD", "source files", "styled to your game"] },
-      { name: "LOGO / BRANDING", price: 50, eta: "1 week", items: ["3 concepts", "final logo + variants", "mini brand guide"] }
-    ]
+      { name: "BUST-UP", prices: [5, 10, 25] },
+      { name: "HALF-BODY", prices: [10, 15, 40], hot: true },
+      { name: "FULL BODY", prices: [15, 20, 50] },
+      { name: "CHIBI", prices: [5, 10, 15] }
+    ],
+    levels: ["sketch", "lineart", "rendered"],
+    addons: ["extra character +50%", "background $5–$15"],
+    will: ["fanart", "OCs", "furries"],
+    wont: ["NSFW", "realism", "ships"],
+    payment: "PayPal or Robux · you pay after the sketch"
   };
 
   /* ---------- games (from alucardd8.itch.io) ---------- */
@@ -47,11 +52,17 @@
       <article class="win tier${t.hot ? " hot" : ""}">
         <div class="win-bar"><span>${esc(t.name)}</span>${t.hot ? '<span class="pop-tag">POPULAR</span>' : ""}</div>
         <div class="tier-body">
-          <p class="price"><small>from</small> ${C.currency}${t.price}</p>
-          <ul>${t.items.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
-          <p class="eta">⧗ ${esc(t.eta)}</p>
+          <p class="price"><small>from</small> ${C.currency}${t.prices[0]}</p>
+          <ul class="plist">${t.prices.map((p, i) => `<li><span>${C.levels[i]}</span><b>${C.currency}${p}</b></li>`).join("")}</ul>
         </div>
       </article>`).join("");
+    $("#cInfo").innerHTML = `
+      <div class="win info"><div class="win-bar"><span>ADD-ONS</span></div><ul>${C.addons.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
+      <div class="win info"><div class="win-bar ok"><span>☺ WILL DRAW</span></div><ul>${C.will.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
+      <div class="win info"><div class="win-bar no"><span>☹ WON'T DRAW</span></div><ul>${C.wont.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
+      <div class="win info"><div class="win-bar"><span>PAYMENT</span></div><ul><li>${esc(C.payment)}</li></ul></div>`;
+    $(".slots").hidden = C.slotsOpen == null;
+    $("#sheetBtn").addEventListener("click", () => openLB([{ src: "images/web/commission-sheet.webp", title: "commission sheet" }], 0));
   }
 
   /* ---------- gallery data ---------- */
