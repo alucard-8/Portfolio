@@ -1,0 +1,1785 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>portfolio — WASSIM</title>
+  <link rel="stylesheet" href="styles.css?v=108">
+</head>
+<body>
+
+  <div class="cursor" id="cursorBlob"></div>
+
+  <div class="track" id="track">
+
+    <section class="page page-1">
+      <div class="sticker" id="sticker">
+        <img class="panel" src="../images/panel.png" alt="">
+        <img class="star star-big"   data-rot="14.44"  src="../images/star.png" alt="">
+        <img class="star star-mid"   data-rot="-32.04" src="../images/star.png" alt="">
+        <img class="star star-small" data-rot="-8.95"  src="../images/star.png" alt="">
+      </div>
+    </section>
+
+    <section class="page page-2">
+      <div class="gamedev">
+          <img class="gamedev-title fade-item" src="../images/gamedev.png" alt="gamedev">
+          <img class="gamedev-sticker gs-1 fade-item" src="../images/gamedevsticker.png" alt="gamedev sticker">
+          <img class="gamedev-sticker gs-2 fade-item" src="../images/gamedevsticker.png" alt="gamedev sticker">
+
+          <a class="postit c-red fade-item" href="https://nomad-2088.itch.io/rogue-protocol" target="_blank" rel="noopener">
+            <img class="cov" src="../images/covers/rogue.gif" alt="Rogue Protocol">
+            <span class="pname">Rogue Protocol</span>
+          </a>
+          <a class="postit c-blue fade-item" href="https://toccata.itch.io/pokado" target="_blank" rel="noopener">
+            <img class="cov" src="../images/covers/pokado.png" alt="pokado">
+            <span class="pname">pokado</span>
+          </a>
+          <a class="postit c-green fade-item" href="https://naaylla.itch.io/unseen" target="_blank" rel="noopener">
+            <img class="cov" src="../images/covers/unseen.png" alt="Unseen">
+            <span class="pname">Unseen</span>
+          </a>
+      </div>
+    </section>
+    <section class="page page-3">
+      <div class="art">
+          <img class="art-title fade-item" src="../images/2dart.png" alt="2d art">
+
+          <!-- 2 drawing post-its pinned to the panel (also live inside the folder) -->
+          <div class="draw-postit dp-zat fade-item" data-full="../images/drawing/Zatannette.png">
+            <img src="../images/drawing/Zatannette.png" alt="Zatannette drawing">
+            <span class="dp-label">Zatannette</span>
+          </div>
+          <div class="draw-postit dp-angel fade-item" data-full="../images/drawing/angel promo.png">
+            <img src="../images/drawing/angel promo.png" alt="Angel promo drawing">
+            <span class="dp-label">Angel</span>
+          </div>
+
+          <!-- the drawing folder: opens the paper with every piece + collabs -->
+          <button class="dr-folder fade-item" id="drFolder" aria-haspopup="dialog" aria-label="Open the folder to see all my drawings">
+            <span class="df-glow"></span>
+            <span class="df-tab"></span>
+            <div class="df-sheet"></div>
+            <span class="df-badge">open me!</span>
+          </button>
+      </div>
+    </section>
+    <section class="page page-4">
+      <div class="gui">
+        <div class="stage">
+
+          <!-- sci-fi title banner -->
+          <img class="gui-title fade-item" src="../images/gameuigraphic/gamedevgraphics and ui.png" alt="gamedev - graphics and ui">
+
+          <!-- faint HUD chrome that frames the panel -->
+          <span class="hc tr"></span>
+          <span class="hc bl"></span>
+          <span class="hc br"></span>
+          <div class="hud-postit"></div>
+          <div class="hud-postits">
+            <div class="hp-note c-green"><img src="../images/smile.png" alt="doodle"></div>
+            <div class="hp-note c-blue"><img src="../images/smile.png" alt="doodle"></div>
+          </div>
+          <div class="hud-radar">
+            <i class="rd-blip b1"></i>
+            <i class="rd-blip b2"></i>
+          </div>
+          <img class="dstar d1" src="../images/star.png" alt="">
+          <img class="dstar d2" src="../images/star.png" alt="">
+          <img class="dstar d3" src="../images/star.png" alt="">
+
+          <!-- stickers taped around the panel (click = thruster pop) -->
+          <img class="ship sg-2 fade-item" src="../images/gameuigraphic/sticker 4.png" alt="spaceship sticker">
+          <img class="ship sg-4 fade-item" src="../images/gameuigraphic/sticker 4.png" alt="spaceship sticker">
+
+          <!-- the big folder: click it to open the paper that holds every
+               piece of work in a clean, non-overlapping layout -->
+          <button class="ui-folder fade-item" id="uiFolder" aria-haspopup="dialog" aria-label="Open the folder to see all my game UI work">
+            <span class="uf-glow"></span>
+            <span class="uf-orbit"><i class="uf-planet p1"></i><i class="uf-planet p2"></i><i class="uf-planet p3"></i></span>
+            <div class="uf-sheet1"></div>
+            <div class="uf-sheet2"></div>
+            <div class="uf-tab"></div>
+            <div class="uf-pocket">
+              <span class="uf-label">my game UI<br>&amp; graphics</span>
+            </div>
+            <span class="uf-badge">open me!</span>
+          </button>
+
+        </div>
+      </div>
+    </section>
+    <section class="page page-5">
+      <div class="graphic">
+        <div class="stage">
+
+          <!-- design title + tools -->
+          <img class="graphic-title fade-item" src="../images/GRAPHIC%20DESIGN.png" alt="graphic design">
+
+          <!-- the pen tool sticker: click it for a little ink burst -->
+          <img class="pt-sticker fade-item" id="penTool" src="../images/PENTOOL.png" alt="pen tool sticker">
+
+          <!-- my Behance profile, pinned to the panel like a note -->
+          <a class="behance-badge fade-item" href="https://www.behance.net/mohamedmessaif" target="_blank" rel="noopener">
+            <img class="be-pin" src="../images/pin.png" alt="">
+            <span class="be-tag">Be</span>
+            <span class="be-name">mohamedmessaif</span>
+            <span class="be-go">visit →</span>
+          </a>
+
+          <!-- the design folder: opens the paper with every piece, laid out cleanly -->
+          <button class="ds-folder fade-item" id="dsFolder" aria-haspopup="dialog" aria-label="Open the folder to see all my graphic design work">
+            <span class="df-glow"></span>
+            <span class="df-tab"></span>
+            <div class="df-sheet"></div>
+            <span class="df-badge">open me!</span>
+          </button>
+
+          <!-- an ink stamp filling the empty bottom-left corner -->
+          <span class="gp-stamp fade-item" aria-hidden="true">portfolio<br>2026</span>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="page page-6">
+      <div class="rate">
+        <div class="stage">
+
+          <!-- the rate card: pin it, tap a star, watch the score move -->
+          <div class="rate-panel fade-item" id="ratePanel">
+            <img class="rp-pin" src="../images/pin.png" alt="">
+            <span class="rp-sup">last page</span>
+            <span class="rp-title">rate my work</span>
+            <div class="rp-stars" id="rateStars" role="radiogroup" aria-label="rate from one to five stars">
+              <button class="rp-star" data-v="1" role="radio" aria-label="1 star">★</button>
+              <button class="rp-star" data-v="2" role="radio" aria-label="2 stars">★</button>
+              <button class="rp-star" data-v="3" role="radio" aria-label="3 stars">★</button>
+              <button class="rp-star" data-v="4" role="radio" aria-label="4 stars">★</button>
+              <button class="rp-star" data-v="5" role="radio" aria-label="5 stars">★</button>
+            </div>
+            <input class="rp-name" id="rateName" type="text" maxlength="24" placeholder="your name — anything" aria-label="your name" autocomplete="off" spellcheck="false">
+            <p class="rp-msg" id="rateMsg">type your name, then tap a star</p>
+            <div class="rp-score">
+              <span class="rp-live"><b></b>live</span>
+              <span class="rp-avg" id="rateAvg">•••</span>
+              <span class="rp-count" id="rateCount">real votes — loading…</span>
+            </div>
+            <p class="rp-recent" id="rateRecent" style="display:none"></p>
+            <p class="rp-sub">one vote per device · straight from the live sheet</p>
+          </div>
+
+          <!-- commissions: get in touch, doors are open -->
+          <div class="comm-panel fade-item">
+            <span class="cp-tag">commissions open</span>
+            <p class="cp-note">open for design, UI &amp; game work — DM me anywhere</p>
+            <a class="cp-link cp-ig" href="https://www.instagram.com/wassim___draw/" target="_blank" rel="noopener">
+              <img src="../images/insta.png" alt="">
+              <span>@wassim___draw</span>
+              <i>open →</i>
+            </a>
+            <button class="cp-link cp-dc" id="cpDiscord" type="button">
+              <img src="../images/discord.png" alt="">
+              <span>w_assim8</span>
+              <i>copy</i>
+            </button>
+          </div>
+
+          <img class="rate-star r-s1" src="../images/star.png" alt="">
+          <img class="rate-star r-s2" src="../images/star.png" alt="">
+          <img class="rate-star r-s3" src="../images/star.png" alt="">
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <!-- static social / info buttons (bottom right, always visible) -->
+  <div class="fab" id="fabBar">
+    <button class="fab-btn fab-discord" data-overlay="overlay-discord" aria-label="Discord">
+      <img src="../images/discord.png" alt="Discord">
+    </button>
+    <button class="fab-btn fab-insta" data-overlay="overlay-insta" aria-label="Instagram">
+      <img src="../images/insta.png" alt="Instagram">
+    </button>
+    <button class="fab-btn fab-info" data-overlay="overlay-info" aria-label="Info">
+      <img src="../images/info.png" alt="Info">
+    </button>
+  </div>
+
+  <!-- doodle / drawing mode (art page) -->
+  <button class="pencil-btn" id="pencilBtn" aria-label="Draw on the art page">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="#fff" aria-hidden="true">
+      <path d="M3 17.25V21h3.75L17.8 9.94l-3.75-3.75L3 17.25zM20.7 7.04a1 1 0 0 0 0-1.41l-2.33-2.33a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.82-1.84z"/>
+    </svg>
+  </button>
+  <!-- small note that pops next to the pencil, telling you there's a drawing mode -->
+  <div class="draw-hint" id="drawHint">there's a drawing mode — tap the pencil</div>
+  <canvas id="drawLayer" class="draw-layer"></canvas>
+  <div class="draw-tools" id="drawTools">
+    <span class="dt-title">quick doodle</span>
+    <div class="dt-cols">
+      <div class="dt-group">
+        <span class="dt-label">color</span>
+        <div class="dt-colors">
+          <button class="dt-swatch active" data-c="#2b3991" style="background:#2b3991" aria-label="navy"></button>
+          <button class="dt-swatch" data-c="#cf3503" style="background:#cf3503" aria-label="orange"></button>
+          <button class="dt-swatch" data-c="#3a9d23" style="background:#3a9d23" aria-label="green"></button>
+          <button class="dt-swatch" data-c="#f5ce25" style="background:#f5ce25" aria-label="yellow"></button>
+          <button class="dt-swatch" data-c="#7a2cbf" style="background:#7a2cbf" aria-label="purple"></button>
+          <button class="dt-swatch" data-c="#1f2447" style="background:#1f2447" aria-label="ink"></button>
+        </div>
+      </div>
+      <div class="dt-divider"></div>
+      <div class="dt-group">
+        <span class="dt-label">size</span>
+        <div class="dt-size">
+          <button class="dt-sizebtn" data-w="2">S</button>
+          <button class="dt-sizebtn active" data-w="5">M</button>
+          <button class="dt-sizebtn" data-w="10">L</button>
+        </div>
+        <label class="dt-custom" title="pick any color">
+          <input type="color" id="dtColor" value="#2b3991">
+          <span class="dt-custom-swatch"></span>
+          <span class="dt-custom-label">any color</span>
+        </label>
+      </div>
+    </div>
+    <div class="dt-btns">
+      <button class="dt-btn" id="dtEraser">eraser</button>
+      <button class="dt-btn" id="dtClear">clear</button>
+      <button class="dt-btn dt-close" id="dtClose">done</button>
+    </div>
+  </div>
+
+  <!-- overlay papers -->
+  <div class="overlay" id="overlay-insta" aria-hidden="true">
+    <div class="paper">
+      <img class="paper-pin" src="../images/pin.png" alt="">
+      <img class="paper-clippy" src="../images/clippy.png" alt="">
+      <h2 class="paper-title">Instagram</h2>
+      <p class="paper-sub">where all my drawings live</p>
+      <div class="paper-body">
+        <a class="ig-link" href="https://www.instagram.com/wassim___draw/" target="_blank" rel="noopener">
+          <span class="ig-handle">@wassim___draw</span>
+          <span class="ig-go">visit →</span>
+        </a>
+        <a class="ig-link" href="https://www.instagram.com/art.bywassim/" target="_blank" rel="noopener">
+          <span class="ig-handle">@art.bywassim</span>
+          <span class="ig-go">visit →</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay-discord" aria-hidden="true">
+    <div class="paper">
+      <img class="paper-pin" src="../images/pin.png" alt="">
+      <img class="paper-clippy" src="../images/clippy.png" alt="">
+      <h2 class="paper-title">Discord</h2>
+      <p class="paper-sub">for commissions, just DM me</p>
+      <div class="paper-body">
+        <p class="paper-text">Open for commissions — hit me up and we'll make something cool.<br><span class="hl">w_assim8</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay-info" aria-hidden="true">
+    <div class="paper">
+      <img class="paper-pin" src="../images/pin.png" alt="">
+      <img class="paper-clippy" src="../images/clippy.png" alt="">
+      <h2 class="paper-title">About Me</h2>
+      <p class="paper-sub">Graphic Designer <span class="amp">&amp;</span> Game Developer</p>
+      <div class="paper-body">
+        <p class="paper-cats">
+          <span class="cat">Graphic Design</span><span class="dot">•</span>
+          <span class="cat">Game Development</span><span class="dot">•</span>
+          <span class="cat">Game UI</span><span class="dot">•</span>
+          <span class="cat">2D Art</span>
+        </p>
+        <p class="paper-text">
+          hey, I'm <span class="hl">MESSAIF MOHAMED WASSIM</span> — 18,
+          a 2nd-year engineering student in <span class="hl">Informatique</span>
+          at <span class="hl">USTHB</span>. People call me
+          <span class="hl">Alucard</span> (or <span class="hl">alulu</span>).
+        </p>
+        <p class="paper-text">
+          My thing is <span class="hl">graphic design</span> — clean layouts,
+          bold colors, and UI that actually feels good to look at, from poster
+          work to <span class="hl">2D game UI</span>. I'm always up for new
+          projects and collabs, and my art lives on my Instagram.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- top tag: "click this to see it bigger" on the art + game-ui pages -->
+  <div class="hint-tag" id="hintTag" aria-hidden="true"></div>
+
+  <!-- the folder's paper: unrolls with every piece laid out cleanly side
+       by side — drag the sheet down / scroll to see it all -->
+  <div class="ui-paper" id="uiPaper" aria-hidden="true" role="dialog" aria-label="My game UI work, laid out cleanly">
+    <div class="ui-paper-sheet">
+      <img class="ship p-s1" src="../images/gameuigraphic/sticker 4.png" alt="spaceship">
+      <img class="ship p-s2" src="../images/gameuigraphic/sticker 4.png" alt="spaceship">
+      <div class="up-head">
+        <span class="up-count">16 pieces</span>
+        <button class="up-close" id="uiPaperClose" aria-label="close the folder">✕</button>
+      </div>
+      <div class="up-grid">
+        <figure class="pwork" data-full="../images/gameuigraphic/1.png">
+          <img src="../images/gameuigraphic/1.png" alt="gameplay frame 1">
+        </figure>
+        <figure class="pwork" data-full="../images/gameuigraphic/a.png">
+          <img src="../images/gameuigraphic/a.png" alt="gameplay frame 2">
+        </figure>
+        <figure class="pwork" data-full="../images/gameuigraphic/banner.png">
+          <img src="../images/gameuigraphic/banner.png" alt="game banner">
+        </figure>
+        <figure class="pwork" data-mp4="../images/gameuigraphic/cover animated.mp4">
+          <span class="pw-video"><span class="pw-play">▶</span></span>
+        </figure>
+        <figure class="pwork" data-full="../images/gameuigraphic/ember hunt.png">
+          <img src="../images/gameuigraphic/ember hunt.png" alt="ember hunt artwork">
+        </figure>
+        <figure class="pwork" data-full="../images/gameuigraphic/Frame 1.png">
+          <img src="../images/gameuigraphic/Frame 1.png" alt="frame 1">
+        </figure>
+        <figure class="pwork" data-full="../images/gameuigraphic/Frame 2.png">
+          <img src="../images/gameuigraphic/Frame 2.png" alt="frame 2">
+        </figure>
+        <figure class="pwork" data-full="../images/gameuigraphic/Frame 30.png">
+          <img src="../images/gameuigraphic/Frame 30.png" alt="frame 30">
+        </figure>
+        <figure class="pwork" data-full="../images/gameuigraphic/game icon.png">
+          <img src="../images/gameuigraphic/game icon.png" alt="game icon">
+        </figure>
+        <figure class="pwork" data-full="../images/gameuigraphic/game over.png">
+          <img src="../images/gameuigraphic/game over.png" alt="game over screen">
+        </figure>
+        <figure class="pwork" data-full="../images/gameuigraphic/pause menu.png">
+          <img src="../images/gameuigraphic/pause menu.png" alt="pause menu">
+        </figure>
+        <figure class="pwork" data-full="../images/gameuigraphic/settings.png">
+          <img src="../images/gameuigraphic/settings.png" alt="settings screen">
+        </figure>
+        <figure class="pwork" data-full="../images/gameuigraphic/settings-1.png">
+          <img src="../images/gameuigraphic/settings-1.png" alt="settings variant">
+        </figure>
+        <figure class="pwork" data-full="../images/gameuigraphic/void runner.png">
+          <img src="../images/gameuigraphic/void runner.png" alt="void runner artwork">
+        </figure>
+        <figure class="pwork" data-full="../images/gameuigraphic/thumbnail.png">
+          <img src="../images/gameuigraphic/thumbnail.png" alt="game thumbnail">
+        </figure>
+        <figure class="pwork" data-full="../images/gameuigraphic/thumbnail 1.png">
+          <img src="../images/gameuigraphic/thumbnail%201.png" alt="game thumbnail variant">
+        </figure>
+      </div>
+      <p class="up-end">that's the whole folder — tap any piece to zoom in</p>
+    </div>
+  </div>
+
+  <!-- the graphic-design folder's paper: same clean layout, all 52 pieces -->
+  <div class="ui-paper" id="uiPaperDsgn" aria-hidden="true" role="dialog" aria-label="My graphic design work, laid out cleanly">
+    <div class="ui-paper-sheet ds-sheet">
+      <div class="up-head">
+        <span class="up-count">3 posts · 52 pieces</span>
+        <button class="up-close" id="uiPaperDsgnClose" aria-label="close the folder">✕</button>
+      </div>
+      <p class="up-note">
+        <span class="un-chip c-club">science club</span>
+        <span class="un-chip c-team">team work</span>
+        some of this is made for my science club, and some of it is team work
+      </p>
+      <div class="beh-section">
+        <span class="beh-head">behance posts</span>
+        <div class="beh-row">
+          <a class="bcard" href="https://www.behance.net/gallery/253741429/BRANDIHAS-MASCOTTE" target="_blank" rel="noopener">
+            <img class="cov" src="../images/covers/brandiha.webp" alt="Brandiha's mascotte">
+            <span class="bc-title">Brandiha's Mascotte</span>
+            <span class="bc-site">behance →</span>
+          </a>
+          <a class="bcard" href="https://www.behance.net/gallery/252415251/FIFA-World-Cup-ALGERIA-2038-Concept" target="_blank" rel="noopener">
+            <img class="cov" src="../images/covers/fifa2038.webp" alt="FIFA World Cup Algeria 2038 concept">
+            <span class="bc-title">FIFA WC ALGERIA 2038</span>
+            <span class="bc-badge">science club · team work</span>
+            <span class="bc-site">behance →</span>
+          </a>
+          <a class="bcard" href="https://www.behance.net/gallery/252183197/Soummam-Yago-Billboard-Challenge" target="_blank" rel="noopener">
+            <img class="cov" src="../images/covers/soummam.webp" alt="Soummam Yago billboard challenge">
+            <span class="bc-title">Soummam Yago Billboard</span>
+            <span class="bc-site">behance →</span>
+          </a>
+        </div>
+      </div>
+      <div class="beh-line"><span>designs</span></div>
+      <div class="up-grid">
+        <figure class="pwork" data-full="../images/designs/1.png"><img src="../images/designs/1.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/2.png"><img src="../images/designs/2.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/3.png"><img src="../images/designs/3.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/4.png"><img src="../images/designs/4.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/5.png"><img src="../images/designs/5.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/6.png"><img src="../images/designs/6.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/7.png"><img src="../images/designs/7.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/144.png"><img src="../images/designs/144.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/145.png"><img src="../images/designs/145.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/146.png"><img src="../images/designs/146.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/147.png"><img src="../images/designs/147.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/148.png"><img src="../images/designs/148.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/149.png"><img src="../images/designs/149.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/150.png"><img src="../images/designs/150.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/151.png"><img src="../images/designs/151.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/152.png"><img src="../images/designs/152.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/153.png"><img src="../images/designs/153.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/164.png"><img src="../images/designs/164.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/165.png"><img src="../images/designs/165.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/166.png"><img src="../images/designs/166.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/167.png"><img src="../images/designs/167.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/168.png"><img src="../images/designs/168.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/169.png"><img src="../images/designs/169.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/back shirt 1.1.png"><img src="../images/designs/back%20shirt%201.1.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/back shirt 1.1-1.png"><img src="../images/designs/back%20shirt%201.1-1.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/back shirt 1.1-2.png"><img src="../images/designs/back%20shirt%201.1-2.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/back shirt 1.1-3.png"><img src="../images/designs/back%20shirt%201.1-3.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/back shirt 1.1-4.png"><img src="../images/designs/back%20shirt%201.1-4.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/Banner.png"><img src="../images/designs/Banner.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/brandiha 24h lime.png"><img src="../images/designs/brandiha%2024h%20lime.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/Check your emails.png"><img src="../images/designs/Check%20your%20emails.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/Check your emails-1.png"><img src="../images/designs/Check%20your%20emails-1.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/first page.png"><img src="../images/designs/first%20page.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/Frame 2147238711.png"><img src="../images/designs/Frame%202147238711.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/Frame 2147239016.png"><img src="../images/designs/Frame%202147239016.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/frame.png"><img src="../images/designs/frame.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/frame-1.png"><img src="../images/designs/frame-1.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/frame-2.png"><img src="../images/designs/frame-2.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/Group 2085665058.png"><img src="../images/designs/Group%202085665058.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/Group 2085665236.png"><img src="../images/designs/Group%202085665236.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/Group 2085665622.png"><img src="../images/designs/Group%202085665622.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/Instagram post - 25.png"><img src="../images/designs/Instagram%20post%20-%2025.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/monochrome logo.png"><img src="../images/designs/monochrome%20logo.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/monochrome logo-1.png"><img src="../images/designs/monochrome%20logo-1.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/option 1.png"><img src="../images/designs/option%201.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/option 2.png"><img src="../images/designs/option%202.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/option 4.png"><img src="../images/designs/option%204.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/option 5.png"><img src="../images/designs/option%205.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/page 26.png"><img src="../images/designs/page%2026.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/poster.png"><img src="../images/designs/poster.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/primary logo.png"><img src="../images/designs/primary%20logo.png" alt="design piece"></figure>
+        <figure class="pwork" data-full="../images/designs/sara li modifyaha alucard.png"><img src="../images/designs/sara%20li%20modifyaha%20alucard.png" alt="design piece"></figure>
+      </div>
+      <p class="up-end">that's the whole folder — tap any piece to zoom in</p>
+    </div>
+  </div>
+
+  <!-- the drawing folder's paper: all pieces + a collabs section -->
+  <div class="ui-paper" id="uiPaperDraw" aria-hidden="true" role="dialog" aria-label="My drawings, laid out cleanly">
+    <div class="ui-paper-sheet ds-sheet">
+      <div class="up-head">
+        <span class="up-count">6 pieces · 1 collab</span>
+        <button class="up-close" id="uiPaperDrawClose" aria-label="close the folder">✕</button>
+      </div>
+      <div class="up-grid">
+        <figure class="pwork" data-full="../images/drawing/angel promo.png"><img src="../images/drawing/angel%20promo.png" alt="angel promo"></figure>
+        <figure class="pwork" data-full="../images/drawing/arthur promo 1.png"><img src="../images/drawing/arthur%20promo%201.png" alt="arthur promo"></figure>
+        <figure class="pwork" data-full="../images/drawing/eternal_sugar_cookie_2.jpg"><img src="../images/drawing/eternal_sugar_cookie_2.jpg" alt="eternal sugar cookie"></figure>
+        <figure class="pwork" data-full="../images/drawing/kaiju_kafka.jpg"><img src="../images/drawing/kaiju_kafka.jpg" alt="kaiju kafka"></figure>
+        <figure class="pwork" data-full="../images/drawing/Zatannette.png"><img src="../images/drawing/Zatannette.png" alt="Zatannette"></figure>
+        <figure class="pwork" data-mp4="../images/drawing/final pls.mp4">
+          <span class="pw-video"><span class="pw-play">▶</span></span>
+        </figure>
+      </div>
+      <div class="beh-line"><span>collabs</span></div>
+      <div class="up-grid">
+        <figure class="pwork" data-full="../images/drawing/collabs/Alulu feat Vanny.png"><img src="../images/drawing/collabs/Alulu%20feat%20Vanny.png" alt="Alulu feat Vanny collab"></figure>
+      </div>
+      <p class="up-end">that's the whole folder — tap any piece to zoom in</p>
+    </div>
+  </div>
+
+  <!-- full-size drawing viewer (click a drawing / ui screen to open) -->
+  <div class="overlay" id="overlay-viewer" aria-hidden="true">
+    <div class="viewer">
+      <img class="viewer-img" id="viewerImg" src="" alt="artwork">
+      <video class="viewer-vid" id="viewerVid" controls></video>
+    </div>
+  </div>
+
+
+<!-- themed page counter (6 pages) -->
+  <nav class="page-counter" id="pageCounter" aria-label="Pages">
+    <button class="pc-dot" data-page="0"><i></i></button>
+    <button class="pc-dot" data-page="1"><i></i></button>
+    <button class="pc-dot" data-page="2"><i></i></button>
+    <button class="pc-dot" data-page="3"><i></i></button>
+    <button class="pc-dot" data-page="4"><i></i></button>
+    <button class="pc-dot" data-page="5"><i></i></button>
+  </nav>
+
+  <script src="cursor.js"></script>
+  <script>
+    (function () {
+var DESIGN_W = 1280, DESIGN_H = 1080;
+      var PAGES = 6;
+
+      var panel = document.querySelector('.sticker .panel');
+      var sticker = document.getElementById('sticker');
+      var stars = {
+        big:   { el: document.querySelector('.sticker .star-big'),   x: 682,  y: 215,  s: 150 },
+        mid:   { el: document.querySelector('.sticker .star-mid'),   x: 477,  y: 436,  s: 126 },
+        small: { el: document.querySelector('.sticker .star-small'), x: 98,   y: 309,  s: 104 }
+      }; // x/y are offset from the panel's top-left (panel design pos 154,147)
+
+      var easRot = { big: 14.44, mid: -32.04, small: -8.95 };
+      var spins = { big: 0, mid: 0, small: 0 };
+      var dots = Array.prototype.slice.call(document.querySelectorAll('.pc-dot'));
+      var track = document.getElementById('track');
+      var page = 0;
+      var prevPage = 0;
+
+      function clampPage() {
+        page = Math.max(0, Math.min(PAGES - 1, page));
+      }
+
+      function placeSticker(w, h) {
+        // the WASSIM sticker lives only on page 1; sized big but guaranteed
+        // to stay inside the page so it never leaks onto the other pages
+        var e = Math.min((w * 0.88) / 971, (h * 0.92) / 756);
+        var bh = DESIGN_H * e;
+        var by = (h - bh) / 2;
+
+        var px = (w - 971 * e) / 2;    // center the panel horizontally
+        var py = by + 147 * e;
+
+        var k = Math.min(e, 1.25);     // star sharpness cap
+
+        sticker.style.left = px + 'px';
+        sticker.style.top  = py + 'px';
+        sticker.style.width  = (971 * e) + 'px';
+        sticker.style.height = (756 * e) + 'px';
+
+        panel.style.width  = (971 * e) + 'px';
+        panel.style.height = (756 * e) + 'px';
+
+        var s = stars.big.el;
+        s.style.left   = (stars.big.x * e) + 'px';
+        s.style.top    = (stars.big.y * e) + 'px';
+        s.style.width  = (stars.big.s * k) + 'px';
+        s.style.height = (stars.big.s * k) + 'px';
+        s.style.transform = 'rotate(' + (easRot.big + spins.big) + 'deg)';
+
+        s = stars.mid.el;
+        s.style.left   = (stars.mid.x * e) + 'px';
+        s.style.top    = (stars.mid.y * e) + 'px';
+        s.style.width  = (stars.mid.s * k) + 'px';
+        s.style.height = (stars.mid.s * k) + 'px';
+        s.style.transform = 'rotate(' + (easRot.mid + spins.mid) + 'deg)';
+
+        s = stars.small.el;
+        s.style.left   = (stars.small.x * e) + 'px';
+        s.style.top    = (stars.small.y * e) + 'px';
+        s.style.width  = (stars.small.s * k) + 'px';
+        s.style.height = (stars.small.s * k) + 'px';
+        s.style.transform = 'rotate(' + (easRot.small + spins.small) + 'deg)';
+      }
+
+      function setActive(p) {
+        dots.forEach(function (d, i) {
+          d.classList.toggle('active', i === p);
+        });
+        if (p !== prevPage) {
+          triggerPageTransition(p);
+          prevPage = p;
+        }
+      }
+
+      // cartoony transition when the active page changes
+      function triggerPageTransition(p) {
+        var dir = p > prevPage ? 1 : -1;
+        var pg = document.querySelector('.page-' + (p + 1));
+        if (pg) {
+          pg.classList.remove('pg-bounce');
+          void pg.offsetWidth;
+          pg.classList.add('pg-bounce');
+          setTimeout(function () { pg.classList.remove('pg-bounce'); }, 700);
+        }
+        // staggered content reveal whenever a page becomes active
+        var gd = document.querySelector('.gamedev');
+        if (gd) {
+          gd.classList.remove('enter');
+          if (p === 1) {
+            void gd.offsetWidth;
+            gd.classList.add('enter');
+          }
+        }
+        var art = document.querySelector('.art');
+        if (art) {
+          art.classList.remove('enter');
+          if (p === 2) {
+            void art.offsetWidth;
+            art.classList.add('enter');
+          }
+        }
+        var gui = document.querySelector('.gui');
+        if (gui) {
+          gui.classList.remove('enter');
+          if (p === 3) {
+            void gui.offsetWidth;
+            gui.classList.add('enter');
+          }
+        }
+        var graphic = document.querySelector('.graphic');
+        if (graphic) {
+          graphic.classList.remove('enter');
+          if (p === 4) {
+            void graphic.offsetWidth;
+            graphic.classList.add('enter');
+          }
+        }
+        var rate = document.querySelector('.rate');
+        if (rate) {
+          rate.classList.remove('enter');
+          if (p === 5) {
+            void rate.offsetWidth;
+            rate.classList.add('enter');
+          }
+        }
+        comicStrike(dir);
+      }
+      // comic action lines bursting from the leading screen edge
+      function comicStrike(dir) {
+        for (var i = 0; i < 14; i++) {
+          var l = document.createElement('div');
+          l.className = 'comicline edge-' + (dir === 1 ? 'right' : 'left');
+          l.style.setProperty('--len', (40 + Math.random() * 70) + 'px');
+          l.style.setProperty('--top', (window.innerHeight / 2 + (Math.random() * 240 - 120)) + 'px');
+          l.style.setProperty('--ang', (Math.random() * 120 - 60) + 'deg');
+          document.body.appendChild(l);
+          l.addEventListener('animationend', function () { l.remove(); });
+        }
+      }
+
+      function goTo(p) {
+        page = p;
+        clampPage();
+        var pw = track.clientWidth || window.innerWidth;
+        track.scrollTo({ left: page * pw, behavior: 'smooth' });
+        setActive(page);
+      }
+
+      function syncFromScroll() {
+        var pw = track.clientWidth || window.innerWidth;
+        var idx = Math.round(track.scrollLeft / pw);
+        page = Math.max(0, Math.min(PAGES - 1, idx));
+        setActive(page);
+      }
+
+      function fit() {
+        placeSticker(window.innerWidth, window.innerHeight);
+        syncFromScroll();
+      }
+
+      fit();
+      window.addEventListener('resize', fit);
+      window.addEventListener('load', fit);
+      track.addEventListener('scroll', syncFromScroll, { passive: true });
+
+      // mouse wheel scrolls freely through the pages (left <-> right),
+      // except when a folder's paper popup is open — then the wheel
+      // scrolls that overlay natively instead
+      window.addEventListener('wheel', function (ev) {
+        var paper = document.getElementById('uiPaper');
+        var dsgnPaper = document.getElementById('uiPaperDsgn');
+        var drawPaper = document.getElementById('uiPaperDraw');
+        if ((paper && paper.classList.contains('open')) ||
+            (dsgnPaper && dsgnPaper.classList.contains('open')) ||
+            (drawPaper && drawPaper.classList.contains('open'))) return;
+        ev.preventDefault();
+        var delta = (ev.deltaY || ev.deltaX);
+        track.scrollLeft += delta;
+      }, { passive: false });
+
+      dots.forEach(function (d) {
+        d.addEventListener('click', function () {
+          goTo(parseInt(d.getAttribute('data-page'), 10));
+        });
+      });
+
+      // tilt the sticker on click
+      sticker.addEventListener('click', function (ev) {
+        this.classList.add('tilt');
+        clearTimeout(this._tiltTimer);
+        this._tiltTimer = setTimeout(function () { sticker.classList.remove('tilt'); }, 500);
+        if (window.sparkleAt) sparkleAt(ev.clientX, ev.clientY);
+      });
+
+      // sparkle + spin stars on click
+      function sparkle(x, y, color) {
+        var angles = [-70, -110, 70, 110, 180];
+        for (var i = 0; i < angles.length; i++) {
+          var sp = document.createElement('div');
+          sp.className = 'sparkle';
+          var dist = 40 + Math.random() * 25;
+          var rad = (angles[i] + (Math.random() * 20 - 10)) * Math.PI / 180;
+          sp.style.left = (x - 7) + 'px';
+          sp.style.top  = (y - 7) + 'px';
+          sp.style.setProperty('--sx', Math.cos(rad) * dist + 'px');
+          sp.style.setProperty('--sy', Math.sin(rad) * dist + 'px');
+          sp.style.background = color || ('hsl(' + (40 + Math.random() * 30) + ', 95%, 62%)');
+          document.body.appendChild(sp);
+          sp.addEventListener('animationend', function () { sp.remove(); });
+        }
+      }
+      window.sparkleAt = sparkle;
+
+      Object.keys(stars).forEach(function (key) {
+        var s = stars[key];
+        s.el.addEventListener('click', function (ev) {
+          ev.stopPropagation();
+          spins[key] += 360;
+          s.el.style.transform = 'rotate(' + (easRot[key] + spins[key]) + 'deg)';
+          sparkle(ev.clientX, ev.clientY);
+        });
+      });
+    })();
+
+    (function () {
+      // the two gamedev stickers burst + sparkle on click
+      var stickers = document.querySelectorAll('.gamedev-sticker');
+      stickers.forEach(function (s) {
+        s.addEventListener('click', function (ev) {
+          ev.stopPropagation();
+          s.classList.remove('burst');
+          void s.offsetWidth;          // restart the animation
+          s.classList.add('burst');
+          if (window.sparkleAt) window.sparkleAt(ev.clientX, ev.clientY);
+        });
+      });
+    })();
+
+    (function () {
+      // smileys: on click, each one pops + bursts a rainbow ring (plus sparks)
+      function rainbowRing(x, y) {
+        var r = document.createElement('div');
+        r.className = 'ring-pop';
+        r.style.left = x + 'px';
+        r.style.top = y + 'px';
+        document.body.appendChild(r);
+        r.addEventListener('animationend', function () { r.remove(); });
+      }
+      Array.prototype.forEach.call(document.querySelectorAll('.smile'), function (sm) {
+        sm.addEventListener('click', function (ev) {
+          ev.stopPropagation();
+          sm.classList.remove('pop');
+          void sm.offsetWidth;
+          sm.classList.add('pop');
+          rainbowRing(ev.clientX, ev.clientY);
+          if (window.sparkleAt) window.sparkleAt(ev.clientX, ev.clientY, '#7ce577');
+          if (window.sparkleAt) window.sparkleAt(ev.clientX, ev.clientY, '#ff8bd6');
+        });
+      });
+
+      // clicking a drawing / a piece of work on the paper opens the
+      // full-size viewer (images and the animated cover video share it)
+      var viewer = document.getElementById('overlay-viewer');
+      var viewerImg = document.getElementById('viewerImg');
+      var viewerVid = document.getElementById('viewerVid');
+      var viewerItems = document.querySelectorAll('.art-piece, .pwork, .draw-postit');
+      Array.prototype.forEach.call(viewerItems, function (item) {
+        item.addEventListener('click', function () {
+          if (!viewer) return;
+          // ignore the click that a drag fires when you let go
+          if (item.__suppressClick) { item.__suppressClick = false; return; }
+          // hide both first so only the right one shows up
+          viewerImg.style.display = 'none';
+          if (viewerVid) {
+            viewerVid.pause();
+            viewerVid.removeAttribute('src');
+            viewerVid.style.display = 'none';
+          }
+          var mp4 = item.getAttribute('data-mp4');
+          if (viewerVid && mp4) {
+            viewerVid.setAttribute('src', mp4);
+            viewerVid.style.display = 'block';
+            viewerVid.play();
+          } else if (viewerImg) {
+            var src = item.getAttribute('data-full') ||
+                      (item.querySelector('img') && item.querySelector('img').getAttribute('src'));
+            viewerImg.setAttribute('src', src);
+            viewerImg.style.display = 'block';
+          }
+          // close any other overlay, then open the viewer
+          Array.prototype.forEach.call(document.querySelectorAll('.overlay'), function (o) {
+            o.classList.remove('open');
+            o.setAttribute('aria-hidden', 'true');
+          });
+          viewer.classList.add('open');
+          viewer.setAttribute('aria-hidden', 'false');
+        });
+      });
+    })();
+
+    (function () {
+      // the "find me on" post-it is freely draggable anywhere on the art page
+      var link = document.querySelector('.art-link');
+      if (link) {
+        var drag = null;
+        link.addEventListener('mousedown', function (e) {
+          if (e.target.closest && e.target.closest('a')) return;  // let links open
+          e.preventDefault();
+          var r = link.getBoundingClientRect();
+          drag = { dx: e.clientX - r.left, dy: e.clientY - r.top };
+          link.classList.add('al-grabbing');
+        });
+        document.addEventListener('mousemove', function (e) {
+          if (!drag) return;
+          link.style.left = (e.clientX - drag.dx) + 'px';
+          link.style.top = (e.clientY - drag.dy) + 'px';
+        });
+        document.addEventListener('mouseup', function () {
+          if (!drag) return;
+          drag = null;
+          link.classList.remove('al-grabbing');
+          // squash-and-stretch "put down" pop when you release it
+          link.classList.remove('al-down');
+          void link.offsetWidth;
+          link.classList.add('al-down');
+        });
+      }
+    })();
+
+    (function () {
+      // the big folder: clicking it unrolls the paper with the whole
+      // work layout, and you drag/scroll the sheet down to see it all
+      var folder = document.getElementById('uiFolder');
+      var paper = document.getElementById('uiPaper');
+      var closeBtn = document.getElementById('uiPaperClose');
+      if (!folder || !paper || !closeBtn) return;
+      function openPaper() {
+        paper.classList.add('open');
+        paper.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        paper.scrollTop = 0;
+        var fr = folder.getBoundingClientRect();
+        confettiAt(fr.left + fr.width / 2, fr.top + fr.height / 2);
+      }
+      function confettiAt(x, y) {
+        var colors = ['#2b3991', '#e0a21f', '#cf3503', '#ffd23f', '#5cf0ff', '#ffffff'];
+        for (var i = 0; i < 22; i++) {
+          var c = document.createElement('div');
+          c.className = 'confetti';
+          c.style.left = x + 'px';
+          c.style.top = y + 'px';
+          c.style.background = colors[(Math.random() * colors.length) | 0];
+          var ang = Math.random() * Math.PI * 2;
+          var dist = 60 + Math.random() * 140;
+          c.style.setProperty('--cx', Math.round(Math.cos(ang) * dist) + 'px');
+          c.style.setProperty('--cy', Math.round(Math.sin(ang) * dist - 40) + 'px');
+          c.style.setProperty('--cr', Math.round(Math.random() * 540 - 270) + 'deg');
+          c.style.animationDelay = (Math.random() * 0.18).toFixed(2) + 's';
+          paper.appendChild(c);
+          c.addEventListener('animationend', function () { c.remove(); });
+        }
+      }
+      function closePaper() {
+        paper.classList.remove('open');
+        paper.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        var vid = document.getElementById('viewerVid');
+        if (vid) { vid.pause(); vid.removeAttribute('src'); }
+      }
+      // the overlay itself is the scroll container, so the mouse wheel
+      // scrolls it natively no matter where the cursor is
+      folder.addEventListener('click', openPaper);
+      closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closePaper(); });
+      paper.addEventListener('click', function (e) {
+        if (e.target === paper) closePaper();      // click outside the sheet
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && paper.classList.contains('open')) closePaper();
+      });
+    })();
+
+    (function () {
+      // the spaceship stickers: clicking them kicks a thruster burst —
+      // engine flame, light-speed streaks and sparks
+      var ships = document.querySelectorAll('.ship');
+      ships.forEach(function (s) {
+        s.addEventListener('click', function (ev) {
+          ev.stopPropagation();
+          s.classList.remove('thrust');
+          void s.offsetWidth;                 // restart the animation
+          s.classList.add('thrust');
+          var r = s.getBoundingClientRect();
+          flameAt(r.left + r.width / 2, r.bottom - 4, r.width);
+          streaks(r.left + r.width / 2, r.top + r.height / 2);
+          if (window.sparkleAt) window.sparkleAt(ev.clientX, ev.clientY, '#ffd23f');
+          if (window.sparkleAt) window.sparkleAt(ev.clientX, ev.clientY, '#5cf0ff');
+          shockAt(r.left + r.width / 2, r.top + r.height / 2, r.width);
+        });
+      });
+      function shockAt(x, y, w) {
+        var ring = document.createElement('div');
+        ring.className = 'shock';
+        ring.style.left = x + 'px';
+        ring.style.top = y + 'px';
+        ring.style.width = (w * 0.9) + 'px';
+        ring.style.height = (w * 0.9) + 'px';
+        document.body.appendChild(ring);
+        ring.addEventListener('animationend', function () { ring.remove(); });
+        var ring2 = document.createElement('div');
+        ring2.className = 'shock alt';
+        ring2.style.left = x + 'px';
+        ring2.style.top = y + 'px';
+        ring2.style.width = (w * 1.5) + 'px';
+        ring2.style.height = (w * 1.5) + 'px';
+        ring2.style.animationDelay = '0.07s';
+        document.body.appendChild(ring2);
+        ring2.addEventListener('animationend', function () { ring2.remove(); });
+      }
+      function flameAt(x, y, w) {
+        var f = document.createElement('div');
+        f.className = 'shipflame';
+        f.style.left = (x - w * 0.12) + 'px';
+        f.style.top  = (y - w * 0.1) + 'px';
+        f.style.width  = (w * 0.24) + 'px';
+        f.style.height = (w * 0.55) + 'px';
+        document.body.appendChild(f);
+        f.addEventListener('animationend', function () { f.remove(); });
+      }
+      function streaks(x, y) {
+        for (var i = 0; i < 3; i++) {
+          var st = document.createElement('div');
+          st.className = 'streaky';
+          st.style.left = (x + (Math.random() * 50 - 25)) + 'px';
+          st.style.top  = (y + (Math.random() * 40 - 20)) + 'px';
+          st.style.width = (55 + Math.random() * 50) + 'px';
+          st.style.setProperty('--rot', (Math.random() * 60 - 30) + 'deg');
+          st.style.setProperty('--tx', (-(120 + Math.random() * 100)) + 'px');
+          document.body.appendChild(st);
+          st.addEventListener('animationend', function () { st.remove(); });
+        }
+      }
+    })();
+
+    (function () {
+      // faint gold/white stars drifting up through the gui page
+      var gui = document.querySelector('.gui');
+      if (!gui) return;
+      var stage = gui.querySelector('.stage') || gui;
+      var colors = ['#ffffff', '#ffffff', '#ffd23f', '#5cf0ff', '#ffffff'];
+      for (var i = 0; i < 40; i++) {
+        var p = document.createElement('div');
+        p.className = 'hudstar';
+        p.style.left = (Math.random() * 100).toFixed(1) + '%';
+        p.style.top = (5 + Math.random() * 82).toFixed(1) + '%';
+        var sz = (3 + Math.random() * 5).toFixed(1);
+        p.style.width = sz + 'px';
+        p.style.height = sz + 'px';
+        p.style.color = colors[(Math.random() * colors.length) | 0];
+        p.style.setProperty('--hd', (5 + Math.random() * 6).toFixed(1) + 's');
+        p.style.setProperty('--ho', (0.5 + Math.random() * 0.4).toFixed(2));
+        p.style.animationDelay = (-Math.random() * 12).toFixed(1) + 's';
+        stage.appendChild(p);
+      }
+    })();
+
+    (function () {
+      // rare "warp flicker" — the gui panel glitches like a corrupted HUD every few seconds
+      var gui = document.querySelector('.gui');
+      if (!gui) return;
+      function warp() {
+        gui.classList.remove('warp');
+        void gui.offsetWidth;
+        gui.classList.add('warp');
+      }
+      setTimeout(warp, 3400);
+      setInterval(warp, 9000);
+    })();
+
+    (function () {
+      // doodle mode: draw on the art page, erase, grayscale ----
+      var canvas = document.getElementById('drawLayer');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var tools = document.getElementById('drawTools');
+      var penBtn = document.getElementById('pencilBtn');
+      var drawing = false;
+      var color = '#2b3991';
+      var size = 5;
+      var eraser = false;
+      var last = null;
+
+      function resize() {
+        var dpr = window.devicePixelRatio || 1;
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = window.innerHeight * dpr;
+        canvas.style.width = window.innerWidth + 'px';
+        canvas.style.height = window.innerHeight + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      function enable(on) {
+        canvas.classList.toggle('active', on);
+        tools.classList.toggle('show', on);
+        if (on) resize();
+      }
+      function getPos(e) {
+        var r = canvas.getBoundingClientRect();
+        return { x: e.clientX - r.left, y: e.clientY - r.top };
+      }
+
+      penBtn.addEventListener('click', function () {
+        enable(!canvas.classList.contains('active'));
+        var dh = document.getElementById('drawHint');
+        if (dh) dh.classList.toggle('show',
+          !canvas.classList.contains('active') && !penBtn.classList.contains('enabled'));
+      });
+
+      canvas.addEventListener('pointerdown', function (e) {
+        drawing = true;
+        last = getPos(e);
+        canvas.setPointerCapture(e.pointerId);
+      });
+      canvas.addEventListener('pointermove', function (e) {
+        if (!drawing) return;
+        var p = getPos(e);
+        ctx.globalCompositeOperation = eraser ? 'destination-out' : 'source-over';
+        ctx.strokeStyle = eraser ? 'rgba(0,0,0,1)' : color;
+        ctx.lineWidth = eraser ? size * 6 : size;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.beginPath();
+        ctx.moveTo(last.x, last.y);
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+        last = p;
+      });
+      canvas.addEventListener('pointerup', function () { drawing = false; });
+      canvas.addEventListener('pointerleave', function () { drawing = false; });
+
+      // color swatches
+      function clearCustomHighlight() {
+        var cClone = document.querySelector('.dt-custom');
+        if (cClone) cClone.classList.remove('active-swatch');
+      }
+      Array.prototype.forEach.call(document.querySelectorAll('.dt-swatch'), function (b) {
+        b.addEventListener('click', function () {
+          color = b.getAttribute('data-c');
+          eraser = false;
+          clearCustomHighlight();
+          Array.prototype.forEach.call(document.querySelectorAll('.dt-swatch'), function (s) {
+            s.classList.remove('active');
+          });
+          b.classList.add('active');
+          document.getElementById('dtEraser').classList.remove('active');
+        });
+      });
+      // custom color wheel
+      var colorInput = document.getElementById('dtColor');
+      var dtCustom = document.querySelector('.dt-custom');
+      function setCustomColor(c) {
+        color = c;
+        eraser = false;
+        if (dtCustom) {
+          dtCustom.style.setProperty('--cur', c);
+          dtCustom.classList.add('active-swatch');
+        }
+        Array.prototype.forEach.call(document.querySelectorAll('.dt-swatch'), function (s) {
+          s.classList.remove('active');
+        });
+        if (document.getElementById('dtEraser')) document.getElementById('dtEraser').classList.remove('active');
+      }
+      if (colorInput) colorInput.addEventListener('input', function () {
+        setCustomColor(colorInput.value);
+      });
+      // pencil size
+      Array.prototype.forEach.call(document.querySelectorAll('.dt-sizebtn'), function (b) {
+        b.addEventListener('click', function () {
+          size = parseInt(b.getAttribute('data-w'), 10);
+          Array.prototype.forEach.call(document.querySelectorAll('.dt-sizebtn'), function (s) {
+            s.classList.remove('active');
+          });
+          b.classList.add('active');
+        });
+      });
+      // eraser
+      document.getElementById('dtEraser').addEventListener('click', function () {
+        eraser = true;
+        this.classList.add('active');
+        Array.prototype.forEach.call(document.querySelectorAll('.dt-swatch'), function (s) {
+          s.classList.remove('active');
+        });
+      });
+      // clear the canvas
+      document.getElementById('dtClear').addEventListener('click', function () {
+        ctx.save();
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.restore();
+      });
+      // close drawing mode
+      document.getElementById('dtClose').addEventListener('click', function () { enable(false); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && canvas.classList.contains('active')) enable(false);
+      });
+
+      // the pencil button is always available on the art page; the
+      // drawing panel only opens when the user presses it. A small note
+      // near the button tells people a drawing mode exists, and a top
+      // tag reminds them clicking a drawing opens it big.
+      var trackEl = document.getElementById('track');
+      var hintTag = document.getElementById('hintTag');
+      var drawHint = document.getElementById('drawHint');
+      function focusPage() {
+        var pw = trackEl.clientWidth || window.innerWidth;
+        var idx = Math.round(trackEl.scrollLeft / pw);
+        var onArt = (idx === 2);
+        penBtn.style.display = onArt ? '' : 'none';
+        if (!onArt && canvas.classList.contains('active')) enable(false);
+        if (hintTag) {
+          hintTag.classList.remove('show');
+          if (idx === 2) hintTag.textContent = 'tap a drawing to see it full size';
+          else if (idx === 3) hintTag.textContent = 'open the folder to browse all my work';
+          else if (idx === 4) hintTag.textContent = 'open the folder to browse all my design work';
+          else if (idx === 5) hintTag.textContent = 'rate my work — it takes a second';
+          if (idx === 2 || idx === 3 || idx === 4 || idx === 5) hintTag.classList.add('show');
+        }
+        if (drawHint) {
+          drawHint.classList.toggle('show',
+            onArt && !penBtn.classList.contains('enabled') && !canvas.classList.contains('active'));
+        }
+      }
+      if (trackEl) {
+        trackEl.addEventListener('scroll', focusPage, { passive: true });
+        focusPage();
+      }
+    })();
+
+    (function () {
+      // colorful paint-spark particles drifting up the art page
+      var arts = document.querySelector('.art');
+      if (!arts) return;
+      var stage = arts.querySelector('.stage') || arts;
+      var colors = ['#ff5c5c', '#ffd23f', '#7ce577', '#5c9dff', '#ff8bd6', '#5cf0ff', '#ff9d3f', '#b78cff'];
+      for (var i = 0; i < 34; i++) {
+        var p = document.createElement('div');
+        p.className = 'artspark';
+        p.style.left = (Math.random() * 100).toFixed(1) + '%';
+        p.style.top = (5 + Math.random() * 82).toFixed(1) + '%';
+        var sz = (5 + Math.random() * 11).toFixed(1);
+        p.style.width = sz + 'px';
+        p.style.height = sz + 'px';
+        var c = colors[(Math.random() * colors.length) | 0];
+        p.style.background = c;
+        p.style.color = c;
+        p.style.setProperty('--ad', (3.5 + Math.random() * 5).toFixed(1) + 's');
+        p.style.setProperty('--ao', (0.7 + Math.random() * 0.3).toFixed(2));
+        p.style.animationDelay = (-Math.random() * 10).toFixed(1) + 's';
+        stage.appendChild(p);
+      }
+    })();
+
+
+    (function () {
+      // floating retro pixels rising from the gamedev page
+      var container = document.querySelector('.page-2') || document.body;
+      var colors = ['#ffd23f', '#ff5c5c', '#5c9dff', '#7ce577', '#ff8bd6', '#b78cff', '#ffffff', '#5cf0ff'];
+      for (var i = 0; i < 40; i++) {
+        var p = document.createElement('div');
+        p.className = 'pixel';
+        p.style.left = (Math.random() * 100).toFixed(1) + 'vw';
+        p.style.top = (5 + Math.random() * 80).toFixed(1) + 'vh';
+        var sz = (6 + Math.random() * 11).toFixed(1);
+        p.style.width = sz + 'px';
+        p.style.height = sz + 'px';
+        var c = colors[(Math.random() * colors.length) | 0];
+        p.style.background = c;
+        p.style.color = c;
+        p.style.setProperty('--pd', (3.5 + Math.random() * 5).toFixed(1) + 's');
+        p.style.setProperty('--po', (0.7 + Math.random() * 0.3).toFixed(2));
+        p.style.animationDelay = (-Math.random() * 10).toFixed(1) + 's';
+        container.appendChild(p);
+      }
+    })();
+
+    (function () {
+      // professional 3D tilt on the project post-its (preserves base rotation)
+      var postits = document.querySelectorAll('.postit');
+      postits.forEach(function (el) {
+        var base = 0;
+        (function () {
+          var c = getComputedStyle(el).transform;
+          var m = c && c !== 'none' ? c.match(/matrix\(([^)]+)\)/) : null;
+          if (m) {
+            var v = m[1].split(',');
+            base = Math.round(Math.atan2(parseFloat(v[1]), parseFloat(v[0])) * 180 / Math.PI);
+          }
+        })();
+        el.addEventListener('mousemove', function (e) {
+          var r = el.getBoundingClientRect();
+          var px = (e.clientX - r.left) / r.width - 0.5;
+          var py = (e.clientY - r.top) / r.height - 0.5;
+          var rx = (-py * 14).toFixed(2);
+          var ry = (px * 16).toFixed(2);
+          el.style.transform = 'rotate(' + base + 'deg) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) scale(1.05)';
+        });
+        el.addEventListener('mouseleave', function () { el.style.transform = ''; });
+      });
+    })();
+
+    (function () {
+      // faint ambient dust motes drifting across the hero page
+      var page = document.querySelector('.page-1');
+      if (!page) return;
+      for (var i = 0; i < 12; i++) {
+        var m = document.createElement('div');
+        m.className = 'mote';
+        var sz = 6 + Math.random() * 14;
+        m.style.width = sz + 'px';
+        m.style.height = sz + 'px';
+        m.style.left = (8 + Math.random() * 84).toFixed(1) + 'vw';
+        m.style.top = (8 + Math.random() * 80).toFixed(1) + 'vh';
+        m.style.setProperty('--mx', (Math.random() * 60 - 30).toFixed(1) + 'px');
+        m.style.setProperty('--my', (Math.random() * -80 - 10).toFixed(1) + 'px');
+        m.style.setProperty('--md', (8 + Math.random() * 10).toFixed(1) + 's');
+        m.style.setProperty('--mo', (0.25 + Math.random() * 0.35).toFixed(2));
+        m.style.animationDelay = (-Math.random() * 18).toFixed(1) + 's';
+        page.appendChild(m);
+      }
+    })();
+
+    (function () {
+      // static buttons open overlay papers
+      var overlays = Array.prototype.slice.call(document.querySelectorAll('.overlay'));
+
+      function closeAll() {
+        var v = document.getElementById('viewerVid');
+        if (v) { v.pause(); v.currentTime = 0; }
+        overlays.forEach(function (o) {
+          o.classList.remove('open');
+          o.setAttribute('aria-hidden', 'true');
+        });
+      }
+
+      Array.prototype.forEach.call(document.querySelectorAll('.fab-btn'), function (b) {
+        b.addEventListener('click', function () {
+          var target = b.getAttribute('data-overlay');
+          closeAll();
+          var ov = document.getElementById(target);
+          if (ov) {
+            ov.classList.add('open');
+            ov.setAttribute('aria-hidden', 'false');
+          }
+        });
+      });
+
+      overlays.forEach(function (o) {
+        // clicking the dim backdrop (outside the paper) closes it
+        o.addEventListener('click', function (e) {
+          if (e.target === o) {
+            var v = document.getElementById('viewerVid');
+            if (v) { v.pause(); v.currentTime = 0; }
+            o.classList.remove('open');
+            o.setAttribute('aria-hidden', 'true');
+          }
+        });
+      });
+
+      // Escape closes any open overlay
+      window.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeAll();
+      });
+    })();
+
+    (function () {
+      // Gamedev + art stay in their hand-placed vw/vh desktop positions.
+      // On SMALL screens only, the whole group is scaled as one unit —
+      // exactly like the page-1 sticker fit (uniform factor, both axes).
+      // The gui page keeps its design-stage scaling via the --gs prop.
+      var BASE_W = 1280, BASE_H = 800;
+      function fitAll() {
+        var s = Math.min(window.innerWidth / BASE_W, window.innerHeight / BASE_H);
+        s = Math.min(s, 1); // never upscale past the design size
+        var groups = document.querySelectorAll('.gamedev, .art');
+        for (var i = 0; i < groups.length; i++) {
+          groups[i].style.transform = 'scale(' + s + ')';
+          groups[i].style.transformOrigin = 'center center';
+        }
+        var stages = document.querySelectorAll('.gui .stage, .graphic .stage, .rate .stage');
+        for (var i = 0; i < stages.length; i++) {
+          stages[i].style.setProperty('--gs', s);
+        }
+      }
+      fitAll();
+      window.addEventListener('resize', fitAll);
+      window.addEventListener('orientationchange', function () { setTimeout(fitAll, 120); });
+    })();
+
+    (function () {
+      // floating color swatches drifting across the graphic design page
+      var graphic = document.querySelector('.graphic');
+      if (!graphic) return;
+      var stage = graphic.querySelector('.stage') || graphic;
+      var colors = ['#7a2cbf', '#5cf0ff', '#e0a21f', '#ff8bd6', '#7ce577', '#cf3503'];
+      for (var i = 0; i < 26; i++) {
+        var p = document.createElement('div');
+        p.className = 'sw';
+        p.style.left = (Math.random() * 100).toFixed(1) + '%';
+        p.style.top = (4 + Math.random() * 82).toFixed(1) + '%';
+        var sz = (6 + Math.random() * 12).toFixed(1);
+        p.style.width = sz + 'px';
+        p.style.height = sz + 'px';
+        var c = colors[(Math.random() * colors.length) | 0];
+        p.style.background = c;
+        p.style.setProperty('--mx', (Math.random() * 44 - 22).toFixed(1) + 'px');
+        p.style.setProperty('--my', (Math.random() * -46 - 10).toFixed(1) + 'px');
+        p.style.setProperty('--ad', (3.5 + Math.random() * 5).toFixed(1) + 's');
+        p.style.setProperty('--ao', (0.45 + Math.random() * 0.4).toFixed(2));
+        p.style.animationDelay = (-Math.random() * 10).toFixed(1) + 's';
+        stage.appendChild(p);
+      }
+    })();
+
+    (function () {
+      // the pen tool sticker: a soft press, then a single clean ripple ring
+      // blooms out from it — simple and tidy
+      var penTool = document.getElementById('penTool');
+      if (!penTool) return;
+      penTool.addEventListener('click', function (ev) {
+        ev.stopPropagation();
+        penTool.classList.remove('press');
+        void penTool.offsetWidth;
+        penTool.classList.add('press');
+        var r = penTool.getBoundingClientRect();
+        var cx = r.left + r.width / 2;
+        var cy = r.top + r.height / 2;
+        var ring = document.createElement('div');
+        ring.className = 'pt-ring';
+        ring.style.left = cx + 'px';
+        ring.style.top = cy + 'px';
+        document.body.appendChild(ring);
+        ring.addEventListener('animationend', function () { ring.remove(); });
+        // an inky spurt of droplets scattering out of the nib
+        var inkColors = ['#202a6e', '#7a2cbf', '#f5a623'];
+        for (var k = 0; k < 8; k++) {
+          var d = document.createElement('div');
+          d.className = 'pt-ink';
+          var a = Math.random() * Math.PI * 2;
+          var dist = 55 + Math.random() * 70;
+          var sz = 6 + Math.random() * 9;
+          d.style.width = sz + 'px';
+          d.style.height = sz + 'px';
+          d.style.left = (cx + Math.round(Math.cos(a) * 6)) + 'px';
+          d.style.top = (cy + Math.round(Math.sin(a) * 6)) + 'px';
+          d.style.background = inkColors[(Math.random() * inkColors.length) | 0];
+          d.style.setProperty('--dx', Math.round(Math.cos(a) * dist) + 'px');
+          d.style.setProperty('--dy', Math.round(Math.sin(a) * dist) + 'px');
+          document.body.appendChild(d);
+          d.addEventListener('animationend', function () { d.remove(); });
+        }
+      });
+    })();
+
+    (function () {
+      // the Behance card is a pinned note you can drag anywhere on the design
+      // panel — it lifts when you pick it up and settles when you set it down
+      var badge = document.querySelector('.behance-badge');
+      var stage = document.querySelector('.graphic .stage');
+      if (!badge || !stage) return;
+      var drag = null;
+      var moved = false;
+      badge.addEventListener('mousedown', function (e) {
+        e.preventDefault();
+        var sr = stage.getBoundingClientRect();
+        var s = sr.width / 1280;
+        var r = badge.getBoundingClientRect();
+        drag = {
+          ox: (e.clientX - sr.left) / s - (r.left - sr.left) / s,
+          oy: (e.clientY - sr.top) / s - (r.top - sr.top) / s,
+          sx: e.clientX, sy: e.clientY
+        };
+        moved = false;
+        badge.classList.add('be-grab');
+        badge.style.zIndex = '60';
+      });
+      document.addEventListener('mousemove', function (e) {
+        if (!drag) return;
+        var sr = stage.getBoundingClientRect();
+        var s = sr.width / 1280;
+        badge.style.left = ((e.clientX - sr.left) / s - drag.ox) + 'px';
+        badge.style.top = ((e.clientY - sr.top) / s - drag.oy) + 'px';
+        if (Math.abs(e.clientX - drag.sx) + Math.abs(e.clientY - drag.sy) > 5) moved = true;
+      });
+      document.addEventListener('mouseup', function () {
+        if (!drag) return;
+        drag = null;
+        badge.style.zIndex = '';
+        badge.classList.remove('be-grab');
+        badge.classList.remove('be-down');
+        void badge.offsetWidth;
+        badge.classList.add('be-down');
+      });
+      // after a real drag, don't follow the link (it lifts off if you move it)
+      badge.addEventListener('click', function (e) {
+        if (moved) { e.preventDefault(); e.stopPropagation(); }
+      });
+    })();
+
+    (function () {
+      // the design folder: clicking it unrolls the paper with every piece,
+      // laid out cleanly — drag / scroll the sheet to see it all
+      var folder = document.getElementById('dsFolder');
+      var paper = document.getElementById('uiPaperDsgn');
+      var closeBtn = document.getElementById('uiPaperDsgnClose');
+      if (!folder || !paper || !closeBtn) return;
+      function openPaper() {
+        paper.classList.add('open');
+        paper.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        paper.scrollTop = 0;
+        var fr = folder.getBoundingClientRect();
+        confettiAt(fr.left + fr.width / 2, fr.top + fr.height / 2);
+      }
+      function confettiAt(x, y) {
+        var colors = ['#7a2cbf', '#5cf0ff', '#2b3991', '#e0a21f', '#ff8bd6', '#fffdf6'];
+        for (var i = 0; i < 26; i++) {
+          var c = document.createElement('div');
+          c.className = 'confetti';
+          c.style.left = x + 'px';
+          c.style.top = y + 'px';
+          c.style.background = colors[(Math.random() * colors.length) | 0];
+          var ang = Math.random() * Math.PI * 2;
+          var dist = 70 + Math.random() * 160;
+          c.style.setProperty('--cx', Math.round(Math.cos(ang) * dist) + 'px');
+          c.style.setProperty('--cy', Math.round(Math.sin(ang) * dist - 40) + 'px');
+          c.style.setProperty('--cr', Math.round(Math.random() * 540 - 270) + 'deg');
+          c.style.animationDelay = (Math.random() * 0.18).toFixed(2) + 's';
+          paper.appendChild(c);
+          c.addEventListener('animationend', function () { c.remove(); });
+        }
+      }
+      function closePaper() {
+        paper.classList.remove('open');
+        paper.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+      folder.addEventListener('click', openPaper);
+      closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closePaper(); });
+      paper.addEventListener('click', function (e) {
+        if (e.target === paper) closePaper();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && paper.classList.contains('open')) closePaper();
+      });
+    })();
+
+    (function () {
+      // the drawing folder: clicking it unrolls the paper with every drawing
+      // piece + the collabs section — drag / scroll the sheet to see it all
+      var folder = document.getElementById('drFolder');
+      var paper = document.getElementById('uiPaperDraw');
+      var closeBtn = document.getElementById('uiPaperDrawClose');
+      if (!folder || !paper || !closeBtn) return;
+      function openPaper() {
+        paper.classList.add('open');
+        paper.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        paper.scrollTop = 0;
+        var fr = folder.getBoundingClientRect();
+        confettiAt(fr.left + fr.width / 2, fr.top + fr.height / 2);
+      }
+      function confettiAt(x, y) {
+        var colors = ['#7a2cbf', '#5cf0ff', '#e0a21f', '#ff8bd6', '#fffdf6', '#d5ff2f'];
+        for (var i = 0; i < 26; i++) {
+          var c = document.createElement('div');
+          c.className = 'confetti';
+          c.style.left = x + 'px';
+          c.style.top = y + 'px';
+          c.style.background = colors[(Math.random() * colors.length) | 0];
+          var ang = Math.random() * Math.PI * 2;
+          var dist = 70 + Math.random() * 160;
+          c.style.setProperty('--cx', Math.round(Math.cos(ang) * dist) + 'px');
+          c.style.setProperty('--cy', Math.round(Math.sin(ang) * dist - 40) + 'px');
+          c.style.setProperty('--cr', Math.round(Math.random() * 540 - 270) + 'deg');
+          c.style.animationDelay = (Math.random() * 0.18).toFixed(2) + 's';
+          paper.appendChild(c);
+          c.addEventListener('animationend', function () { c.remove(); });
+        }
+      }
+      function closePaper() {
+        paper.classList.remove('open');
+        paper.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+      folder.addEventListener('click', openPaper);
+      closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closePaper(); });
+      paper.addEventListener('click', function (e) {
+        if (e.target === paper) closePaper();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && paper.classList.contains('open')) closePaper();
+      });
+    })();
+
+    (function () {
+      // ============ page 6: the rating board ============
+      // Paste your Apps Script web-app URL here (see grade-backend.gs in the
+      // repo). Keep it empty for a local-only preview that works offline.
+      var RATE_API = 'https://script.google.com/macros/s/AKfycbwbeZoiS353T1WXSbJXdhKxyyLpl_OJc8J1UFm2p0uEumdq4CKLjafczhlVnwGMSk6l/exec';
+
+      var msgEl = document.getElementById('rateMsg');
+      var avgEl = document.getElementById('rateAvg');
+      var cntEl = document.getElementById('rateCount');
+      var starsEl = document.getElementById('rateStars');
+      var panelEl = document.getElementById('ratePanel');
+      var nameEl = document.getElementById('rateName');
+      var recentEl = document.getElementById('rateRecent');
+      if (!msgEl || !starsEl || !avgEl || !cntEl || !nameEl) return;
+      var starBtns = Array.prototype.slice.call(starsEl.children).filter(function (b) {
+        return b.classList.contains('rp-star');
+      });
+      var subKey = 'wassim_rate_v2';
+      var nameKey = 'wassim_rate_name_v1';
+      var myValue = parseInt(localStorage.getItem(subKey) || '0', 10) || 0;
+      var myName = localStorage.getItem(nameKey) || '';
+
+      function setStars(n) {
+        starBtns.forEach(function (b, i) {
+          b.classList.toggle('on', i < n);
+        });
+      }
+      function round1(x) { return Math.round(x * 10) / 10; }
+      function setScore(avg, count) {
+        var filled = Math.round(avg);
+        var s = '';
+        for (var i = 0; i < 5; i++) s += '<span class="' + (i < filled ? 'on' : '') + '">★</span>';
+        avgEl.innerHTML = s + '<em>' + round1(avg) + '</em>';
+        cntEl.textContent = count + (count === 1 ? ' rating' : ' ratings');
+        cntEl.classList.add('live');
+      }
+      function celebrate() {
+        var r = starsEl.getBoundingClientRect();
+        var x = r.left + r.width / 2, y = r.top + r.height / 2;
+        if (window.sparkleAt) window.sparkleAt(x, y);
+        if (panelEl) {
+          panelEl.classList.remove('rp-pop');
+          void panelEl.offsetWidth;
+          panelEl.classList.add('rp-pop');
+        }
+      }
+      function deviceId() {
+        try {
+          var c = document.createElement('canvas'), ctx = c.getContext('2d');
+          ctx.textBaseline = 'top';
+          ctx.font = '15px Arial';
+          ctx.fillText('wassim-grade-' + Math.random(), 2, 2);
+          var f = navigator.userAgent + '|' + screen.width + 'x' + screen.height + '|' +
+                  navigator.language + '|' + new Date().getTimezoneOffset() + '|' + c.toDataURL();
+          var h = 0;
+          for (var i = 0; i < f.length; i++) h = (Math.imul(h, 31) + f.charCodeAt(i)) | 0;
+          return 'fp' + (h >>> 0).toString(16);
+        } catch (e) {
+          return 'fp' + Math.random().toString(36).slice(2);
+        }
+      }
+
+      function renderRecent(recent) {
+        if (!recentEl) return;
+        if (!recent || !recent.length) { recentEl.style.display = 'none'; return; }
+        recentEl.style.display = 'block';
+        recentEl.textContent = recent.slice(0, 3).map(function (r) {
+          return (r.n || 'someone') + ' ★' + r.s;
+        }).join('   ·   ');
+      }
+
+      function loadScore() {
+        if (!RATE_API) {
+          avgEl.innerHTML = '<em>—</em>';
+          cntEl.textContent = 'score sync pending';
+          return;
+        }
+        fetch(RATE_API + (RATE_API.indexOf('?') === -1 ? '?' : '&') + 'action=get', { method: 'GET' })
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            if (d && typeof d.avg === 'number') {
+              setScore(d.avg, d.count || 0);
+              renderRecent(d.recent);
+            } else { avgEl.innerHTML = '<em>—</em>'; cntEl.textContent = 'score currently unavailable'; }
+          })
+          .catch(function () {
+            avgEl.innerHTML = '<em>—</em>';
+            cntEl.textContent = 'couldn\u2019t reach the scoreboard';
+          });
+      }
+
+      function submit(v, name) {
+        nameEl.disabled = true;
+        nameEl.classList.remove('is-bad');
+        setStars(v);
+        starsEl.classList.add('locked');
+        msgEl.textContent = 'sending your rating…';
+        if (!RATE_API) {
+          var loc = JSON.parse(localStorage.getItem('wassim_ratings_local') || '{"n":0,"s":0}');
+          loc.n++; loc.s += v;
+          localStorage.setItem('wassim_ratings_local', JSON.stringify(loc));
+          localStorage.setItem(subKey, String(v));
+          setScore(loc.s / loc.n, loc.n);
+          msgEl.textContent = 'thanks ' + name + '! (preview score — connect the backend for the live one)';
+          celebrate();
+          return;
+        }
+        fetch(RATE_API + (RATE_API.indexOf('?') === -1 ? '?' : '&') + 'action=add', {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify({ v: v, fp: deviceId(), name: name })
+        })
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            localStorage.setItem(subKey, String(v));
+            localStorage.setItem(nameKey, name);
+            myValue = v;
+            if (d && d.ok) {
+              setScore(d.avg, d.count || 0);
+              renderRecent(d.recent);
+              msgEl.textContent = 'thanks ' + name + '!';
+              celebrate();
+            } else if (d && d.already) {
+              msgEl.textContent = 'you already rated — one vote per device';
+              if (typeof d.avg === 'number') setScore(d.avg, d.count || 0);
+              if (d.recent) renderRecent(d.recent);
+            } else {
+              msgEl.textContent = 'hmm, that didn\u2019t go through — try again';
+            }
+          })
+          .catch(function () { msgEl.textContent = 'couldn\u2019t reach the scoreboard — try again'; });
+      }
+
+      setStars(myValue);
+      if (myValue > 0) {
+        starsEl.classList.add('locked');
+        nameEl.value = myName;
+        nameEl.disabled = true;
+        msgEl.textContent = 'you rated ' + myValue + (myValue > 1 ? ' stars' : ' star') + (myName ? ' — thanks ' + myName + '!' : ' — thanks!');
+      }
+      starBtns.forEach(function (b) {
+        b.addEventListener('mouseenter', function () {
+          if (starsEl.classList.contains('locked')) return;
+          var v = parseInt(b.getAttribute('data-v'), 10);
+          setStars(v);
+          msgEl.textContent = 'leaving ' + v + (v > 1 ? ' stars' : ' star');
+        });
+        b.addEventListener('click', function () {
+          if (starsEl.classList.contains('locked')) {
+            msgEl.textContent = 'you already rated — the score below keeps counting yours';
+            return;
+          }
+          var nm = nameEl.value.replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 24);
+          if (!nm) {
+            nameEl.classList.add('is-bad');
+            msgEl.textContent = 'type your name first — anything works';
+            nameEl.focus();
+            nameEl.removeAttribute('disabled');
+            return;
+          }
+          submit(parseInt(b.getAttribute('data-v'), 10), nm);
+        });
+      });
+      starsEl.addEventListener('mouseleave', function () {
+        if (starsEl.classList.contains('locked')) return;
+        setStars(myValue);
+        msgEl.textContent = myValue ? 'you rated ' + myValue + ' — thanks!' : 'type your name, then tap a star';
+      });
+      loadScore();
+    })();
+
+    (function () {
+      // Discord handle chip: clicking it copies "w_assim8" to the clipboard
+      var dc = document.getElementById('cpDiscord');
+      if (!dc) return;
+      dc.addEventListener('click', function () {
+        function done() {
+          var i = dc.querySelector('i');
+          if (!i) return;
+          var old = i.textContent;
+          i.textContent = 'copied!';
+          setTimeout(function () { i.textContent = old; }, 1500);
+        }
+        function fallback() {
+          var ta = document.createElement('textarea');
+          ta.value = 'w_assim8';
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); done(); } catch (e) {}
+          ta.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText('w_assim8').then(done, fallback);
+        } else fallback();
+      });
+    })();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

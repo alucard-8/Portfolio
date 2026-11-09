@@ -6,31 +6,29 @@ The whole thing is plain HTML, CSS and a little JS. No frameworks, no build step
 
 ## What's on it
 
-- **Intro page** — name, the little floating star, and a "find me on" note with my links.
-- **Gamedev** — three project post-its (each one opens up) plus a couple of stickers.
-- **2D art** — a gallery of drawings pinned up like polaroids on the wall. Click one to view it bigger.
-- **Doodle tool** — on the art page there's a pencil button. It lets you scribble over the screen: six colors, a custom color wheel, three line sizes, an eraser and a clear button. Mainly there because I think it's fun.
-- **Contact** — Discord, Instagram and the info popup.
+A retro "WASSIM.OS" look: cream + electric blue, pixel fonts, window chrome, loading bars and warning dialogs.
 
-Once you're on the phone the panels just scale down as one group to fit, so nothing overlaps or falls off the page.
+- **Boot screen** — quick loading bar (once per visit, skippable).
+- **Hero** — big pixel name, fanned cards of featured work.
+- **Games** — Unseen, Rogue Protocol, Pokado (itch.io).
+- **Design** — Behance case studies + a gallery with "load more".
+- **Game UI** and **2D art** — galleries with a lightbox (keyboard + swipe).
+- **About + contact** — Discord (tap to copy), Instagram, Behance.
+
+Fully responsive (grid/flow layout, no fixed positioning), and respects reduced-motion.
 
 ## Running it
 
-- Just double-click `index.html`, or serve the folder with anything, e.g. `python -m http.server`.
+Double-click `index.html`, or serve the folder, e.g. `python -m http.server`.
 
 ## Project layout
 
 ```
-index.html        the whole site, markup + the interactive JS
-styles.css        all the styling
-cursor.js         small custom cursor behaviour
-images/           artwork, panel backgrounds, stickers, icons
-  covers/         gamedev cover images
-  drawing/        the art gallery images
-fonts/            font files
+index.html   markup
+styles.css   all styling (responsive breakpoints at the bottom)
+app.js       galleries, lightbox, boot screen, menu
+images/      artwork (gallery lists live at the top of app.js)
+legacy/      the previous version of the site
 ```
 
-## Notes
-
-- All images are local to the repo, so it works offline once downloaded.
-- Hosted on GitHub Pages from the `main` branch.
+Fonts come from Google Fonts (Pixelify Sans, Silkscreen, VT323, Space Mono); icons from pixelarticons via jsDelivr.
